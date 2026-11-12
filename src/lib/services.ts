@@ -161,7 +161,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Honest repair-or-replace advice and a clean, well-communicated re-roof.",
     metaTitle: "Roof Replacement | Portland OR & Vancouver WA",
     metaDescription:
-      "Roof replacement for Portland and Vancouver WA homes. We inspect first and only recommend a new roof when repair won't last. Financing available. Call (503) 209-2023.",
+      "Roof replacement for Portland and Vancouver WA homes. We inspect first and only recommend a new roof when repair won't last. Call (503) 209-2023.",
     heroHeading: "Roof Replacement",
     heroSubheading: "We inspect first and only recommend a new roof when a repair won't do the job.",
     intro:
@@ -180,7 +180,7 @@ export const SERVICES: ServiceData[] = [
     ],
     pricing: {
       headline: "Free itemized estimate",
-      note: "A full replacement commonly runs from $5,000 to $20,000 or more depending on roof size and materials. You get the full number in writing before work starts, and financing is available through Hearth.",
+      note: "A full replacement commonly runs from $5,000 to $20,000 or more depending on roof size and materials. You get the full number in writing before work starts.",
     },
     callout: {
       title: "Signs it may be time",
@@ -189,7 +189,6 @@ export const SERVICES: ServiceData[] = [
     faqs: [
       { question: "How do I know if I need a new roof?", answer: "Common signs are sagging, interior moisture or mold, widespread cracked or curling shingles, and age beyond about 25 years. An inspection tells you for certain." },
       { question: "Will you tell me if a repair is enough?", answer: "Yes. Most damage can be repaired, and we recommend replacement only when it is the better long-term option." },
-      { question: "Is financing available for a new roof?", answer: "Yes. You can check financing options through our partner Hearth in under two minutes, with no impact on your credit score." },
     ],
     related: ["roof-installation", "roof-inspection-cleaning-repair", "gutter-replacement"],
   },

@@ -38,9 +38,6 @@ export const SOCIAL = {
   instagram: "https://www.instagram.com/allaroundmaintenance/",
 } as const;
 
-/** Third-party financing partner (Hearth). */
-export const FINANCING_URL = "https://app.gethearth.com/partners/all-around-maintenance-inc";
-
 export const ESTIMATE_PATH = "/free-estimate";
 
 /**

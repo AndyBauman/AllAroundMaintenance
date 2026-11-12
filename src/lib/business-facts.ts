@@ -60,7 +60,7 @@ export function changeOrderText(): string {
 }
 
 export function paymentText(): string {
-  return "We accept credit and debit cards, bank transfers and checks. Financing is available through our partner Hearth.";
+  return "We accept credit and debit cards, bank transfers and checks.";
 }
 
 export function junkPricingText(): string {

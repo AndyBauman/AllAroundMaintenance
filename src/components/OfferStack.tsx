@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  BadgeCheck, CalendarCheck, Check, ClipboardList, CreditCard, FileText, Gift, MessageSquare,
+  BadgeCheck, CalendarCheck, Check, ClipboardList, FileText, Gift, MessageSquare,
   Search, ShieldCheck, Sparkles, type LucideIcon,
 } from "lucide-react";
 import { ESTIMATE_PATH, LICENSE_LINE } from "@/lib/constants";
@@ -16,7 +16,6 @@ const VALUE_ITEMS: { icon: LucideIcon; title: string; description: string; tag: 
   { icon: BadgeCheck, title: "Licensed, Bonded & Insured", description: LICENSE_LINE, tag: "OR + WA" },
   { icon: Sparkles, title: "Clean-Up Included", description: "We leave the property as clean as we found it.", tag: "Included" },
   { icon: Gift, title: "6-Month Moss Guarantee", description: mossGuaranteeText(), tag: `${FACTS.mossGuaranteeMonths} months`, isBonus: true },
-  { icon: CreditCard, title: "Financing Available", description: "Check your options through Hearth in under two minutes, with no impact on your credit score.", tag: "Hearth", isBonus: true },
 ];
 
 export default function OfferStack() {

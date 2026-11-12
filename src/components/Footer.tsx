@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import {
-  EMAIL, ESTIMATE_PATH, FINANCING_URL, HOURS, LEGAL_NAME, LICENSES,
+  EMAIL, ESTIMATE_PATH, HOURS, LEGAL_NAME, LICENSES,
   PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF, SOCIAL,
 } from "@/lib/constants";
 import { CREDENTIALS } from "@/lib/business-facts";
@@ -93,7 +93,6 @@ export default function Footer() {
               <li><Link href="/hoa-maintenance" className={linkClass}>HOA Maintenance</Link></li>
               <li><Link href="/service-areas" className={linkClass}>All Service Areas</Link></li>
               <li><Link href={ESTIMATE_PATH} className={linkClass}>Get a Free Estimate</Link></li>
-              <li><a href={FINANCING_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>Financing (Hearth)</a></li>
               <li><a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className={linkClass}>Facebook</a></li>
               <li><a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={linkClass}>Instagram</a></li>
             </ul>

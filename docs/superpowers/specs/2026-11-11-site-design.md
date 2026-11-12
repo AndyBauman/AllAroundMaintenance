@@ -10,7 +10,7 @@ built on the RemoveScrap site's structure, practices and layouts. No database in
   sticky mobile CTA, honeypot spam guard).
 - **Dropped (junk-removal specific):** DIY-vs-pro calculator, scrap-metal pricing, community cleanup,
   referral program, photo estimate, admin CRM, Supabase, Twilio.
-- **Added for this business:** HOA / commercial / financing bands, 6-month moss guarantee, two phone lines
+- **Added for this business:** HOA / commercial bands, 6-month moss guarantee, two phone lines
   (WA pages lead with the Vancouver number), four-step process from the owner's published process.
 - **URLs:** every existing service and city slug is kept, with trailing slashes, so rankings carry over.
   Merged pages 301; blog posts 307 to the closest service page until rewritten.

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LeadCapture from "@/components/LeadCapture";
-import { FINANCING_URL, LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
+import { LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { PROCESS_STEPS, paymentText } from "@/lib/business-facts";
 
 const TITLE = "Get a Free Estimate";
@@ -64,11 +64,6 @@ export default function FreeEstimatePage() {
 
               <div className="mt-10 rounded-2xl border border-gray-200 bg-white p-6 text-sm leading-relaxed text-gray-700">
                 <p>{paymentText()}</p>
-                <p className="mt-2">
-                  <a href={FINANCING_URL} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
-                    Check financing options →
-                  </a>
-                </p>
                 <p className="mt-4 text-gray-500">{LICENSE_LINE}</p>
               </div>
             </div>
