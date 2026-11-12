@@ -3,6 +3,7 @@ import { ArrowRight, CircleCheck, Phone } from "lucide-react";
 import { DEFAULT_SERVICE_PROCESS, SERVICES, getServiceBySlug } from "@/lib/services";
 import { absoluteUrl, LEAD_FORM_ENABLED, PHONE, PHONE_HREF } from "@/lib/constants";
 import { serviceSchema } from "@/lib/schema";
+import { serviceFaqs } from "@/lib/faqs";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
@@ -14,6 +15,7 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
   const svc = getServiceBySlug(serviceSlug)!;
   const steps = svc.process ?? DEFAULT_SERVICE_PROCESS;
   const related = svc.related.map((s) => SERVICES.find((x) => x.slug === s)).filter((x) => x !== undefined);
+  const faqs = serviceFaqs(svc);
 
   return (
     <main>
@@ -150,8 +152,8 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
         </div>
       </section>
 
-      <FAQJsonLd faqs={svc.faqs} />
-      <FAQSection faqs={svc.faqs} heading={`${svc.shortTitle} FAQ`} />
+      <FAQJsonLd faqs={faqs} />
+      <FAQSection faqs={faqs} heading={`${svc.shortTitle} FAQ`} />
     </main>
   );
 }

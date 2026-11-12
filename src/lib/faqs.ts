@@ -1,6 +1,7 @@
 import { LEAD_FORM_ENABLED, LICENSES, PHONE, PHONE_WA } from "./constants";
 import {
   FACTS,
+  changeOrderText,
   estimateText,
   guaranteeText,
   languagesText,
@@ -9,6 +10,7 @@ import {
   schedulingText,
 } from "./business-facts";
 import type { CityData } from "./cities";
+import type { ServiceData } from "./services";
 
 export interface Faq {
   question: string;
@@ -19,6 +21,13 @@ const OR_FORM = LEAD_FORM_ENABLED ? " or send the free estimate form" : "";
 
 const LICENSE_ANSWER = `Yes. All Around Maintenance Inc. is a licensed, bonded and insured contractor in both states: Oregon CCB #${LICENSES.oregonCcb} and Washington #${LICENSES.washington}.`;
 
+const AREAS_ANSWER =
+  "The Portland, Oregon and Vancouver, Washington metro areas, including Gresham, Beaverton, Hillsboro, Tigard, Lake Oswego, West Linn, Wilsonville, Camas, Washougal, Battle Ground, Ridgefield, Longview and Kelso.";
+
+const AWAY_ANSWER = "No. Once the scope is agreed, most exterior work can be completed without you there.";
+
+const CLEANUP_ANSWER = "Yes. Clean-up is part of every job, and our goal is to leave the property as clean as we found it.";
+
 export const HOME_FAQS: Faq[] = [
   {
     question: "What services does All Around Maintenance offer?",
@@ -27,8 +36,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     question: "What areas do you serve?",
-    answer:
-      "The Portland, Oregon and Vancouver, Washington metro areas, including Gresham, Beaverton, Hillsboro, Tigard, Lake Oswego, West Linn, Wilsonville, Camas, Washougal, Battle Ground, Ridgefield, Longview and Kelso.",
+    answer: AREAS_ANSWER,
   },
   { question: "Are you licensed and insured?", answer: LICENSE_ANSWER },
   {
@@ -51,7 +59,7 @@ export const HOME_FAQS: Faq[] = [
       "Yes. For urgent problems such as a leaking roof or overflowing gutters, call as soon as you can. We send someone to assess the problem and apply a quick fix, then help you plan the permanent repair.",
   },
   { question: "Do you guarantee your work?", answer: `${guaranteeText()} For moss removal specifically: ${mossGuaranteeText()}` },
-  { question: "Do I need to be home while you work?", answer: "No. Once the scope is agreed, most exterior work can be completed without you there." },
+  { question: "Do I need to be home while you work?", answer: AWAY_ANSWER },
   { question: "How can I pay?", answer: paymentText() },
   { question: "What languages does your team speak?", answer: `Our team can help you in ${languagesText()}.` },
   {
@@ -100,4 +108,74 @@ export function cityFaqs(city: CityData, focus: "home" | "roof" = "home"): Faq[]
     },
     { question: `How do I book service in ${place}?`, answer: `Call ${phone}${OR_FORM}. We respond ${FACTS.responseTime}.` },
   ];
+}
+
+/** Service names that read wrong mid-sentence ("schedule drainage") get a noun phrase instead. */
+const SERVICE_LABELS: Record<string, string> = {
+  "trims-around-houses": "exterior trim work",
+  "drainage-services": "drainage work",
+  "drywall-installation": "drywall work",
+};
+
+/** Services in the "home" group that are done entirely outside. Roofs, gutters and decks always are. */
+const OUTDOOR_HOME_SLUGS = new Set([
+  "pressure-washing-portland",
+  "siding-repair-portland",
+  "fence-repair-portland",
+  "trims-around-houses",
+  "yard-cleanup",
+]);
+
+/** Recurring or haul-away services, where questions about repairs and hidden damage don't apply. */
+const NON_REPAIR_SLUGS = new Set([
+  "landscape-maintenance-portland",
+  "junk-removal-portland",
+  "yard-cleanup",
+  "pressure-washing-portland",
+  "hoa-maintenance",
+]);
+
+/** Re-roofs are scheduled to a project timeline, not the usual 2 to 3 day window. */
+const PROJECT_SLUGS = new Set(["roof-replacement", "roof-installation"]);
+
+/** The contractor licence answer is left off plumbing and electrical pages until trade licensing is confirmed. */
+const TRADE_SLUGS = new Set(["plumbing-leaks", "light-fixture-replacements"]);
+
+const MAX_SERVICE_FAQS = 13;
+const MIN_SHARED_FAQS = 3;
+
+/**
+ * FAQs for a service page: the service's own questions, then the questions customers ask about
+ * any job (licensing, scheduling, estimates), worded for that service. A shared question is left
+ * out when the service already answers it or when it doesn't fit that kind of work.
+ */
+export function serviceFaqs(svc: ServiceData): Faq[] {
+  const own = svc.faqs;
+  const asked = own.map((faq) => faq.question).join(" | ");
+  const covers = (pattern: RegExp) => pattern.test(asked);
+  const label = SERVICE_LABELS[svc.slug] ?? svc.shortTitle.toLowerCase().replace("hoa", "HOA");
+  const outdoor = svc.group !== "home" || OUTDOOR_HOME_SLUGS.has(svc.slug);
+  const repair = !NON_REPAIR_SLUGS.has(svc.slug);
+
+  const shared: (Faq | false)[] = [
+    !TRADE_SLUGS.has(svc.slug) && { question: "Are you licensed and insured?", answer: LICENSE_ANSWER },
+    !PROJECT_SLUGS.has(svc.slug) &&
+      !covers(/how soon|same.day|how far ahead|emergenc/i) && {
+        question: `How soon can you schedule ${label}?`,
+        answer: schedulingText(),
+      },
+    outdoor && !covers(/be home/i) && { question: `Do I need to be home during ${label}?`, answer: AWAY_ANSWER },
+    !covers(/cost|price|charge/i) && { question: `Is there a charge for ${label} estimates?`, answer: `No. ${estimateText()}` },
+    repair && !covers(/guarantee|comes back/i) && { question: `Do you guarantee your ${label}?`, answer: `Yes. ${guaranteeText()}` },
+    { question: `Where do you offer ${label}?`, answer: AREAS_ANSWER },
+    repair &&
+      !covers(/what if you find|find damage|rot behind/i) && {
+        question: "What if you find more damage once you start?",
+        answer: changeOrderText(),
+      },
+    repair && !covers(/clean.?up|haul/i) && { question: `Do you clean up after ${label}?`, answer: CLEANUP_ANSWER },
+  ];
+
+  const room = Math.max(MIN_SHARED_FAQS, MAX_SERVICE_FAQS - own.length);
+  return [...own, ...shared.filter((faq): faq is Faq => faq !== false).slice(0, room)];
 }
