@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { ESTIMATE_PATH, absoluteUrl, phoneFor } from "@/lib/constants";
+import { ESTIMATE_PATH, LEAD_FORM_ENABLED, absoluteUrl, phoneFor } from "@/lib/constants";
 import { FACTS, PROCESS_STEPS, estimateText, paymentText } from "@/lib/business-facts";
 import { CITIES, cityLabel, cityPath, getCity, nearbyCities, roofCityPath, ROOF_CITY_SLUGS } from "@/lib/cities";
 import { cityFaqs } from "@/lib/faqs";
@@ -11,7 +11,7 @@ import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
-import QuoteForm from "@/components/QuoteForm";
+import LeadCapture from "@/components/LeadCapture";
 import ServiceIcon from "@/components/ServiceIcon";
 
 const TRUST = [
@@ -236,10 +236,14 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-center font-display text-3xl font-bold text-gray-900">Get a Free Estimate in {city.name}</h2>
           <p className="mx-auto mt-4 max-w-xl text-center text-lg text-gray-600">
-            Tell us what needs attention and we&apos;ll take it from there.
+            {LEAD_FORM_ENABLED ? "Tell us" : "Call and tell us"} what needs attention and we&apos;ll take it from there.
           </p>
           <div className="mt-10">
-            <QuoteForm city={city.kind === "county" ? "" : city.name} service={isRoof ? "Roof Repair or Inspection" : undefined} />
+            <LeadCapture
+              city={city.kind === "county" ? "" : city.name}
+              service={isRoof ? "Roof Repair or Inspection" : undefined}
+              stateAbbr={city.stateAbbr}
+            />
           </div>
         </div>
       </section>

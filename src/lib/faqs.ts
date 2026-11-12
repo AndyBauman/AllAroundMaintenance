@@ -1,4 +1,4 @@
-import { LICENSES, PHONE, PHONE_WA } from "./constants";
+import { LEAD_FORM_ENABLED, LICENSES, PHONE, PHONE_WA } from "./constants";
 import {
   FACTS,
   estimateText,
@@ -14,6 +14,8 @@ export interface Faq {
   question: string;
   answer: string;
 }
+
+const OR_FORM = LEAD_FORM_ENABLED ? " or send the free estimate form" : "";
 
 const LICENSE_ANSWER = `Yes. All Around Maintenance Inc. is a licensed, bonded and insured contractor in both states: Oregon CCB #${LICENSES.oregonCcb} and Washington #${LICENSES.washington}.`;
 
@@ -58,7 +60,7 @@ export const HOME_FAQS: Faq[] = [
   },
   {
     question: "How do I get started?",
-    answer: `Call ${PHONE} in the Portland area or ${PHONE_WA} in the Vancouver area, or send the free estimate form. We respond ${FACTS.responseTime}.`,
+    answer: `Call ${PHONE} in the Portland area or ${PHONE_WA} in the Vancouver area${LEAD_FORM_ENABLED ? ", or send the free estimate form" : ""}. We respond ${FACTS.responseTime}.`,
   },
 ];
 
@@ -80,7 +82,7 @@ export function cityFaqs(city: CityData, focus: "home" | "roof" = "home"): Faq[]
       { question: `How do you remove moss from roofs in ${place}?`, answer: `By hand, never with a pressure washer. We then scrub the roof, clean the gutters and apply a treatment that kills the roots. ${mossGuaranteeText()}` },
       { question: `How often should a roof in ${place} be maintained?`, answer: "Once a year is a good rule in the Pacific Northwest, ideally before the rainy season." },
       { question: `Are you licensed to work in ${city.state}?`, answer: LICENSE_ANSWER },
-      { question: `How do I schedule roof work in ${place}?`, answer: `Call ${phone} or send the free estimate form. ${schedulingText()}` },
+      { question: `How do I schedule roof work in ${place}?`, answer: `Call ${phone}${OR_FORM}. ${schedulingText()}` },
     ];
   }
 
@@ -96,6 +98,6 @@ export function cityFaqs(city: CityData, focus: "home" | "roof" = "home"): Faq[]
       question: `Do you work with HOAs and businesses in ${place}?`,
       answer: `Yes. We provide custom maintenance plans and on-demand repairs for HOAs, and maintenance and repair for commercial properties.`,
     },
-    { question: `How do I book service in ${place}?`, answer: `Call ${phone} or send the free estimate form. We respond ${FACTS.responseTime}.` },
+    { question: `How do I book service in ${place}?`, answer: `Call ${phone}${OR_FORM}. We respond ${FACTS.responseTime}.` },
   ];
 }

@@ -43,6 +43,14 @@ export const FINANCING_URL = "https://app.gethearth.com/partners/all-around-main
 
 export const ESTIMATE_PATH = "/free-estimate";
 
+/**
+ * Online estimate form and its email delivery (src/app/api/lead).
+ * OFF for launch: the site is call-first and no lead endpoint is exposed.
+ * To turn it on later: set this to true, add RESEND_API_KEY and NOTIFY_EMAIL
+ * in Vercel, and redeploy. Every page and all copy switch over from this one flag.
+ */
+export const LEAD_FORM_ENABLED: boolean = false;
+
 /** Absolute URL in the site's canonical form (trailing slash, matching `trailingSlash: true`). */
 export function absoluteUrl(path = "/"): string {
   const clean = path === "/" ? "" : path.replace(/\/+$/, "");

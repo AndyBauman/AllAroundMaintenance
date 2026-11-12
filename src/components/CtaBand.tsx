@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { ESTIMATE_PATH, PHONE, PHONE_HREF } from "@/lib/constants";
+import { ESTIMATE_PATH, LEAD_FORM_ENABLED, PHONE, PHONE_HREF } from "@/lib/constants";
 
 export default function CtaBand({
   heading = "Not Sure What It'll Cost?",
-  text = "Estimates are free, itemized and come with no obligation. Call or request one online.",
+  text = LEAD_FORM_ENABLED
+    ? "Estimates are free, itemized and come with no obligation. Call or request one online."
+    : "Estimates are free, itemized and come with no obligation. Call and we'll set one up.",
   phone = { display: PHONE, href: PHONE_HREF },
 }: {
   heading?: string;
@@ -28,7 +30,7 @@ export default function CtaBand({
             href={ESTIMATE_PATH}
             className="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-lg font-bold text-gray-950 transition hover:bg-accent-light"
           >
-            Free Estimate Online →
+            {LEAD_FORM_ENABLED ? "Free Estimate Online →" : "How Estimates Work →"}
           </Link>
         </div>
       </div>

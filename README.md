@@ -18,7 +18,7 @@ npm run build
 
 | Want to change… | Edit |
 |---|---|
-| Phone numbers, licenses, social links, site URL | `src/lib/constants.ts` |
+| Phone numbers, licenses, social links, site URL, form on/off | `src/lib/constants.ts` |
 | Claims: response time, guarantee, payment, junk pricing | `src/lib/business-facts.ts` |
 | A service page (copy, FAQs, pricing note, related links) | `src/lib/services.ts` |
 | Cities and neighborhoods | `src/lib/cities.ts` |
@@ -32,27 +32,27 @@ schema and `llms.txt` line are generated from it.
 
 ## Pages (59 indexable URLs)
 
-- `/` home, `/services`, `/service-areas`, `/about-us`, `/faq`, `/free-estimate`
+- `/` home, `/services`, `/service-areas`, `/about-us`, `/faq`, `/free-estimate` (call-first contact page)
 - 25 service pages at their **original slugs** (e.g. `/gutter-repair-portland/`)
 - 23 city pages (`/{city}-home-maintenance/`) and 5 roof-city pages (`/roof-maintenance-{city}/`)
 - `/sitemap.xml`, `/robots.txt`, `/llms.txt`
 
 `trailingSlash: true` matches the old WordPress URLs exactly, so existing indexed URLs resolve with no redirect.
 
-## Lead form (no database)
+## Contact: call-first (online form is switched off)
 
-`/free-estimate` and the form on every service and city page POST to `src/app/api/lead/route.ts`,
-which validates, drops bots (honeypot + minimum fill time) and emails the lead through Resend.
+The site launches **without a contact form or email system**. Every place a form would go shows a
+call card with both phone lines instead, and `/api/lead` answers 404.
 
-Set in Vercel → Settings → Environment Variables:
+The form and its email delivery are already built and tested, just switched off. To turn them on later:
 
-| Variable | Purpose |
-|---|---|
-| `RESEND_API_KEY` | **Required.** Resend API key |
-| `NOTIFY_EMAIL` | **Required.** Where leads go (comma-separated for several) |
-| `RESEND_FROM` | Optional. Verified sender. Defaults to Resend's test sender, which only delivers to the Resend account owner |
+1. Set `LEAD_FORM_ENABLED` to `true` in `src/lib/constants.ts`.
+2. Add `RESEND_API_KEY` and `NOTIFY_EMAIL` in Vercel → Settings → Environment Variables
+   (`RESEND_FROM` optional, for a verified sender).
+3. Redeploy. Pages, FAQs and CTA copy all switch over from that one flag.
 
-Until both required variables are set, the form tells the visitor to call instead of failing silently.
+When on, the form posts to `src/app/api/lead/route.ts`, which validates, drops bots
+(honeypot + minimum fill time) and emails the lead through Resend. No database.
 
 ## Drop-in assets
 
@@ -74,8 +74,8 @@ award years, street address, hours, email. Address, hours, email and rating are 
 
 ## Before pointing the domain here
 
-1. Set `RESEND_API_KEY` and `NOTIFY_EMAIL`, then submit a test lead.
-2. Add `public/logo.png` and real job photos.
+1. Add `public/logo.png` and real job photos.
+2. Decide whether to switch the online form on (see above).
 3. Rewrite the 19 blog posts. Their old URLs currently 307 to the closest service page (`next.config.ts`).
 4. Confirm the open business facts with the owner (address, hours, email, review count, warranty terms).
 5. Add `NEXT_PUBLIC_GA_MEASUREMENT_ID` (and port the GTM container if still needed).

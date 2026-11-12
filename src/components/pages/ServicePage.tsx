@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, CircleCheck, Phone } from "lucide-react";
 import { DEFAULT_SERVICE_PROCESS, SERVICES, getServiceBySlug } from "@/lib/services";
-import { absoluteUrl, PHONE, PHONE_HREF } from "@/lib/constants";
+import { absoluteUrl, LEAD_FORM_ENABLED, PHONE, PHONE_HREF } from "@/lib/constants";
 import { serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
 import FAQJsonLd from "@/components/FAQJsonLd";
-import QuoteForm from "@/components/QuoteForm";
+import LeadCapture from "@/components/LeadCapture";
 import ServiceIcon from "@/components/ServiceIcon";
 
 export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
@@ -128,7 +128,8 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
             <div>
               <h2 className="font-display text-3xl font-bold text-gray-900">Get a Free {svc.shortTitle} Estimate</h2>
               <p className="mt-4 text-lg text-gray-600">
-                Tell us about the project. We respond the same day and send an itemized estimate within 1 business day.
+                {LEAD_FORM_ENABLED ? "Tell us" : "Call and tell us"} about the project. We respond the same day and send an itemized
+                estimate within 1 business day.
               </p>
               {related.length > 0 && (
                 <div className="mt-10">
@@ -144,7 +145,7 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
                 </div>
               )}
             </div>
-            <QuoteForm />
+            <LeadCapture />
           </div>
         </div>
       </section>

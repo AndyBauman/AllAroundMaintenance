@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { LEGAL_NAME, PHONE } from "@/lib/constants";
+import { LEAD_FORM_ENABLED, LEGAL_NAME, PHONE } from "@/lib/constants";
 import { ELAPSED_FIELD, HONEYPOT_FIELD, detectSpam } from "@/lib/spam-guard";
 
 export const runtime = "nodejs";
 
 /**
+ * Only active when LEAD_FORM_ENABLED (src/lib/constants.ts) is true.
+ *
  * Lead intake with no database: validate, drop obvious bots, email the lead through Resend.
  *
  * Required env (Vercel → Settings → Environment Variables):
@@ -29,6 +31,9 @@ function multiLine(v: unknown, max = 4000): string {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export async function POST(request: Request) {
+  // Closed while the form is switched off: no lead endpoint is exposed at launch.
+  if (!LEAD_FORM_ENABLED) return NextResponse.json({ error: "Not found." }, { status: 404 });
+
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;

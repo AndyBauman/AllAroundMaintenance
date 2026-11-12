@@ -4,13 +4,13 @@ import {
   Search, ShieldCheck, Sparkles, type LucideIcon,
 } from "lucide-react";
 import { ESTIMATE_PATH, LICENSE_LINE } from "@/lib/constants";
-import { FACTS, changeOrderText, guaranteeText, mossGuaranteeText } from "@/lib/business-facts";
+import { FACTS, changeOrderText, guaranteeText, mossGuaranteeText, reachUsText } from "@/lib/business-facts";
 
 /** The right-hand tag states a fact, never an invented dollar value. */
 const VALUE_ITEMS: { icon: LucideIcon; title: string; description: string; tag: string; isBonus?: boolean }[] = [
   { icon: FileText, title: "Free Itemized Estimate", description: "Every line of the job priced in writing before you decide anything.", tag: "Free" },
   { icon: Search, title: "Free Roof & Attic Inspection", description: "Comes with an itemized report and photos of what we found.", tag: "Free" },
-  { icon: MessageSquare, title: "Same-Day Response", description: "Call or send the form and you'll hear back the same day.", tag: "Same day" },
+  { icon: MessageSquare, title: "Same-Day Response", description: `${reachUsText()} and you'll hear back the same day.`, tag: "Same day" },
   { icon: CalendarCheck, title: "Fast Scheduling", description: `Estimate within ${FACTS.estimateTurnaround}. Most work booked within ${FACTS.schedulingWindow}.`, tag: FACTS.schedulingWindow },
   { icon: ClipboardList, title: "No Surprise Changes", description: changeOrderText(), tag: "Your approval" },
   { icon: BadgeCheck, title: "Licensed, Bonded & Insured", description: LICENSE_LINE, tag: "OR + WA" },

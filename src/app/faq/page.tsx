@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
+import { reachUsText } from "@/lib/business-facts";
 import { HOME_FAQS } from "@/lib/faqs";
 
 const TITLE = "Frequently Asked Questions";
@@ -28,7 +29,7 @@ export default function FaqPage() {
       </section>
       <FAQJsonLd faqs={HOME_FAQS} />
       <FAQSection faqs={HOME_FAQS} heading="Working With All Around Maintenance" />
-      <CtaBand heading="Still Have a Question?" text="Call us or send the estimate form. We respond the same day." />
+      <CtaBand heading="Still Have a Question?" text={`${reachUsText()}. We respond the same day.`} />
     </main>
   );
 }

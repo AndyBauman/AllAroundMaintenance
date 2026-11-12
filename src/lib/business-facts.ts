@@ -1,4 +1,4 @@
-import { PHONE } from "./constants";
+import { LEAD_FORM_ENABLED, PHONE } from "./constants";
 
 /**
  * Single source of truth for claims used in copy, FAQs and schema.
@@ -72,12 +72,17 @@ export function callText(): string {
   return `Call ${PHONE}`;
 }
 
+/** How a visitor starts a job. Follows the lead-form switch so copy never mentions a form that isn't there. */
+export function reachUsText(): string {
+  return LEAD_FORM_ENABLED ? "Call or send the estimate form" : "Call us";
+}
+
 /** The standard customer journey, used on the home page, estimate page and HowTo schema. */
 export const PROCESS_STEPS = [
   {
     step: "01",
     title: "Tell Us What You Need",
-    description: `Call or send the estimate form. We respond ${FACTS.responseTime}.`,
+    description: `${LEAD_FORM_ENABLED ? "Call or send the estimate form" : "Call us and tell us what's going on"}. We respond ${FACTS.responseTime}.`,
   },
   {
     step: "02",
