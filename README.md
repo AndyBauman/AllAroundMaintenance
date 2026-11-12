@@ -60,7 +60,7 @@ Add the file to `/public`, redeploy, and the site uses it automatically (`src/li
 
 | File | Used for |
 |---|---|
-| `public/logo.png` | Header and footer logo. The brand logo is white, which is why both are navy |
+| `public/logo.svg` | Header and footer logo (in place). The brand logo is white, which is why both are navy. The emblem is cleaned up from a supplied banner image and the wordmark is redrawn, so swap in the original artwork when it is available (`logo.png` also works) |
 | `public/hero.jpg` | Home page hero photo |
 | `public/why-us.jpg` | Crew or job photo in the "Why us" section |
 | `public/og.jpg` | 1200×630 social share image |
@@ -74,7 +74,7 @@ award years, street address, hours, email. Address, hours, email and rating are 
 
 ## Before pointing the domain here
 
-1. Add `public/logo.png` and real job photos.
+1. Add real job photos, and replace `public/logo.svg` with the original logo artwork if the owner has it.
 2. Decide whether to switch the online form on (see above).
 3. Rewrite the 19 blog posts. Their old URLs currently 307 to the closest service page (`next.config.ts`).
 4. Confirm the open business facts with the owner (address, hours, email, review count, warranty terms).

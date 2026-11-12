@@ -32,7 +32,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-200 transition-colors hover:bg-white/10 hover:text-white"
+                className="rounded-md px-2.5 py-2 text-sm font-medium text-gray-200 transition-colors hover:bg-white/10 hover:text-white xl:px-3"
               >
                 {link.label}
               </Link>

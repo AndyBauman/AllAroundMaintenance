@@ -2,12 +2,23 @@ import { Compass } from "lucide-react";
 import { hasPublicFile } from "@/lib/assets";
 import { LEGAL_NAME } from "@/lib/constants";
 
+/** Fills the header bar on phones and wide screens; steps down at `lg`, where the nav first appears. */
+const LOGO_CLASS = "h-13 w-auto md:h-16 lg:h-12 xl:h-16";
+
 /**
- * Renders /public/logo.png when it exists (the brand logo is white, made for dark
- * backgrounds, which is why the header and footer are navy). Until the file is added,
- * a text wordmark stands in.
+ * Header and footer logo. Uses /public/logo.svg (the banner lockup: compass emblem,
+ * wordmark and red rule) or, failing that, /public/logo.png. The artwork is white,
+ * made for dark backgrounds, which is why the header and footer are navy. With
+ * neither file present, a text wordmark stands in.
  */
 export default function Logo() {
+  if (hasPublicFile("logo.svg")) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src="/logo.svg" alt={LEGAL_NAME} width={237} height={64} className={LOGO_CLASS} />
+    );
+  }
+
   if (hasPublicFile("logo.png")) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
