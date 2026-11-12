@@ -33,10 +33,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: ogImages,
   },
+  // No title or description here: each page's own Open Graph values carry over to the card.
   twitter: {
     card: ogImages ? "summary_large_image" : "summary",
-    title: TITLE,
-    description: DESCRIPTION,
     images: ogImages?.map((i) => i.url),
   },
   robots: {
