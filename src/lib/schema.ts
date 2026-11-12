@@ -81,7 +81,7 @@ export function siteWideGraphSchema() {
     url: absoluteUrl("/"),
     name: SITE_NAME,
     description:
-      "Roof, gutter, siding and deck repair plus full home maintenance in Portland OR and Vancouver WA. Family-owned since 1999. Free itemized estimates.",
+      "Roof, gutter, siding and deck repair plus full home maintenance in Portland, OR and Vancouver, WA. Family-owned since 1999. Free itemized estimates.",
     publisher: { "@id": ORGANIZATION_ID },
     inLanguage: "en-US",
   };

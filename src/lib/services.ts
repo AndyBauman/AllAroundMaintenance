@@ -80,9 +80,9 @@ export const SERVICES: ServiceData[] = [
     title: "Roof Inspection, Cleaning & Repair",
     shortTitle: "Roof Repair & Inspection",
     blurb: "Free inspections, leak and storm repair, and yearly maintenance.",
-    metaTitle: "Roof Repair & Free Roof Inspection | Portland OR & Vancouver WA",
+    metaTitle: "Roof Repair & Free Roof Inspection | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Free roof inspection with a photo report, plus leak, flashing and storm-damage repair across Portland and Vancouver WA. Licensed in OR & WA. Call (503) 209-2023.",
+      "Free roof inspection with a photo report, plus leak, flashing and storm-damage repair across Portland and Vancouver, WA. Licensed in OR & WA. Call (503) 209-2023.",
     heroHeading: "Roof Repair & Free Inspections",
     heroSubheading:
       "Find small roof problems before the rainy season turns them into big ones. Inspections are free and come with a photo report.",
@@ -107,7 +107,7 @@ export const SERVICES: ServiceData[] = [
     faqs: [
       { question: "How much does a roof inspection cost?", answer: "Nothing. Roof and attic inspections are free and include an itemized report with photos, so you can see exactly what we saw." },
       { question: "What roof problems do you repair?", answer: "Leaks, failed flashing and chimney seals, missing or damaged shingles, wind blow-offs, punctures, blistering, ponding water, and problems left by poor installation or earlier repairs." },
-      { question: "How often should a roof be inspected?", answer: "Once a year is a good rule in our climate, and again after any major wind storm. An annual visit before the rainy season catches most problems early." },
+      { question: "How often should a roof be inspected?", answer: "Once a year is a good rule in our climate, and again after any major windstorm. An annual visit before the rainy season catches most problems early." },
       { question: "Do you offer same-day roof repair?", answer: "When our schedule allows, yes. Call as early in the day as you can and tell us what's happening so we can prioritize active leaks." },
       { question: "What does a roof inspection cover?", answer: "The roof exterior, the attic side, ventilation and insulation. You get an itemized report with photos of what we found." },
       { question: "What are signs my roof needs repair?", answer: "Missing, cracked or curling shingles, granules collecting in the gutters, water stains on ceilings, damp spots in the attic, and moss that keeps coming back." },
@@ -123,9 +123,9 @@ export const SERVICES: ServiceData[] = [
     title: "Leaky Roof Repair",
     shortTitle: "Leaky Roof Repair",
     blurb: "Fast leak tracing, a temporary fix if needed, then a permanent repair.",
-    metaTitle: "Leaky Roof Repair | Portland OR & Vancouver WA",
+    metaTitle: "Leaky Roof Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Roof leaking? We trace the source, stop the water and plan the permanent repair for homes and businesses in Portland and Vancouver WA. Call (503) 209-2023.",
+      "Roof leaking? We trace the source, stop the water and plan the permanent repair for homes and businesses in Portland and Vancouver, WA. Call (503) 209-2023.",
     heroHeading: "Leaky Roof Repair",
     heroSubheading: "Water coming in? Call now. We'll help you slow it down and get someone out to find the source.",
     intro:
@@ -151,7 +151,7 @@ export const SERVICES: ServiceData[] = [
     faqs: [
       { question: "What causes most roof leaks?", answer: "Aging roofing, failed flashing, fallen branches, clogged gutters that pool water at the roof edge, wildlife damage, and mistakes in the original installation." },
       { question: "Do you handle emergency leaks?", answer: "Yes. Call as soon as you notice water. We send someone to assess the problem and apply a quick fix, then help you plan the permanent repair." },
-      { question: "Will I need a new roof?", answer: "Usually not. Most leaks are repairable. We only recommend replacement when the inspection shows a repair won't last." },
+      { question: "Will I need a new roof?", answer: "Usually not. Most leaks are repairable. We recommend replacement only when the inspection shows a repair won't last." },
       { question: "Do you repair leaks on commercial buildings?", answer: "Yes. We repair leaks for homes and businesses across the Portland and Vancouver metro areas." },
       { question: "What should I do while I wait for a roof leak repair?", answer: "Catch the water in a bucket, move furniture and electronics out of the way, and call us. Stay off the roof, especially while it is wet." },
       { question: "How do you find where a roof leak is coming from?", answer: "We trace it from both sides: the attic and the roof surface. Water often travels along the framing before it shows, so the stain inside is rarely right under the leak." },
@@ -167,11 +167,11 @@ export const SERVICES: ServiceData[] = [
     title: "Roof Replacement",
     shortTitle: "Roof Replacement",
     blurb: "Honest repair-or-replace advice and a clean, well-communicated re-roof.",
-    metaTitle: "Roof Replacement | Portland OR & Vancouver WA",
+    metaTitle: "Roof Replacement | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Roof replacement for Portland and Vancouver WA homes. We inspect first and only recommend a new roof when repair won't last. Call (503) 209-2023.",
+      "Roof replacement for homes in Portland and Vancouver, WA. We inspect first and recommend a new roof only when a repair won't last. Call (503) 209-2023.",
     heroHeading: "Roof Replacement",
-    heroSubheading: "We inspect first and only recommend a new roof when a repair won't do the job.",
+    heroSubheading: "We inspect first and recommend a new roof only when a repair won't do the job.",
     intro:
       "Replacing a roof is a major investment, so the first step is making sure you need one. If you do, you get a clear plan, regular updates during the job, and no hidden costs.",
     includes: [
@@ -179,7 +179,7 @@ export const SERVICES: ServiceData[] = [
       "A straight answer on repair versus replacement",
       "Tear-off and installation with durable, weatherproof roofing products",
       "Updates throughout the job",
-      "Complete clean-up when the work is done",
+      "Complete cleanup when the work is done",
     ],
     process: [
       { step: "01", title: "Assessment", description: "We determine whether replacement or repair is the better option for your roof." },
@@ -188,19 +188,19 @@ export const SERVICES: ServiceData[] = [
     ],
     pricing: {
       headline: "Free itemized estimate",
-      note: "A full replacement commonly runs from $5,000 to $20,000 or more depending on roof size and materials. You get the full number in writing before work starts.",
+      note: "A full replacement commonly runs from $5,000 to $20,000 or more, depending on roof size and materials. You get the full number in writing before work starts.",
     },
     callout: {
       title: "Signs it may be time",
-      text: "A sagging or drooping roofline, moisture or mold inside, cracked, curling or missing shingles, or a roof more than 25 years old.",
+      text: "A sagging or drooping roofline; moisture or mold inside; cracked, curling or missing shingles; or a roof more than 25 years old.",
     },
     faqs: [
       { question: "How do I know if I need a new roof?", answer: "Common signs are sagging, interior moisture or mold, widespread cracked or curling shingles, and age beyond about 25 years. An inspection tells you for certain." },
       { question: "Will you tell me if a repair is enough?", answer: "Yes. Most damage can be repaired, and we recommend replacement only when it is the better long-term option." },
-      { question: "How much does a roof replacement cost?", answer: "A full replacement commonly runs from $5,000 to $20,000 or more depending on roof size and materials. You get the full number in writing before work starts." },
+      { question: "How much does a roof replacement cost?", answer: "A full replacement commonly runs from $5,000 to $20,000 or more, depending on roof size and materials. You get the full number in writing before work starts." },
       { question: "How long does a roof last?", answer: "Many asphalt shingle roofs last 20 to 30 years. Moss, poor attic ventilation and storm damage shorten that, and regular maintenance extends it." },
-      { question: "What happens during a roof replacement?", answer: "We assess the roof, review cost, options and timeline with you, then our roofing technicians complete the re-roof and leave the property clean." },
-      { question: "Will you keep me updated during the job?", answer: "Yes. You get updates throughout the job and a complete clean-up when the work is done." },
+      { question: "What happens during a roof replacement?", answer: "We assess the roof and review cost, options and timeline with you. Then our roofing technicians complete the re-roof and leave the property clean." },
+      { question: "Will you keep me updated during the job?", answer: "Yes. You get updates throughout the job and a complete cleanup when the work is done." },
     ],
     related: ["roof-installation", "roof-inspection-cleaning-repair", "gutter-replacement"],
   },
@@ -211,9 +211,9 @@ export const SERVICES: ServiceData[] = [
     title: "Roof Installation",
     shortTitle: "Roof Installation",
     blurb: "New roofs planned around your home, your budget and your schedule.",
-    metaTitle: "Roof Installation | Portland OR & Vancouver WA",
+    metaTitle: "Roof Installation | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Roof installation in Portland and Vancouver WA with a custom plan, clear costs and full clean-up. Licensed in OR & WA. Call (503) 209-2023 for a free estimate.",
+      "Roof installation in Portland and Vancouver, WA, with a custom plan, clear costs and full cleanup. Licensed in OR & WA. Call (503) 209-2023 for a free estimate.",
     heroHeading: "Roof Installation",
     heroSubheading: "A roof built for Northwest weather, with costs and timeline agreed before we start.",
     intro:
@@ -224,7 +224,7 @@ export const SERVICES: ServiceData[] = [
       "A repair recommendation instead, when a simple fix is enough",
       "Durable, weatherproof roofing products",
       "Scheduling at your convenience",
-      "Full clean-up after the work",
+      "Full cleanup after the work",
     ],
     process: [
       { step: "01", title: "Inspection", description: "We confirm whether the roof needs replacing or a repair will do." },
@@ -236,7 +236,7 @@ export const SERVICES: ServiceData[] = [
     faqs: [
       { question: "What does the installation process look like?", answer: "Three steps: an inspection, a recommendation meeting where we cover cost and timeline, and then construction scheduled at a time that works for you." },
       { question: "How long does a roof installation take?", answer: "It depends on the size and complexity of the roof. You'll get a specific timeline with your estimate before anything is scheduled." },
-      { question: "Do you clean up afterward?", answer: "Yes. Clean-up is part of every job, and our goal is to leave the property as clean as we found it." },
+      { question: "Do you clean up afterward?", answer: "Yes. Cleanup is part of every job, and our goal is to leave the property as clean as we found it." },
       { question: "What do you check before installing a roof?", answer: "The roof deck, ventilation, insulation, chimney and flashing. If a simple repair is enough, we recommend that instead." },
       { question: "How much does a new roof cost?", answer: "It depends on roof size and materials. A full replacement commonly runs from $5,000 to $20,000 or more, and you get the full number in writing before work starts." },
       { question: "Can you schedule the installation around my calendar?", answer: "Yes. Construction is scheduled at a time that works for you." },
@@ -251,13 +251,13 @@ export const SERVICES: ServiceData[] = [
     title: "Roof Moss Removal & Roof Cleaning",
     shortTitle: "Moss Removal",
     blurb: `Hand removal plus root-killing treatment, guaranteed for ${FACTS.mossGuaranteeMonths} months.`,
-    metaTitle: "Roof Moss Removal & Roof Cleaning | Portland OR & Vancouver WA",
+    metaTitle: "Roof Moss Removal & Roof Cleaning | Portland, OR & Vancouver, WA",
     metaDescription:
       "Roof moss removed by hand, never pressure washed, then treated at the root. Gutters cleaned on every job. 6-month re-treatment guarantee. Call (503) 209-2023.",
     heroHeading: "Roof Moss Removal",
     heroSubheading: `Removed by hand, treated at the root, and guaranteed for ${FACTS.mossGuaranteeMonths} months.`,
     intro:
-      "Moss holds water against your shingles and lifts their edges, which shortens the life of the roof. We remove it the careful way, by hand, then treat the roof so it does not grow straight back.",
+      "Moss holds water against your shingles and lifts their edges, which shortens the life of the roof. We remove it the careful way, by hand, then treat the roof so the moss does not grow straight back.",
     includes: [
       "Moss, leaves and debris removed by hand",
       "Remaining growth scrubbed off",
@@ -274,13 +274,13 @@ export const SERVICES: ServiceData[] = [
     pricing: FREE_ESTIMATE,
     callout: { title: `${FACTS.mossGuaranteeMonths}-month moss guarantee`, text: mossGuaranteeText() },
     faqs: [
-      { question: "How do you remove moss from a roof?", answer: "By hand first, then we scrub off what remains, clean the gutters and downspouts, and apply an industrial-grade treatment that kills the moss at the root." },
+      { question: "How do you remove moss from a roof?", answer: "By hand first. Then we scrub off what remains, clean the gutters and downspouts, and apply an industrial-grade treatment that kills the moss at the root." },
       { question: "Do you pressure wash roofs?", answer: "No. Pressure washing can strip the protective granules off asphalt shingles, so we remove moss by hand." },
       { question: "What if the moss comes back?", answer: mossGuaranteeText() },
       { question: "How often does a roof need moss treatment?", answer: "Heavily shaded roofs often need cleaning every year. Roofs that get more sun can usually go longer between treatments." },
       { question: "Why is moss bad for a roof?", answer: "Moss holds moisture against the shingles and works its way under their edges, which lifts them and lets water in. Left alone, it shortens the life of the roof." },
       { question: "Do you clean the gutters during moss removal?", answer: "Yes. Gutters and downspouts are cleaned and unclogged on every moss removal job." },
-      { question: "How can I slow moss from coming back?", answer: "Trim back overhanging branches so the roof gets more sun and dries faster, and keep the roof and gutters clear of leaves and debris." },
+      { question: "How can I keep moss from coming back?", answer: "Trim back overhanging branches so the roof gets more sun and dries faster, and keep the roof and gutters clear of leaves and debris." },
     ],
     related: ["roof-inspection-cleaning-repair", "gutter-cleaning-gutter-inspection", "pressure-washing-portland"],
   },
@@ -294,9 +294,9 @@ export const SERVICES: ServiceData[] = [
     title: "Gutter Cleaning & Inspection",
     shortTitle: "Gutter Cleaning",
     blurb: "Gutters and downspouts cleared, flushed and checked for problems.",
-    metaTitle: "Gutter Cleaning & Inspection | Portland OR & Vancouver WA",
+    metaTitle: "Gutter Cleaning & Inspection | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Gutter cleaning in Portland and Vancouver WA: debris removed, downspouts flushed, leaks and sagging checked. Free estimates, same-day response. Call (503) 209-2023.",
+      "Gutter cleaning in Portland and Vancouver, WA: debris removed, downspouts flushed, leaks and sagging checked. Free estimates, same-day response. Call (503) 209-2023.",
     heroHeading: "Gutter Cleaning & Inspection",
     heroSubheading: "Stop overflowing gutters before they stain siding, rot fascia or pool water at the foundation.",
     intro:
@@ -305,7 +305,7 @@ export const SERVICES: ServiceData[] = [
       "Leaves, needles and buildup removed from gutters and downspouts",
       "Downspouts flushed to clear clogs and confirm flow",
       "Check for leaks, sagging sections and loose fasteners",
-      "Gutter guard inspection, if you have them",
+      "Gutter guard inspection, if you have guards",
       "Downspout rerouting when water is draining toward the house",
       "Scheduled plans for homes and HOA communities",
     ],
@@ -335,9 +335,9 @@ export const SERVICES: ServiceData[] = [
     title: "Gutter Repair",
     shortTitle: "Gutter Repair",
     blurb: "Leaks, sagging runs, failed hangers and downspouts that won't drain.",
-    metaTitle: "Gutter Repair | Portland OR & Vancouver WA",
+    metaTitle: "Gutter Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Gutter repair for leaks, sagging sections, separated seams and bad downspouts in Portland and Vancouver WA. Same-day service often available. Call (503) 209-2023.",
+      "Gutter repair for leaks, sagging sections, separated seams and bad downspouts in Portland and Vancouver, WA. Same-day service often available. Call (503) 209-2023.",
     heroHeading: "Gutter Repair",
     heroSubheading: "Leaking, sagging or pulling away from the house? We fix the cause, not just the drip.",
     intro:
@@ -356,7 +356,7 @@ export const SERVICES: ServiceData[] = [
     },
     callout: { title: "Urgent problems first", text: "Issues that could cause water damage are prioritized, and same-day service is often possible." },
     faqs: [
-      { question: "How do I know if I need repair or just cleaning?", answer: "Dripping at the seams, sagging runs, overflow that continues after a cleaning, pooling near the foundation, or gaps where the gutter pulls from the fascia all point to a repair." },
+      { question: "How do I know if I need repair or just cleaning?", answer: "Dripping at the seams, sagging runs, overflow that continues after a cleaning, pooling near the foundation, or gaps where the gutter pulls away from the fascia all point to a repair." },
       { question: "Can you repair gutters the same day?", answer: "Often, depending on our schedule and the type of repair. Tell us if water is getting into the house so we can prioritize it." },
       { question: "Should I repair or replace my gutters?", answer: "Isolated problems are worth repairing. If damage is widespread, with multiple cracks, broken seams or recurring drainage trouble, replacement is usually the better value." },
       { question: "What gutter problems can you repair?", answer: "Leaks at seams, corners and end caps, loose or sagging sections, failed hangers and fasteners, and downspouts that don't drain." },
@@ -373,13 +373,13 @@ export const SERVICES: ServiceData[] = [
     title: "Gutter Replacement & Installation",
     shortTitle: "Gutter Replacement",
     blurb: "New gutters pitched, placed and fastened correctly, matched to your home.",
-    metaTitle: "Gutter Replacement & Installation | Portland OR & Vancouver WA",
+    metaTitle: "Gutter Replacement & Installation | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Gutter replacement and installation in Portland and Vancouver WA. Correct pitch, smart downspout placement, matched to your home. Free itemized estimate. (503) 209-2023.",
+      "Gutter replacement and installation in Portland and Vancouver, WA. Correct pitch, smart downspout placement, matched to your home. Free itemized estimate. (503) 209-2023.",
     heroHeading: "Gutter Replacement",
     heroSubheading: "When cleaning and repair are no longer enough, we install gutters that drain the way they should.",
     intro:
-      "We start by confirming you actually need new gutters. If you do, the details decide whether they work: the pitch, where the downspouts go, and what they are fastened to.",
+      "We start by confirming you actually need new gutters. If you do, the details decide whether they work: the pitch, where the downspouts go, and what the gutters are fastened to.",
     includes: [
       "Assessment first: clean, repair or replace",
       "Gutters pitched so water runs to the downspouts",
@@ -414,9 +414,9 @@ export const SERVICES: ServiceData[] = [
     title: "Deck Cleaning, Repair & Restoration",
     shortTitle: "Deck Repair & Restoration",
     blurb: "Cleaning, board and railing repair, staining and full refinishing.",
-    metaTitle: "Deck Cleaning, Repair & Refinishing | Portland OR & Vancouver WA",
+    metaTitle: "Deck Cleaning, Repair & Refinishing | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Deck cleaning, board and railing repair, staining and refinishing in Portland and Vancouver WA. Wood and composite. Free in-person assessment. Call (503) 209-2023.",
+      "Deck cleaning, board and railing repair, staining and refinishing in Portland and Vancouver, WA. Wood and composite. Free in-person assessment. Call (503) 209-2023.",
     heroHeading: "Deck Repair & Restoration",
     heroSubheading: "Bring a gray, slick or wobbly deck back to something you want to stand on.",
     intro:
@@ -435,7 +435,7 @@ export const SERVICES: ServiceData[] = [
       { step: "03", title: "Restore", description: "We wash, repair, sand and stain as needed, then clean up." },
     ],
     pricing: FREE_ESTIMATE,
-    callout: { title: "Fix the cause", text: "When a board rots we look for the reason, such as trapped water or poor drainage, so the repair lasts." },
+    callout: { title: "Fix the cause", text: "When a board rots, we look for the reason, such as trapped water or poor drainage, so the repair lasts." },
     faqs: [
       { question: "How often should a deck be cleaned?", answer: "At least once a year, ideally before or after the rainy season. Shaded or damp decks need it more often." },
       { question: "Does my deck need repair or just cleaning?", answer: "Soft, spongy or loose boards and railings need repair. Wood that is dirty but solid usually needs only cleaning or refinishing." },
@@ -444,7 +444,7 @@ export const SERVICES: ServiceData[] = [
       { question: "Do you work on composite decks?", answer: "Yes. We clean and repair both wood and composite decks." },
       { question: "Can you clean and stain my deck in one visit?", answer: "Yes. Our power wash and stain package covers the full job in one visit at one price." },
       { question: "Do you replace individual boards and railings?", answer: "Yes. We replace damaged boards and railings and fix the underlying cause, so the same spot doesn't fail again." },
-      { question: "Is pressure washing safe for an older deck?", answer: "For older and delicate wood we use a soft wash instead of full pressure, which cleans without tearing up the surface." },
+      { question: "Is pressure washing safe for an older deck?", answer: "For older and delicate wood, we use a soft wash instead of full pressure, which cleans without tearing up the surface." },
       { question: "Do you build new decks?", answer: "Yes. We build new decks in wood or composite on request." },
     ],
     related: ["pressure-washing-portland", "fence-repair-portland", "dry-rot-repair"],
@@ -459,9 +459,9 @@ export const SERVICES: ServiceData[] = [
     title: "Pressure Washing",
     shortTitle: "Pressure Washing",
     blurb: "Decks, siding, patios, driveways and walkways cleaned with commercial equipment.",
-    metaTitle: "Pressure Washing | Portland OR & Vancouver WA",
+    metaTitle: "Pressure Washing | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Pressure washing and soft washing for decks, siding, patios, driveways and pavers in Portland and Vancouver WA. Licensed, bonded and insured. Call (503) 209-2023.",
+      "Pressure washing and soft washing for decks, siding, patios, driveways and pavers in Portland and Vancouver, WA. Licensed, bonded and insured. Call (503) 209-2023.",
     heroHeading: "Pressure Washing",
     heroSubheading: "Clear the moss, mildew and grime that make surfaces slick and tired-looking.",
     intro:
@@ -494,9 +494,9 @@ export const SERVICES: ServiceData[] = [
     title: "Siding Repair",
     shortTitle: "Siding Repair",
     blurb: "Cracked, punctured or peeling siding repaired and matched to your home.",
-    metaTitle: "Siding Repair | Portland OR & Vancouver WA",
+    metaTitle: "Siding Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Siding repair for cracked, damaged or poorly installed siding in Portland and Vancouver WA. Materials matched to your home. Free estimate. Call (503) 209-2023.",
+      "Siding repair for cracked, damaged or poorly installed siding in Portland and Vancouver, WA. Materials matched to your home. Free estimate. Call (503) 209-2023.",
     heroHeading: "Siding Repair",
     heroSubheading: "Fix cracked or peeling siding before water finds its way behind it.",
     intro:
@@ -528,9 +528,9 @@ export const SERVICES: ServiceData[] = [
     title: "Fence Repair & Staining",
     shortTitle: "Fence Repair",
     blurb: "Boards, posts and gates repaired, plus cleaning and staining.",
-    metaTitle: "Fence Repair & Staining | Portland OR & Vancouver WA",
+    metaTitle: "Fence Repair & Staining | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Fence repair in Portland and Vancouver WA: leaning posts, broken boards, gates, staining and refinishing for cedar, privacy, picket and hogwire fences. (503) 209-2023.",
+      "Fence repair in Portland and Vancouver, WA: leaning posts, broken boards, gates, staining and refinishing for cedar, privacy, picket and hog wire fences. (503) 209-2023.",
     heroHeading: "Fence Repair & Staining",
     heroSubheading: "Leaning posts, broken boards and sagging gates fixed, then protected with a fresh stain.",
     intro:
@@ -541,18 +541,18 @@ export const SERVICES: ServiceData[] = [
       "Gate repair and replacement",
       "Pest and weather damage repair",
       "Pressure washing, staining and refinishing",
-      "Cedar, privacy, picket and hogwire fences",
+      "Cedar, privacy, picket and hog wire fences",
       "New fence installation on request",
     ],
     pricing: FREE_ESTIMATE,
-    callout: { title: "Staining schedule", text: "Most fences in our area benefit from staining about every four years." },
+    callout: { title: "Staining schedule", text: "Most fences in our area benefit from staining about every 4 years." },
     faqs: [
       { question: "When should I call about my fence?", answer: "Loose or missing boards, rot or insect damage, leaning posts, rusty hardware and gates that won't latch are all worth a look." },
       { question: "How much does fence repair cost?", answer: "It depends on the extent of the damage. We give you a free estimate based on what your fence actually needs." },
-      { question: "How often should a fence be stained?", answer: "About every four years for most fences in the Portland and Vancouver area." },
+      { question: "How often should a fence be stained?", answer: "About every 4 years for most fences in the Portland and Vancouver area." },
       { question: "Can you fix a leaning fence?", answer: "Yes. A lean usually means a post has rotted or come loose at the base. We repair or replace the post and re-secure the fence." },
       { question: "Should I repair or replace my fence?", answer: "If the damage is limited to a few boards, a gate or a post or two, repair makes sense. When most of the posts have rotted, a new fence is usually the better value, and we install new fences on request." },
-      { question: "What types of fences do you work on?", answer: "Cedar, privacy, picket and hogwire fences, including the gates." },
+      { question: "What types of fences do you work on?", answer: "Cedar, privacy, picket and hog wire fences, including the gates." },
       { question: "Do you stain and refinish fences?", answer: "Yes. We pressure wash, stain and refinish fences." },
     ],
     related: ["deck-cleaning-deck-repair-deck-restoration", "pressure-washing-portland", "landscape-maintenance-portland"],
@@ -563,10 +563,10 @@ export const SERVICES: ServiceData[] = [
     icon: "rot",
     title: "Dry Rot Repair",
     shortTitle: "Dry Rot Repair",
-    blurb: "Find the moisture source, replace the damaged wood, stop it coming back.",
-    metaTitle: "Dry Rot Repair | Portland OR & Vancouver WA",
+    blurb: "Find the moisture source, replace the damaged wood, stop it from coming back.",
+    metaTitle: "Dry Rot Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Dry rot repair for homes and businesses in Portland and Vancouver WA. We find the moisture source, replace damaged wood and fix the cause. Call (503) 209-2023.",
+      "Dry rot repair for homes and businesses in Portland and Vancouver, WA. We find the moisture source, replace damaged wood and fix the cause. Call (503) 209-2023.",
     heroHeading: "Dry Rot Repair",
     heroSubheading: "Rot spreads quietly. We find where the water is coming from and repair the damage it left.",
     intro:
@@ -574,7 +574,7 @@ export const SERVICES: ServiceData[] = [
     includes: [
       "Inspection to find the root cause and every affected area",
       "Replacement of wood that can't be saved",
-      "Repair of the leak or siding and roofing issue feeding the rot",
+      "Repair of the leak or the siding or roofing issue feeding the rot",
       "Price, timeline and scope laid out before work starts",
       "Homes of all sizes and commercial buildings",
     ],
@@ -598,9 +598,9 @@ export const SERVICES: ServiceData[] = [
     title: "Exterior Trim Repair & Installation",
     shortTitle: "Exterior Trim",
     blurb: "New trim, trim repair and updates that seal out moisture.",
-    metaTitle: "Exterior Trim Repair & Installation | Portland OR & Vancouver WA",
+    metaTitle: "Exterior Trim Repair & Installation | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Exterior trim installation and repair for homes and businesses in Portland and Vancouver WA. Protect against moisture and sharpen curb appeal. Call (503) 209-2023.",
+      "Exterior trim installation and repair for homes and businesses in Portland and Vancouver, WA. Protect against moisture and sharpen curb appeal. Call (503) 209-2023.",
     heroHeading: "Exterior Trim",
     heroSubheading: "Trim does two jobs: it finishes the look of the house and keeps water out of the joints.",
     intro:
@@ -630,9 +630,9 @@ export const SERVICES: ServiceData[] = [
     title: "Drainage Services",
     shortTitle: "Drainage",
     blurb: "Standing water in the yard, crawl space or basement diagnosed and fixed.",
-    metaTitle: "Drainage Services | Portland OR & Vancouver WA",
+    metaTitle: "Drainage Services | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Drainage solutions for standing water in yards, crawl spaces and basements in Portland and Vancouver WA: French drains, pumps, rain gardens and more. (503) 209-2023.",
+      "Drainage solutions for standing water in yards, crawl spaces and basements in Portland and Vancouver, WA: French drains, pumps, rain gardens and more. (503) 209-2023.",
     heroHeading: "Drainage Services",
     heroSubheading: "Standing water doesn't fix itself. We find where it's coming from and give it somewhere to go.",
     intro:
@@ -670,9 +670,9 @@ export const SERVICES: ServiceData[] = [
     title: "Plumbing Leak Repair",
     shortTitle: "Plumbing Leak Repair",
     blurb: "Dripping faucets, running toilets and small leaks fixed for good.",
-    metaTitle: "Plumbing Leak Repair | Portland OR & Vancouver WA",
+    metaTitle: "Plumbing Leak Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Small plumbing leak repairs for faucets, toilets, tubs, showers and drains in Portland and Vancouver WA homes and businesses. Call (503) 209-2023.",
+      "Small plumbing leak repairs for faucets, toilets, tubs, showers and drains in homes and businesses across Portland and Vancouver, WA. Call (503) 209-2023.",
     heroHeading: "Plumbing Leak Repair",
     heroSubheading: "A small leak wastes water every day and damages whatever is underneath it.",
     intro:
@@ -683,7 +683,7 @@ export const SERVICES: ServiceData[] = [
       "Bathtubs and showers",
       "Drains",
       "Visible water-line leaks",
-      "Complete clean-up afterward",
+      "Complete cleanup afterward",
     ],
     pricing: FREE_ESTIMATE,
     callout: { title: "What we don't do", text: "Sewer and septic work is outside our scope. We'll tell you up front if your problem needs a specialist." },
@@ -692,7 +692,7 @@ export const SERVICES: ServiceData[] = [
       { question: "Do you work on sewer or septic lines?", answer: "No. Sewer, septic and foundation work is outside what we do." },
       { question: "What should I do if I find a leak?", answer: "Shut off the water at the fixture's valve, or at the main if you can't find it, and call us. Even a slow drip can damage cabinets, flooring and drywall over time." },
       { question: "Do you repair running toilets and dripping faucets?", answer: "Yes. We repair leaks at sink faucets, toilets, bathtubs, showers and drains." },
-      { question: "Do you clean up after the repair?", answer: "Yes. Complete clean-up is part of the job." },
+      { question: "Do you clean up after the repair?", answer: "Yes. Complete cleanup is part of the job." },
     ],
     related: ["handyman-portland", "guest-ready-home-repairs", "drywall-installation"],
   },
@@ -703,13 +703,13 @@ export const SERVICES: ServiceData[] = [
     title: "Cabinet Repair & Refinishing",
     shortTitle: "Cabinet Repair",
     blurb: "Loose hinges, chipped doors and worn finishes repaired, not replaced.",
-    metaTitle: "Cabinet Repair & Refinishing | Portland OR & Vancouver WA",
+    metaTitle: "Cabinet Repair & Refinishing | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Kitchen cabinet repair and refinishing in Portland and Vancouver WA: hinges, hardware, chips, cracks and worn finishes. Less cost and waste than replacing. (503) 209-2023.",
+      "Kitchen cabinet repair and refinishing in Portland and Vancouver, WA: hinges, hardware, chips, cracks and worn finishes. Less cost and waste than replacing. (503) 209-2023.",
     heroHeading: "Cabinet Repair & Refinishing",
     heroSubheading: "A new look for your kitchen at a fraction of the cost and waste of replacement.",
     intro:
-      "Most tired cabinets are structurally fine. We repair what is broken and refinish what is worn, and we handle the project from start to clean-up.",
+      "Most tired cabinets are structurally fine. We repair what is broken and refinish what is worn, and we handle the project from start to cleanup.",
     includes: [
       "Hardware re-secured and broken hinges replaced",
       "Chips and cracks repaired",
@@ -720,7 +720,7 @@ export const SERVICES: ServiceData[] = [
     process: [
       { step: "01", title: "Consultation", description: "We look at the cabinets, identify damage and learn what you want them to look like." },
       { step: "02", title: "Recommendation", description: "You get a repair or refinishing plan with a timeline and cost estimate." },
-      { step: "03", title: "Repair & Clean-Up", description: "We do the work and leave the kitchen clean." },
+      { step: "03", title: "Repair & Cleanup", description: "We do the work and leave the kitchen clean." },
     ],
     pricing: FREE_ESTIMATE,
     callout: { title: "Repair before replace", text: "Repairing and refinishing costs less and wastes less than tearing out sound cabinets." },
@@ -739,13 +739,13 @@ export const SERVICES: ServiceData[] = [
     title: "Light Fixture Replacement",
     shortTitle: "Fixture Replacement",
     blurb: "Dated or damaged fixtures, fans, covers and shades swapped out cleanly.",
-    metaTitle: "Light Fixture Replacement | Portland OR & Vancouver WA",
+    metaTitle: "Light Fixture Replacement | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Light fixture replacement in Portland and Vancouver WA: ceiling lights, pendants, chandeliers, ceiling fans, covers and shades. Free estimate. Call (503) 209-2023.",
+      "Light fixture replacement in Portland and Vancouver, WA: ceiling lights, pendants, chandeliers, ceiling fans, covers and shades. Free estimate. Call (503) 209-2023.",
     heroHeading: "Light Fixture Replacement",
     heroSubheading: "Swap a failing or dated fixture for something that works and suits the room.",
     intro:
-      "We assess the existing fixture and the area around it, talk through what you want, then handle the replacement and the clean-up.",
+      "We assess the existing fixture and the area around it, talk through what you want, then handle the replacement and the cleanup.",
     includes: [
       "Ceiling lights and pendants",
       "Chandeliers and ceiling fans",
@@ -756,7 +756,7 @@ export const SERVICES: ServiceData[] = [
     process: [
       { step: "01", title: "Inspection", description: "An on-site look at the fixture and a conversation about your goals." },
       { step: "02", title: "Planning", description: "We sort out the details and help you settle on the right replacement." },
-      { step: "03", title: "Replacement & Clean-Up", description: "The fixture goes in and the space is left as clean as we found it." },
+      { step: "03", title: "Replacement & Cleanup", description: "The fixture goes in and the space is left as clean as we found it." },
     ],
     pricing: FREE_ESTIMATE,
     callout: { title: "Repair or replace?", text: "Repair is sometimes possible, but replacement is often the more economical choice." },
@@ -775,13 +775,13 @@ export const SERVICES: ServiceData[] = [
     title: "Drywall Installation & Repair",
     shortTitle: "Drywall",
     blurb: "New walls, patched holes and ceiling repairs with clean, flat finishes.",
-    metaTitle: "Drywall Installation & Repair | Portland OR & Vancouver WA",
+    metaTitle: "Drywall Installation & Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Drywall installation and repair for homes and offices in Portland and Vancouver WA: new rooms, dividers, closets, patches and ceilings. Free estimate. (503) 209-2023.",
+      "Drywall installation and repair for homes and offices in Portland and Vancouver, WA: new rooms, dividers, closets, patches and ceilings. Free estimate. (503) 209-2023.",
     heroHeading: "Drywall Installation & Repair",
     heroSubheading: "From a fist-sized patch to a new room, finished so you can't tell where the work was done.",
     intro:
-      "Good drywall work disappears. That means no visible fasteners, no uneven joints and frames that line up. Every project starts with an assessment and a plan built for your space.",
+      "Good drywall work disappears. That means no visible fasteners, no uneven joints, and frames that line up. Every project starts with an assessment and a plan built for your space.",
     includes: [
       "New rooms and room dividers",
       "Closets",
@@ -793,7 +793,7 @@ export const SERVICES: ServiceData[] = [
     pricing: FREE_ESTIMATE,
     callout: { title: "The finish matters", text: "We sweat the details that show: flat joints, hidden fasteners and aligned frames." },
     faqs: [
-      { question: "Do you do small drywall repairs?", answer: "Yes. We patch holes and cracks as well as hanging drywall for whole rooms." },
+      { question: "Do you do small drywall repairs?", answer: "Yes. We patch holes and cracks, and we hang drywall for whole rooms." },
       { question: "Do you work in offices?", answer: "Yes. We install and repair drywall in both homes and offices." },
       { question: "What drywall work do you do?", answer: "New rooms, room dividers and closets, damaged ceiling repair, and hole and crack patching." },
       { question: "Can you repair a damaged ceiling?", answer: "Yes. We repair damaged ceilings as well as walls. If a leak caused the damage, the leak needs to be fixed first so the repair lasts." },
@@ -808,13 +808,13 @@ export const SERVICES: ServiceData[] = [
     title: "Handyman Services",
     shortTitle: "Handyman Services",
     blurb: "The whole to-do list handled in one visit by a licensed crew.",
-    metaTitle: "Handyman Services | Portland OR & Vancouver WA",
+    metaTitle: "Handyman Services | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Licensed handyman services in Portland and Vancouver WA: mounting, doors, locks, drywall, dry rot, cabinets, small plumbing and more. Up-front quotes. (503) 209-2023.",
+      "Licensed handyman services in Portland and Vancouver, WA: mounting, doors, locks, drywall, dry rot, cabinets, small plumbing and more. Up-front quotes. (503) 209-2023.",
     heroHeading: "Handyman Services",
     heroSubheading: "No job is too big or too small. Hand us the list and we'll fix it all at once.",
     intro:
-      "We bring the tools and materials, handle the prep and the clean-up, and give you a quote up front so there are no surprises.",
+      "We bring the tools and materials, handle the prep and the cleanup, and give you a quote up front so there are no surprises.",
     includes: [
       "TV and shelf mounting",
       "Door, doorjamb, latch and lock repair",
@@ -824,15 +824,15 @@ export const SERVICES: ServiceData[] = [
       "Small plumbing repairs",
       "Fences, siding, decks, gutters and pressure washing",
     ],
-    pricing: { headline: "Up-front quote", note: "You know the price before we start. We bring the tools and materials and handle prep and clean-up." },
+    pricing: { headline: "Up-front quote", note: "You know the price before we start. We bring the tools and materials and handle prep and cleanup." },
     callout: { title: "Bundle the list", text: "Group your small repairs into a single visit. It costs less than calling someone for each one." },
     faqs: [
       { question: "What handyman jobs do you take?", answer: "Mounting, door and lock repair, drywall, dry rot, cabinets, small plumbing, sprinkler heads, window and door replacement, and most exterior repairs." },
       { question: "Do I need to supply materials?", answer: "No. We bring the tools and materials. If you would rather supply your own, we can provide labor only." },
       { question: "Is your work guaranteed?", answer: guaranteeText() },
-      { question: "Will I know the price before you start?", answer: "Yes. You know the price before we start. We bring the tools and materials and handle prep and clean-up." },
+      { question: "Will I know the price before you start?", answer: "Yes. You know the price before we start. We bring the tools and materials and handle prep and cleanup." },
       { question: "Can I combine several small jobs in one visit?", answer: "Yes. Give us the whole list and we price it together, so you know the total before we start." },
-      { question: "Do you mount TVs and shelves?", answer: "Yes. TV and shelf mounting are among the jobs we take." },
+      { question: "Do you mount TVs and shelves?", answer: "Yes. TV and shelf mounting is among the jobs we take." },
     ],
     related: ["guest-ready-home-repairs", "drywall-installation", "plumbing-leaks"],
   },
@@ -844,9 +844,9 @@ export const SERVICES: ServiceData[] = [
     title: "HOA Maintenance",
     shortTitle: "HOA Maintenance",
     blurb: "Custom maintenance plans and on-demand repairs for communities of any size.",
-    metaTitle: "HOA Maintenance Services | Portland OR & Vancouver WA",
+    metaTitle: "HOA Maintenance Services | Portland, OR & Vancouver, WA",
     metaDescription:
-      "HOA maintenance for condos, townhomes, apartments and subdivisions in Portland and Vancouver WA. Custom plans, emergency repairs, off-hours scheduling. (503) 209-2023.",
+      "HOA maintenance for condos, townhomes, apartments and subdivisions in Portland and Vancouver, WA. Custom plans, emergency repairs, off-hours scheduling. (503) 209-2023.",
     heroHeading: "HOA Maintenance",
     heroSubheading: `One licensed contractor for roofs, gutters, grounds and repairs. More than ${FACTS.hoaYears} years serving HOAs.`,
     intro:
@@ -857,7 +857,7 @@ export const SERVICES: ServiceData[] = [
       "Roof inspections, roof cleaning and leak repair",
       "Community-wide gutter cleaning and repair",
       "Landscaping, fences, siding, decks and patios",
-      "Pressure washing of shared spaces and junk removal",
+      "Pressure washing of shared spaces, plus junk removal",
       "Weekend and off-hours scheduling to limit disruption to residents",
     ],
     process: [
@@ -871,7 +871,7 @@ export const SERVICES: ServiceData[] = [
       { question: "Can an HOA hire you for ongoing maintenance?", answer: "Yes. We build custom maintenance and repair plans for condos, townhome communities, subdivisions and apartment complexes." },
       { question: "Do you handle emergencies?", answer: "Yes. Communities can use us on demand for urgent repairs as well as scheduled maintenance." },
       { question: "Can work be done outside business hours?", answer: "Yes. Weekend and off-hours scheduling is available to minimize disruption to residents." },
-      { question: "What can an HOA maintenance plan cover?", answer: "Plans are built around your community and can include roof inspections, roof cleaning and leak repair, community-wide gutter cleaning and repair, landscaping, fences, siding, decks and patios, pressure washing of shared spaces and junk removal." },
+      { question: "What can an HOA maintenance plan cover?", answer: "Plans are built around your community and can include roof inspections, roof cleaning and leak repair, community-wide gutter cleaning and repair, landscaping, fences, siding, decks and patios, pressure washing of shared spaces, and junk removal." },
       { question: "How much does an HOA maintenance plan cost?", answer: "Plans are built around the size and needs of your community. There's no charge for the walkthrough or the quote." },
       { question: "How long have you worked with HOAs?", answer: `More than ${FACTS.hoaYears} years.` },
     ],
@@ -883,29 +883,29 @@ export const SERVICES: ServiceData[] = [
     icon: "landscape",
     title: "Landscaping & Landscape Maintenance",
     shortTitle: "Landscaping",
-    blurb: "Mowing, trimming, weeding and clean-ups on a monthly plan or one time.",
-    metaTitle: "Landscape Maintenance | Portland OR & Vancouver WA",
+    blurb: "Mowing, trimming, weeding and cleanups on a monthly plan or one time.",
+    metaTitle: "Landscape Maintenance | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Landscape maintenance in Portland and Vancouver WA: mowing, trimming, pruning, weeding, bark and clean-ups. Monthly plans or one-time service. Call (503) 209-2023.",
+      "Landscape maintenance in Portland and Vancouver, WA: mowing, trimming, pruning, weeding, bark and cleanups. Monthly plans or one-time service. Call (503) 209-2023.",
     heroHeading: "Landscape Maintenance",
     heroSubheading: "A yard that stays tidy without taking your weekends.",
     intro:
-      "Set up a monthly plan and the work simply gets done, whether you're home or not. Or book a one-time clean-up when things have gotten away from you.",
+      "Set up a monthly plan and the work simply gets done, whether you're home or not. Or book a one-time cleanup when things have gotten away from you.",
     includes: [
       "Lawn mowing, edging and lawn care",
       "Tree, bush and shrub trimming and pruning",
       "Weeding and weed control",
       "Fertilizing",
       "Bark spreading",
-      "Raking, debris removal and seasonal clean-ups",
+      "Raking, debris removal and seasonal cleanups",
       "Monthly maintenance plans or one-time service",
     ],
     pricing: FREE_ESTIMATE,
     callout: { title: "Bigger projects", text: "Planning something larger? We'll work with you on the vision and the plan." },
     faqs: [
       { question: "Do you offer recurring service?", answer: "Yes. Monthly maintenance plans keep the yard on a regular schedule, and you don't need to be home." },
-      { question: "Can I book a one-time clean-up?", answer: "Yes. One-time clean-ups are available alongside recurring plans." },
-      { question: "What does landscape maintenance include?", answer: "Lawn mowing, edging and lawn care, trimming and pruning of trees, bushes and shrubs, weeding and weed control, fertilizing, bark spreading, raking and seasonal clean-ups." },
+      { question: "Can I book a one-time cleanup?", answer: "Yes. One-time cleanups are available alongside recurring plans." },
+      { question: "What does landscape maintenance include?", answer: "Lawn mowing, edging and lawn care, trimming and pruning of trees, bushes and shrubs, weeding and weed control, fertilizing, bark spreading, raking and seasonal cleanups." },
       { question: "Do you trim trees and shrubs?", answer: "Yes. Tree, bush and shrub trimming and pruning are part of the service." },
       { question: "Do you remove the yard debris?", answer: "Yes. Raking and debris removal are part of the service." },
     ],
@@ -918,9 +918,9 @@ export const SERVICES: ServiceData[] = [
     title: "Junk Removal",
     shortTitle: "Junk Removal",
     blurb: `Hauling and disposal at $${FACTS.junkRemoval.perCubicYard} per cubic yard, $${FACTS.junkRemoval.minimum} minimum.`,
-    metaTitle: "Junk Removal | Portland OR & Vancouver WA",
+    metaTitle: "Junk Removal | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Junk hauling from a few items to whole-home cleanouts in Portland and Vancouver WA. $50 per cubic yard, $250 minimum. Same-day or next-day when available. (503) 209-2023.",
+      "Junk hauling from a few items to whole-home cleanouts in Portland and Vancouver, WA. $50 per cubic yard, $250 minimum. Same-day or next-day when available. (503) 209-2023.",
     heroHeading: "Junk Removal",
     heroSubheading: "A few items or a whole house. We load it, haul it and sweep up.",
     intro:
@@ -935,13 +935,13 @@ export const SERVICES: ServiceData[] = [
     ],
     pricing: {
       headline: `$${FACTS.junkRemoval.perCubicYard} per cubic yard`,
-      note: `$${FACTS.junkRemoval.minimum} minimum. You get an up-front quote after we see what needs to go. Same-day or next-day service depending on availability.`,
+      note: `$${FACTS.junkRemoval.minimum} minimum. You get an up-front quote after we see what needs to go. Same-day or next-day service, depending on availability.`,
     },
     callout: { title: "Can't take it?", text: "If there's something we can't haul, we'll help you find another disposal option." },
     faqs: [
       { question: "How much does junk removal cost?", answer: `${junkPricingText()} We quote the job up front after seeing it.` },
       { question: "What do you take?", answer: "Appliances, e-waste, furniture, mattresses, construction debris, scrap metal, yard waste and general household junk." },
-      { question: "How soon can you come?", answer: "Same-day or next-day service is available depending on our schedule." },
+      { question: "How soon can you come?", answer: "Same-day or next-day service is available, depending on our schedule." },
       { question: "Do you take appliances and hot tubs?", answer: "Yes. We haul appliances, including refrigerators and hot tubs." },
       { question: "Can you clear out a whole house?", answer: "Yes. We handle anything from a single item to a whole-home cleanout." },
       { question: "Do you take construction debris?", answer: "Yes. We take construction and remodeling debris, along with scrap metal and yard waste." },
@@ -956,9 +956,9 @@ export const SERVICES: ServiceData[] = [
     title: "Guest-Ready Home Repairs",
     shortTitle: "Guest-Ready Repairs",
     blurb: "Every small repair on the list knocked out in one visit before company arrives.",
-    metaTitle: "Guest-Ready Home Repairs | Portland OR & Vancouver WA",
+    metaTitle: "Guest-Ready Home Repairs | Portland, OR & Vancouver, WA",
     metaDescription:
-      "One-visit home repairs before guests arrive: bathrooms, doors, lights, drywall patches, railings and more in Portland and Vancouver WA. Call (503) 209-2023.",
+      "One-visit home repairs before guests arrive: bathrooms, doors, lights, drywall patches, railings and more in Portland and Vancouver, WA. Call (503) 209-2023.",
     heroHeading: "Guest-Ready Home Repairs",
     heroSubheading: "Company coming? Send us the list and we'll take care of it in as few trips as possible.",
     intro:
@@ -993,9 +993,9 @@ export const SERVICES: ServiceData[] = [
     title: "Yard Cleanup",
     shortTitle: "Yard Cleanup",
     blurb: "Leaves, debris and overgrowth cleared and hauled away.",
-    metaTitle: "Yard Cleanup | Portland OR & Vancouver WA",
+    metaTitle: "Yard Cleanup | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Yard cleanup in Portland and Vancouver WA: leaves, sticks, debris and overgrowth cleared and hauled away for homes and businesses. Call (503) 209-2023.",
+      "Yard cleanup in Portland and Vancouver, WA: leaves, sticks, debris and overgrowth cleared and hauled away for homes and businesses. Call (503) 209-2023.",
     heroHeading: "Yard Cleanup",
     heroSubheading: "Reset an overgrown or storm-littered yard in a single scheduled visit.",
     intro:

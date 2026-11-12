@@ -10,7 +10,7 @@ import { ABOUT_FAQS } from "@/lib/faqs";
 
 const TITLE = "About Us | Family-Owned Since 1999";
 const DESCRIPTION =
-  "All Around Maintenance Inc. was founded in 1999 by Alex Svistun. A family-owned, licensed crew serving Portland OR and Vancouver WA homeowners, HOAs and businesses.";
+  "All Around Maintenance Inc. was founded in 1999 by Alex Svistun. A family-owned, licensed crew serving homeowners, HOAs and businesses in Portland, OR and Vancouver, WA.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -51,8 +51,8 @@ export default function AboutPage() {
             <span className="inline-flex rounded-full bg-white/15 px-4 py-2 text-sm font-medium text-white">Family-owned since {FACTS.founded}</span>
             <h1 className="mt-6 font-display text-4xl font-extrabold text-white sm:text-5xl">About All Around Maintenance</h1>
             <p className="mt-6 text-lg leading-relaxed text-white/85">
-              {FACTS.founder} founded {LEGAL_NAME} in {FACTS.founded}. More than 25 years later we&apos;re still
-              family-owned, and still the crew people in Portland and Vancouver call for the roof, the gutters, the deck
+              {FACTS.founder} founded {LEGAL_NAME} in {FACTS.founded}. More than 25 years later, we&apos;re still
+              family-owned and still the crew people in Portland and Vancouver call for the roof, the gutters, the deck
               and whatever comes next.
             </p>
           </div>

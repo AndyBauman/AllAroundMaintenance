@@ -31,10 +31,10 @@ export default function Home() {
           serviceSchema({
             name: "Home Maintenance and Repair",
             description:
-              "Roof repair and moss removal, gutter cleaning and repair, deck restoration and full home maintenance in Portland OR and Vancouver WA.",
+              "Roof repair and moss removal, gutter cleaning and repair, deck restoration and full home maintenance in Portland, OR and Vancouver, WA.",
             url: absoluteUrl("/"),
           }),
-          howToSchema("How working with All Around Maintenance works", PROCESS_STEPS),
+          howToSchema("How to work with All Around Maintenance", PROCESS_STEPS),
         ]}
       />
 

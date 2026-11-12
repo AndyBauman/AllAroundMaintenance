@@ -47,7 +47,7 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
       <JsonLd
         data={serviceSchema({
           name: `${noun} in ${label}`,
-          description: `${noun} for homes, HOAs and businesses in ${label} by All Around Maintenance Inc.`,
+          description: `${noun.charAt(0)}${noun.slice(1).toLowerCase()} for homes, HOAs and businesses in ${label}, provided by All Around Maintenance Inc.`,
           url: absoluteUrl(path),
           areaServed: [label],
         })}
@@ -92,7 +92,7 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
                 href={ESTIMATE_PATH}
                 className="inline-flex items-center justify-center rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-white/20"
               >
-                Get Free Estimate →
+                Get a Free Estimate →
               </Link>
             </div>
           </div>

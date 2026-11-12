@@ -14,7 +14,7 @@ const VALUE_ITEMS: { icon: LucideIcon; title: string; description: string; tag: 
   { icon: CalendarCheck, title: "Fast Scheduling", description: `Estimate within ${FACTS.estimateTurnaround}. Most work booked within ${FACTS.schedulingWindow}.`, tag: FACTS.schedulingWindow },
   { icon: ClipboardList, title: "No Surprise Changes", description: changeOrderText(), tag: "Your approval" },
   { icon: BadgeCheck, title: "Licensed, Bonded & Insured", description: LICENSE_LINE, tag: "OR + WA" },
-  { icon: Sparkles, title: "Clean-Up Included", description: "We leave the property as clean as we found it.", tag: "Included" },
+  { icon: Sparkles, title: "Cleanup Included", description: "We leave the property as clean as we found it.", tag: "Included" },
   { icon: Gift, title: "6-Month Moss Guarantee", description: mossGuaranteeText(), tag: `${FACTS.mossGuaranteeMonths} months`, isBonus: true },
 ];
 

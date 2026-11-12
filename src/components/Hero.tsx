@@ -43,7 +43,7 @@ export default function Hero() {
           </div>
 
           <h1 className="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:whitespace-nowrap lg:text-6xl">
-            Roof, Gutters, <span className="whitespace-nowrap">Siding &amp; Decks</span>
+            Roof, Gutter, <span className="whitespace-nowrap">Siding &amp; Deck</span>
             <br />
             <span className="text-accent">Repair &amp; Maintenance</span>
             <br />

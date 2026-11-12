@@ -39,7 +39,7 @@ export default function ServiceAreas() {
           <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-sm font-semibold text-brand">Where We Work</span>
           <h2 className="mt-4 font-display text-3xl font-bold text-gray-900 sm:text-4xl">Service Areas</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-700">
-            Licensed on both sides of the Columbia: the Portland metro, Clark County and up to Longview and Kelso.
+            Licensed on both sides of the Columbia: the Portland metro, Clark County, and up to Longview and Kelso.
           </p>
         </div>
 

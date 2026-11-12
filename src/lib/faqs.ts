@@ -24,9 +24,9 @@ const LICENSE_ANSWER = `Yes. All Around Maintenance Inc. is a licensed, bonded a
 const AREAS_ANSWER =
   "The Portland, Oregon and Vancouver, Washington metro areas, including Gresham, Beaverton, Hillsboro, Tigard, Lake Oswego, West Linn, Milwaukie, Happy Valley, Wilsonville, Sandy, Camas, Washougal, Battle Ground, Ridgefield, Woodland, Kalama, Longview and Kelso.";
 
-const AWAY_ANSWER = "No. Once the scope is agreed, most exterior work can be completed without you there.";
+const AWAY_ANSWER = "No. Once we agree on the scope, most exterior work can be completed without you there.";
 
-const CLEANUP_ANSWER = "Yes. Clean-up is part of every job, and our goal is to leave the property as clean as we found it.";
+const CLEANUP_ANSWER = "Yes. Cleanup is part of every job, and our goal is to leave the property as clean as we found it.";
 
 export const HOME_FAQS: Faq[] = [
   {
@@ -186,7 +186,7 @@ export function serviceFaqs(svc: ServiceData): Faq[] {
   const own = svc.faqs;
   const asked = own.map((faq) => faq.question).join(" | ");
   const covers = (pattern: RegExp) => pattern.test(asked);
-  const label = SERVICE_LABELS[svc.slug] ?? svc.shortTitle.toLowerCase().replace("hoa", "HOA");
+  const label = SERVICE_LABELS[svc.slug] ?? svc.shortTitle.toLowerCase().replace("hoa", "HOA").replace(" & ", " and ");
   const outdoor = svc.group !== "home" || OUTDOOR_HOME_SLUGS.has(svc.slug);
   const repair = !NON_REPAIR_SLUGS.has(svc.slug);
 
@@ -239,7 +239,7 @@ export const SERVICES_PAGE_FAQS: Faq[] = [
   ...general("What services does All Around Maintenance offer?"),
   {
     question: "I'm not sure which service I need. What should I do?",
-    answer: `${CALL_ANSWER} Describe what you're seeing. Roof and attic inspections are free and estimates are free and itemized, so you know what the job involves before you decide anything.`,
+    answer: `${CALL_ANSWER} Describe what you're seeing. Roof and attic inspections are free, and estimates are free and itemized, so you know what the job involves before you decide anything.`,
   },
   {
     question: "Can I combine several jobs in one visit?",
@@ -275,7 +275,7 @@ export const ABOUT_FAQS: Faq[] = [
     question: "How long has All Around Maintenance been in business?",
     answer: `Since ${FACTS.founded}. ${FACTS.founder} founded the company, and it is still family-owned.`,
   },
-  { question: "How big is your team?", answer: `${FACTS.fieldCrew} field crew members and ${FACTS.officeStaff} office staff.` },
+  { question: "How big is your team?", answer: `We have ${FACTS.fieldCrew} field crew members and ${FACTS.officeStaff} office staff.` },
   ...general(
     "What languages does your team speak?",
     "Are you licensed and insured?",

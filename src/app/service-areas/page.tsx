@@ -8,7 +8,7 @@ import { PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { SERVICE_AREA_FAQS } from "@/lib/faqs";
 import { SERVICE_GROUPS, servicesInGroup } from "@/lib/services";
 
-const TITLE = "Service Areas | Portland OR & Vancouver WA";
+const TITLE = "Service Areas | Portland, OR & Vancouver, WA";
 const DESCRIPTION =
   "All Around Maintenance serves the Portland metro, Clark County, Longview and Kelso. Find home maintenance and roof services in your city.";
 
@@ -41,7 +41,7 @@ export default function ServiceAreasPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h1 className="font-display text-4xl font-extrabold text-gray-900 sm:text-5xl">Service Areas</h1>
           <p className="mt-4 max-w-3xl text-lg text-gray-600">
-            We&apos;re licensed on both sides of the Columbia River and work throughout the Portland metro, Clark County
+            We&apos;re licensed on both sides of the Columbia River and work throughout the Portland metro, Clark County,
             and north to Longview and Kelso.
           </p>
         </div>
