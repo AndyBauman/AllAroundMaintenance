@@ -1,0 +1,92 @@
+import Image from "next/image";
+import Link from "next/link";
+import { CircleCheck, Phone } from "lucide-react";
+import { hasPublicFile } from "@/lib/assets";
+import { ESTIMATE_PATH, PHONE, PHONE_HREF } from "@/lib/constants";
+import { FACTS } from "@/lib/business-facts";
+
+const BADGES = ["Licensed in OR & WA", `Family-Owned Since ${FACTS.founded}`, "Free Itemized Estimates"];
+
+export default function Hero() {
+  const hasPhoto = hasPublicFile("hero.jpg");
+
+  return (
+    <section className="relative flex min-h-[80vh] items-center overflow-hidden bg-brand-dark">
+      <div className="absolute inset-0 z-0">
+        {hasPhoto ? (
+          <>
+            <Image
+              src="/hero.jpg"
+              alt="All Around Maintenance crew at work on a Portland-area home"
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+              quality={60}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-brand-dark/40" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-dark via-brand-dark to-brand" />
+            <div className="absolute -right-32 -top-32 h-[32rem] w-[32rem] rounded-full bg-accent/10 blur-3xl" aria-hidden />
+            <div className="absolute -bottom-40 left-1/3 h-[28rem] w-[28rem] rounded-full bg-brand-light/20 blur-3xl" aria-hidden />
+          </>
+        )}
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="max-w-2xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
+            Serving Portland &amp; Vancouver
+          </div>
+
+          <h1 className="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+            Roof, Gutter &amp; Deck
+            <br />
+            <span className="text-accent">Repair &amp; Maintenance</span>
+            <br />
+            Portland &amp; Vancouver
+          </h1>
+
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-white sm:text-xl">
+            One licensed, family-owned crew for the roof, the gutters, the deck and nearly everything else on your list.
+            We respond {FACTS.responseTime} and send a free itemized estimate within {FACTS.estimateTurnaround}.
+          </p>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+            <Link
+              href={ESTIMATE_PATH}
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-8 py-4 text-lg font-bold text-gray-950 shadow-xl transition-all hover:-translate-y-0.5 hover:bg-accent-light hover:shadow-2xl"
+            >
+              Get a Free Estimate
+            </Link>
+            <Link
+              href="/roof-inspection-cleaning-repair"
+              className="inline-flex items-center justify-center rounded-xl border-2 border-white/40 bg-white/10 px-8 py-4 text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              Free Roof Inspection
+            </Link>
+            <a
+              href={PHONE_HREF}
+              className="inline-flex items-center justify-center gap-3 rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              <Phone className="h-5 w-5" aria-hidden />
+              {PHONE}
+            </a>
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-6 text-sm text-gray-200">
+            {BADGES.map((badge) => (
+              <div key={badge} className="flex items-center gap-2">
+                <CircleCheck className="h-5 w-5 text-accent" aria-hidden />
+                {badge}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
