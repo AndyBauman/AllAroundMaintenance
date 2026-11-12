@@ -22,7 +22,7 @@ const OR_FORM = LEAD_FORM_ENABLED ? " or send the free estimate form" : "";
 const LICENSE_ANSWER = `Yes. All Around Maintenance Inc. is a licensed, bonded and insured contractor in both states: Oregon CCB #${LICENSES.oregonCcb} and Washington #${LICENSES.washington}.`;
 
 const AREAS_ANSWER =
-  "The Portland, Oregon and Vancouver, Washington metro areas, including Gresham, Beaverton, Hillsboro, Tigard, Lake Oswego, West Linn, Wilsonville, Camas, Washougal, Battle Ground, Ridgefield, Longview and Kelso.";
+  "The Portland, Oregon and Vancouver, Washington metro areas, including Gresham, Beaverton, Hillsboro, Tigard, Lake Oswego, West Linn, Milwaukie, Happy Valley, Wilsonville, Sandy, Camas, Washougal, Battle Ground, Ridgefield, Woodland, Kalama, Longview and Kelso.";
 
 const AWAY_ANSWER = "No. Once the scope is agreed, most exterior work can be completed without you there.";
 

@@ -34,7 +34,7 @@ schema and `llms.txt` line are generated from it.
 
 - `/` home, `/services`, `/service-areas`, `/about-us`, `/faq`, `/free-estimate` (call-first contact page)
 - 25 service pages at their **original slugs** (e.g. `/gutter-repair-portland/`)
-- 23 city pages (`/{city}-home-maintenance/`) and 5 roof-city pages (`/roof-maintenance-{city}/`)
+- 35 city pages (`/{city}-home-maintenance/`) and 5 roof-city pages (`/roof-maintenance-{city}/`)
 - `/sitemap.xml`, `/robots.txt`, `/llms.txt`
 
 `trailingSlash: true` matches the old WordPress URLs exactly, so existing indexed URLs resolve with no redirect.
