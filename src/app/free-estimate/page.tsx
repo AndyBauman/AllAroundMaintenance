@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import FAQSection from "@/components/FAQSection";
 import LeadCapture from "@/components/LeadCapture";
 import { LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { PROCESS_STEPS, paymentText } from "@/lib/business-facts";
+import { ESTIMATE_FAQS } from "@/lib/faqs";
 
 const TITLE = "Get a Free Estimate";
 const DESCRIPTION =
@@ -70,6 +72,8 @@ export default function FreeEstimatePage() {
           </div>
         </div>
       </section>
+
+      <FAQSection faqs={ESTIMATE_FAQS} heading="Estimate FAQ" />
     </main>
   );
 }

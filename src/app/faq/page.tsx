@@ -4,7 +4,7 @@ import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import { reachUsText } from "@/lib/business-facts";
-import { HOME_FAQS } from "@/lib/faqs";
+import { FAQ_TOPICS, HOME_FAQS } from "@/lib/faqs";
 
 const TITLE = "Frequently Asked Questions";
 const DESCRIPTION =
@@ -29,6 +29,9 @@ export default function FaqPage() {
       </section>
       <FAQJsonLd faqs={HOME_FAQS} />
       <FAQSection faqs={HOME_FAQS} heading="Working With All Around Maintenance" />
+      {FAQ_TOPICS.map((topic) => (
+        <FAQSection key={topic.heading} faqs={topic.faqs} heading={topic.heading} />
+      ))}
       <CtaBand heading="Still Have a Question?" text={`${reachUsText()}. We respond the same day.`} />
     </main>
   );

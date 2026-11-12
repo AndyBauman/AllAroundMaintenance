@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import FAQSection from "@/components/FAQSection";
 import ServiceIcon from "@/components/ServiceIcon";
+import { SERVICES_PAGE_FAQS } from "@/lib/faqs";
 import { SERVICE_GROUPS, servicesInGroup } from "@/lib/services";
 
 const TITLE = "Home Maintenance Services in Portland & Vancouver";
@@ -69,6 +71,7 @@ export default function ServicesPage() {
         </section>
       ))}
 
+      <FAQSection faqs={SERVICES_PAGE_FAQS} heading="Services FAQ" />
       <CtaBand />
     </main>
   );

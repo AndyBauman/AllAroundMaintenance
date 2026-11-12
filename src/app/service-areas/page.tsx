@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import FAQSection from "@/components/FAQSection";
 import { ROOF_CITY_SLUGS, citiesInState, cityLabel, cityPath, getCity, roofCityPath, type CityData } from "@/lib/cities";
 import { PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
+import { SERVICE_AREA_FAQS } from "@/lib/faqs";
 import { SERVICE_GROUPS, servicesInGroup } from "@/lib/services";
 
 const TITLE = "Service Areas | Portland OR & Vancouver WA";
@@ -99,6 +101,7 @@ export default function ServiceAreasPage() {
         </div>
       </section>
 
+      <FAQSection faqs={SERVICE_AREA_FAQS} heading="Service Area FAQ" />
       <CtaBand heading="Not Sure If We Cover Your Area?" text="Call and ask. If you're in or near the Portland or Vancouver metro, the answer is probably yes." />
     </main>
   );

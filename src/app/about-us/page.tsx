@@ -3,8 +3,10 @@ import Link from "next/link";
 import { CircleCheck } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import FAQSection from "@/components/FAQSection";
 import { LEGAL_NAME, LICENSES } from "@/lib/constants";
 import { FACTS, languagesText } from "@/lib/business-facts";
+import { ABOUT_FAQS } from "@/lib/faqs";
 
 const TITLE = "About Us | Family-Owned Since 1999";
 const DESCRIPTION =
@@ -109,6 +111,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <FAQSection faqs={ABOUT_FAQS} heading="Questions About Us" />
       <CtaBand heading="Let's Take a Look" text="Tell us what's going on with the house. Estimates are free, itemized and come with no obligation." />
     </main>
   );

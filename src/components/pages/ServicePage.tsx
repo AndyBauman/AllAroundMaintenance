@@ -152,7 +152,8 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
         </div>
       </section>
 
-      <FAQJsonLd faqs={faqs} />
+      {/* Shared questions repeat across pages, so only this service's own are marked up. */}
+      <FAQJsonLd faqs={svc.faqs} />
       <FAQSection faqs={faqs} heading={`${svc.shortTitle} FAQ`} />
     </main>
   );
