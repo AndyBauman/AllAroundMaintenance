@@ -12,12 +12,12 @@ import { hasPublicFile } from "@/lib/assets";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { siteWideGraphSchema } from "@/lib/schema";
 
-const TITLE = "Roof, Gutter & Deck Repair Portland & Vancouver | All Around Maintenance";
+const TITLE = "Roof, Gutter, Siding & Deck Repair Portland & Vancouver | All Around Maintenance";
 const DESCRIPTION =
-  "Family-owned since 1999. Roof repair, gutter cleaning, deck restoration and home maintenance in Portland OR & Vancouver WA. Free estimates: (503) 209-2023.";
+  "Family-owned since 1999. Roof, gutter, siding and deck repair plus home maintenance in Portland OR & Vancouver WA. Free estimates: (503) 209-2023.";
 
 const ogImages = hasPublicFile("og.jpg")
-  ? [{ url: "/og.jpg", width: 1200, height: 630, alt: "All Around Maintenance: roof, gutter and deck repair in Portland and Vancouver" }]
+  ? [{ url: "/og.jpg", width: 1200, height: 630, alt: "All Around Maintenance: roof, gutter, siding and deck repair in Portland and Vancouver" }]
   : undefined;
 
 export const metadata: Metadata = {

@@ -42,8 +42,8 @@ export default function Hero() {
             Serving Portland &amp; Vancouver
           </div>
 
-          <h1 className="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Roof, Gutter &amp; Deck
+          <h1 className="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:whitespace-nowrap lg:text-6xl">
+            Roof, Gutters, <span className="whitespace-nowrap">Siding &amp; Decks</span>
             <br />
             <span className="text-accent">Repair &amp; Maintenance</span>
             <br />
@@ -51,7 +51,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-white sm:text-xl">
-            One licensed, family-owned crew for the roof, the gutters, the deck and nearly everything else on your list.
+            One licensed, family-owned crew for the roof, the gutters, the siding, the deck and nearly everything else on your list.
             We respond {FACTS.responseTime} and send a free itemized estimate within {FACTS.estimateTurnaround}.
           </p>
 

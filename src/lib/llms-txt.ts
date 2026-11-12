@@ -11,7 +11,7 @@ export function buildLlmsTxt(): string {
   const lines: string[] = [
     `# ${SITE_NAME}`,
     ``,
-    `> ${LEGAL_NAME} is a family-owned home maintenance and repair contractor serving the Portland, Oregon and Vancouver, Washington metro areas since ${FACTS.founded}. Specialties: roofs, gutters and decks, plus exterior, interior and property maintenance for homeowners, HOAs and businesses.`,
+    `> ${LEGAL_NAME} is a family-owned home maintenance and repair contractor serving the Portland, Oregon and Vancouver, Washington metro areas since ${FACTS.founded}. Specialties: roofs, gutters, siding and decks, plus exterior, interior and property maintenance for homeowners, HOAs and businesses.`,
     ``,
     `## Key facts`,
     `- Founded: ${FACTS.founded} by ${FACTS.founder}`,

@@ -49,7 +49,7 @@ export default function Services() {
           <span className="inline-block rounded-full bg-brand/10 px-4 py-1.5 text-sm font-semibold text-brand">What We Do</span>
           <h2 className="mt-4 font-display text-3xl font-bold text-gray-900 sm:text-4xl">Our Services</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
-            Roofs, gutters and decks are our specialty. The same crew handles the rest of the property too.
+            Roofs, gutters, siding and decks are our specialty. The same crew handles the rest of the property too.
           </p>
         </div>
 
