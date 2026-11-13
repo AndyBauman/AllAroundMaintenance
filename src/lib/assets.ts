@@ -7,6 +7,7 @@ import path from "node:path";
  *
  *   public/logo.svg    white logo for the dark header and footer (logo.png also works)
  *   public/hero.jpg    home page hero photo
+ *   public/hero-mobile.jpg  optional tall crop of the hero photo for phones
  *   public/why-us.jpg  crew or job photo for the "Why us" section
  *   public/og.jpg      1200x630 social share image
  */

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { CircleCheck, Phone } from "lucide-react";
 import { hasPublicFile } from "@/lib/assets";
@@ -6,6 +6,35 @@ import { ESTIMATE_PATH, PHONE, PHONE_HREF } from "@/lib/constants";
 import { FACTS } from "@/lib/business-facts";
 
 const BADGES = ["Licensed in OR & WA", `Family-Owned Since ${FACTS.founded}`, "Free Itemized Estimates"];
+
+const PHOTO_ALT = "Modern Pacific Northwest home with gray siding, a covered patio and a green lawn";
+
+/**
+ * On phones and tablets the hero is taller than it is wide, so the photo is scaled up to
+ * cover it. These sizes tell the browser how wide the photo is really drawn, so it picks
+ * a file sharp enough instead of one sized for the screen width.
+ */
+const WIDE_SIZES = "(max-width: 1023px) 220vw, 100vw";
+const TALL_SIZES = "200vw";
+
+/** public/hero.jpg everywhere; public/hero-mobile.jpg (a tall crop) on phones when present. */
+function HeroPhoto() {
+  const shared = { alt: PHOTO_ALT, fill: true, priority: true, quality: 60 } as const;
+
+  if (!hasPublicFile("hero-mobile.jpg")) {
+    return <Image {...shared} src="/hero.jpg" sizes={WIDE_SIZES} className="object-cover" />;
+  }
+
+  const { props: wide } = getImageProps({ ...shared, src: "/hero.jpg", sizes: WIDE_SIZES });
+  const { props: tall } = getImageProps({ ...shared, src: "/hero-mobile.jpg", sizes: TALL_SIZES });
+
+  return (
+    <picture>
+      <source media="(max-width: 639px)" srcSet={tall.srcSet} sizes={TALL_SIZES} />
+      <img {...wide} alt={PHOTO_ALT} className="object-cover" />
+    </picture>
+  );
+}
 
 export default function Hero() {
   const hasPhoto = hasPublicFile("hero.jpg");
@@ -15,16 +44,9 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         {hasPhoto ? (
           <>
-            <Image
-              src="/hero.jpg"
-              alt="All Around Maintenance crew at work on a Portland-area home"
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-              quality={60}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-brand-dark/40" />
+            <HeroPhoto />
+            {/* Darker and more even on small screens, where the copy runs the full width. */}
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/85 to-brand-dark/70 lg:via-brand-dark/80 lg:to-brand-dark/40" />
           </>
         ) : (
           <>
