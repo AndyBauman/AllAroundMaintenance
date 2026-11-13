@@ -8,6 +8,16 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://www.allaroundmaintenanceinc.com"
 ).replace(/\/$/, "");
 
+/**
+ * Google Tag Manager container from the previous WordPress site, so its tags keep firing
+ * after the domain moves. Set NEXT_PUBLIC_GTM_ID to "off" to disable it.
+ */
+const gtmEnv = process.env.NEXT_PUBLIC_GTM_ID?.trim();
+export const GTM_ID = gtmEnv === "off" ? "" : gtmEnv || "GTM-KTHXVD7";
+
+/** Meta (Facebook) domain verification code from the previous site. */
+export const META_DOMAIN_VERIFICATION = "po5xqpw5zqg0pcrjq79tkht8g0keb9";
+
 /** Public brand (titles, copy, schema). */
 export const SITE_NAME = "All Around Maintenance";
 export const LEGAL_NAME = "All Around Maintenance Inc.";

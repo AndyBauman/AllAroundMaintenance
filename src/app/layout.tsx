@@ -9,7 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import Logo from "@/components/Logo";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { hasPublicFile } from "@/lib/assets";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { GTM_ID, META_DOMAIN_VERIFICATION, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { siteWideGraphSchema } from "@/lib/schema";
 
 const TITLE = "Roof, Gutter, Siding & Deck Repair Portland & Vancouver | All Around Maintenance";
@@ -46,6 +46,7 @@ export const metadata: Metadata = {
   other: {
     "geo.region": "US-OR",
     "geo.placename": "Portland, OR and Vancouver, WA",
+    "facebook-domain-verification": META_DOMAIN_VERIFICATION,
   },
 };
 
@@ -59,6 +60,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className="antialiased">
+        {GTM_ID ? (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+              title="Google Tag Manager"
+            />
+          </noscript>
+        ) : null}
         <JsonLd data={siteWideGraphSchema()} />
         <Header logo={<Logo />} />
         {children}
@@ -97,6 +109,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 else loadGa();
               }, 3500);
             `}
+          </Script>
+        ) : null}
+
+        {GTM_ID ? (
+          <Script id="google-tag-manager" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
           </Script>
         ) : null}
       </body>
