@@ -48,10 +48,6 @@ const VALUES = [
 const FACT_ROWS: [string, string][] = [
   ["Founded", `${FACTS.founded}, by ${FACTS.founder}`],
   ["Ownership", "Family-owned and operated"],
-  [
-    "Team",
-    `${FACTS.fieldCrew} field crew members and ${FACTS.officeStaff} office staff`,
-  ],
   ["Languages", languagesText()],
   ["Oregon license", `CCB #${LICENSES.oregonCcb}`],
   ["Washington license", `#${LICENSES.washington}`],
@@ -95,12 +91,11 @@ export default function AboutPage() {
                 Who we are
               </h2>
               <p className="mt-4 leading-relaxed text-gray-700">
-                We&apos;re a team of {FACTS.fieldCrew} field crew members and{" "}
-                {FACTS.officeStaff} office staff based in the Portland and
-                Vancouver area. Most of us are bilingual, and between us we can
-                help you in {languagesText()}. Our crew comes from at least 4
-                different ethnic backgrounds, and we hire without regard to
-                gender or ethnicity.
+                We&apos;re a local team based in the Portland and Vancouver
+                area. Most of us are bilingual, and between us we can help you
+                in {languagesText()}. Our crew comes from at least 4 different
+                ethnic backgrounds, and we hire without regard to gender or
+                ethnicity.
               </p>
               <p className="mt-4 leading-relaxed text-gray-700">
                 Our work covers homes, HOA communities and commercial

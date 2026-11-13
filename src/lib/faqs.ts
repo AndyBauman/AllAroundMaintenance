@@ -275,7 +275,6 @@ export const ABOUT_FAQS: Faq[] = [
     question: "How long has All Around Maintenance been in business?",
     answer: `Since ${FACTS.founded}. ${FACTS.founder} founded the company, and it is still family-owned.`,
   },
-  { question: "How big is your team?", answer: `We have ${FACTS.fieldCrew} field crew members and ${FACTS.officeStaff} office staff.` },
   ...general(
     "What languages does your team speak?",
     "Are you licensed and insured?",

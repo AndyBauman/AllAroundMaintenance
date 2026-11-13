@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
                   <Compass className="h-14 w-14 text-accent" strokeWidth={1.25} aria-hidden />
                   <p className="mt-4 font-display text-3xl font-bold">Family-owned since {FACTS.founded}</p>
                   <p className="mt-2 max-w-xs text-white/80">
-                    Founded by {FACTS.founder}. A team of {FACTS.fieldCrew} field crew and {FACTS.officeStaff} office staff.
+                    Founded by {FACTS.founder}. Licensed in Oregon and Washington.
                   </p>
                 </div>
               )}

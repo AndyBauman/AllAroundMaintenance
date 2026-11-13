@@ -13,8 +13,6 @@ import { LEAD_FORM_ENABLED, PHONE } from "./constants";
 export const FACTS = {
   founded: 1999,
   founder: "Alex Svistun",
-  fieldCrew: 7,
-  officeStaff: 2,
   languages: ["English", "Russian", "Ukrainian", "Spanish"],
   /** Inquiries are answered the same day. */
   responseTime: "the same day",
