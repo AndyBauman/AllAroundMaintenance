@@ -113,7 +113,39 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         {GTM_ID ? (
           <Script id="google-tag-manager" strategy="afterInteractive">
-            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`}
+            {`
+              /*
+               * Tag Manager loads the old marketing tags (GA4, Google Ads, Meta Pixel, CallRail,
+               * ClickCease): roughly 700 KB of script. Loading it with the page pushed mobile
+               * LCP to ~9s on slow 4G. It now loads on the visitor's first touch, scroll, click
+               * or key press, or 3.5s after the page finishes loading, whichever comes first.
+               * Events pushed to dataLayer before then are queued and sent when it loads.
+               */
+              (function (w, d, id) {
+                w.dataLayer = w.dataLayer || [];
+                w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var loaded = false;
+                var evts = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'wheel', 'mousemove'];
+                function load() {
+                  if (loaded) return;
+                  loaded = true;
+                  evts.forEach(function (e) { w.removeEventListener(e, load); });
+                  var j = d.createElement('script');
+                  j.async = true;
+                  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + id;
+                  d.head.appendChild(j);
+                }
+                evts.forEach(function (e) { w.addEventListener(e, load, { once: true, passive: true }); });
+                function later() {
+                  w.setTimeout(function () {
+                    if (w.requestIdleCallback) w.requestIdleCallback(load, { timeout: 2000 });
+                    else load();
+                  }, 3500);
+                }
+                if (d.readyState === 'complete') later();
+                else w.addEventListener('load', later, { once: true });
+              })(window, document, '${GTM_ID}');
+            `}
           </Script>
         ) : null}
       </body>
