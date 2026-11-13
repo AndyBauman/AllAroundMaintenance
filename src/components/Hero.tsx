@@ -45,8 +45,8 @@ export default function Hero() {
         {hasPhoto ? (
           <>
             <HeroPhoto />
-            {/* Darker and more even on small screens, where the copy runs the full width. */}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/85 to-brand-dark/70 lg:via-brand-dark/80 lg:to-brand-dark/40" />
+            {/* Light enough to show the house; a little heavier on small screens, where the copy runs the full width. */}
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/75 via-brand-dark/55 to-brand-dark/35 lg:from-brand-dark/70 lg:via-brand-dark/35 lg:to-transparent" />
           </>
         ) : (
           <>
@@ -64,7 +64,7 @@ export default function Hero() {
             Serving Portland &amp; Vancouver
           </div>
 
-          <h1 className="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:whitespace-nowrap lg:text-6xl">
+          <h1 className="[text-shadow:0_2px_12px_rgb(0_0_0/0.55)] font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:whitespace-nowrap lg:text-6xl">
             Roof, Gutter, <span className="whitespace-nowrap">Siding &amp; Deck</span>
             <br />
             <span className="text-accent">Repair &amp; Maintenance</span>
@@ -72,7 +72,7 @@ export default function Hero() {
             Portland &amp; Vancouver
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-white sm:text-xl">
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.6)] sm:text-xl">
             One licensed, family-owned crew for the roof, the gutters, the siding, the deck and nearly everything else on your list.
             We respond {FACTS.responseTime} and send a free itemized estimate within {FACTS.estimateTurnaround}.
           </p>
