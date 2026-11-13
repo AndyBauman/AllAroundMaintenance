@@ -9,16 +9,17 @@ import { hasPublicFile } from "@/lib/assets";
 import { LEGAL_NAME, LICENSES } from "@/lib/constants";
 import { FACTS, languagesText } from "@/lib/business-facts";
 import { ABOUT_FAQS } from "@/lib/faqs";
+import { socialMeta } from "@/lib/social";
 
 const TITLE = "About Us | Family-Owned Since 1999";
 const DESCRIPTION =
-  "All Around Maintenance Inc. was founded in 1999 by Alex Svistun. A family-owned, licensed crew serving homeowners, HOAs and businesses in Portland, OR and Vancouver, WA.";
+  "Founded in 1999 by Alex Svistun. A family-owned, licensed crew serving homes, HOAs and businesses in Portland, OR and Vancouver, WA. Free estimates.";
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/about-us" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "/about-us" },
+  ...socialMeta(TITLE, DESCRIPTION, "/about-us"),
 };
 
 const VALUES = [

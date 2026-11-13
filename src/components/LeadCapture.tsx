@@ -1,5 +1,8 @@
 import CallCard from "@/components/CallCard";
-import QuoteForm from "@/components/QuoteForm";
+import dynamic from "next/dynamic";
+
+// Loaded only when the form is switched on, so its script never ships while it is off.
+const QuoteForm = dynamic(() => import("@/components/QuoteForm"));
 import { LEAD_FORM_ENABLED } from "@/lib/constants";
 
 /**

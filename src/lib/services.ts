@@ -82,7 +82,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Free inspections, leak and storm repair, and yearly maintenance.",
     metaTitle: "Roof Repair & Free Roof Inspection | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Free roof inspection with a photo report, plus leak, flashing and storm-damage repair across Portland and Vancouver, WA. Licensed in OR & WA. Call (503) 209-2023.",
+      "Free roof inspection with a photo report, plus leak, flashing and storm-damage repair across Portland and Vancouver, WA. Licensed in OR & WA. (503) 209-2023.",
     heroHeading: "Roof Repair & Free Inspections",
     heroSubheading:
       "Find small roof problems before the rainy season turns them into big ones. Inspections are free and come with a photo report.",
@@ -296,7 +296,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Gutters and downspouts cleared, flushed and checked for problems.",
     metaTitle: "Gutter Cleaning & Inspection | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Gutter cleaning in Portland and Vancouver, WA: debris removed, downspouts flushed, leaks and sagging checked. Free estimates, same-day response. Call (503) 209-2023.",
+      "Gutter cleaning in Portland and Vancouver, WA: debris removed, downspouts flushed, leaks and sagging checked. Same-day response. Call (503) 209-2023.",
     heroHeading: "Gutter Cleaning & Inspection",
     heroSubheading: "Stop overflowing gutters before they stain siding, rot fascia or pool water at the foundation.",
     intro:
@@ -337,7 +337,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Leaks, sagging runs, failed hangers and downspouts that won't drain.",
     metaTitle: "Gutter Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Gutter repair for leaks, sagging sections, separated seams and bad downspouts in Portland and Vancouver, WA. Same-day service often available. Call (503) 209-2023.",
+      "Gutter repair for leaks, sagging sections, separated seams and bad downspouts in Portland and Vancouver, WA. Same-day service often available. (503) 209-2023.",
     heroHeading: "Gutter Repair",
     heroSubheading: "Leaking, sagging or pulling away from the house? We fix the cause, not just the drip.",
     intro:
@@ -375,7 +375,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "New gutters pitched, placed and fastened correctly, matched to your home.",
     metaTitle: "Gutter Replacement & Installation | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Gutter replacement and installation in Portland and Vancouver, WA. Correct pitch, smart downspout placement, matched to your home. Free itemized estimate. (503) 209-2023.",
+      "Gutter replacement and installation in Portland and Vancouver, WA. Correct pitch, smart downspout placement, free itemized estimate. Call (503) 209-2023.",
     heroHeading: "Gutter Replacement",
     heroSubheading: "When cleaning and repair are no longer enough, we install gutters that drain the way they should.",
     intro:
@@ -416,7 +416,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Cleaning, board and railing repair, staining and full refinishing.",
     metaTitle: "Deck Cleaning, Repair & Refinishing | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Deck cleaning, board and railing repair, staining and refinishing in Portland and Vancouver, WA. Wood and composite. Free in-person assessment. Call (503) 209-2023.",
+      "Deck cleaning, board and railing repair, staining and refinishing in Portland and Vancouver, WA. Wood and composite. Free assessment. Call (503) 209-2023.",
     heroHeading: "Deck Repair & Restoration",
     heroSubheading: "Bring a gray, slick or wobbly deck back to something you want to stand on.",
     intro:
@@ -461,7 +461,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Decks, siding, patios, driveways and walkways cleaned with commercial equipment.",
     metaTitle: "Pressure Washing | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Pressure washing and soft washing for decks, siding, patios, driveways and pavers in Portland and Vancouver, WA. Licensed, bonded and insured. Call (503) 209-2023.",
+      "Pressure washing and soft washing for decks, siding, patios, driveways and pavers in Portland and Vancouver, WA. Licensed and insured. Call (503) 209-2023.",
     heroHeading: "Pressure Washing",
     heroSubheading: "Clear the moss, mildew and grime that make surfaces slick and tired-looking.",
     intro:
@@ -530,7 +530,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Boards, posts and gates repaired, plus cleaning and staining.",
     metaTitle: "Fence Repair & Staining | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Fence repair in Portland and Vancouver, WA: leaning posts, broken boards, gates, staining and refinishing for cedar, privacy, picket and hog wire fences. (503) 209-2023.",
+      "Fence repair in Portland and Vancouver, WA: leaning posts, broken boards, gates and staining for cedar, privacy, picket and hog wire fences. (503) 209-2023.",
     heroHeading: "Fence Repair & Staining",
     heroSubheading: "Leaning posts, broken boards and sagging gates fixed, then protected with a fresh stain.",
     intro:
@@ -600,7 +600,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "New trim, trim repair and updates that seal out moisture.",
     metaTitle: "Exterior Trim Repair & Installation | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Exterior trim installation and repair for homes and businesses in Portland and Vancouver, WA. Protect against moisture and sharpen curb appeal. Call (503) 209-2023.",
+      "Exterior trim installation and repair for homes and businesses in Portland and Vancouver, WA. Protects against moisture and lifts curb appeal. (503) 209-2023.",
     heroHeading: "Exterior Trim",
     heroSubheading: "Trim does two jobs: it finishes the look of the house and keeps water out of the joints.",
     intro:
@@ -632,7 +632,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Standing water in the yard, crawl space or basement diagnosed and fixed.",
     metaTitle: "Drainage Services | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Drainage solutions for standing water in yards, crawl spaces and basements in Portland and Vancouver, WA: French drains, pumps, rain gardens and more. (503) 209-2023.",
+      "Drainage fixes for standing water in yards, crawl spaces and basements in Portland and Vancouver, WA: French drains, pumps, rain gardens. (503) 209-2023.",
     heroHeading: "Drainage Services",
     heroSubheading: "Standing water doesn't fix itself. We find where it's coming from and give it somewhere to go.",
     intro:
@@ -705,7 +705,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Loose hinges, chipped doors and worn finishes repaired, not replaced.",
     metaTitle: "Cabinet Repair & Refinishing | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Kitchen cabinet repair and refinishing in Portland and Vancouver, WA: hinges, hardware, chips, cracks and worn finishes. Less cost and waste than replacing. (503) 209-2023.",
+      "Kitchen cabinet repair and refinishing in Portland and Vancouver, WA: hinges, hardware, chips, cracks and worn finishes. Cheaper than replacing. (503) 209-2023.",
     heroHeading: "Cabinet Repair & Refinishing",
     heroSubheading: "A new look for your kitchen at a fraction of the cost and waste of replacement.",
     intro:
@@ -741,7 +741,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Dated or damaged fixtures, fans, covers and shades swapped out cleanly.",
     metaTitle: "Light Fixture Replacement | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Light fixture replacement in Portland and Vancouver, WA: ceiling lights, pendants, chandeliers, ceiling fans, covers and shades. Free estimate. Call (503) 209-2023.",
+      "Light fixture replacement in Portland and Vancouver, WA: ceiling lights, pendants, chandeliers, ceiling fans and shades. Free estimate. Call (503) 209-2023.",
     heroHeading: "Light Fixture Replacement",
     heroSubheading: "Swap a failing or dated fixture for something that works and suits the room.",
     intro:
@@ -777,7 +777,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "New walls, patched holes and ceiling repairs with clean, flat finishes.",
     metaTitle: "Drywall Installation & Repair | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Drywall installation and repair for homes and offices in Portland and Vancouver, WA: new rooms, dividers, closets, patches and ceilings. Free estimate. (503) 209-2023.",
+      "Drywall installation and repair for homes and offices in Portland and Vancouver, WA: new rooms, closets, patches and ceilings. Free estimate. (503) 209-2023.",
     heroHeading: "Drywall Installation & Repair",
     heroSubheading: "From a fist-sized patch to a new room, finished so you can't tell where the work was done.",
     intro:
@@ -810,7 +810,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "The whole to-do list handled in one visit by a licensed crew.",
     metaTitle: "Handyman Services | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Licensed handyman services in Portland and Vancouver, WA: mounting, doors, locks, drywall, dry rot, cabinets, small plumbing and more. Up-front quotes. (503) 209-2023.",
+      "Licensed handyman in Portland and Vancouver, WA: mounting, doors, locks, drywall, dry rot, cabinets and small plumbing. Up-front quotes. Call (503) 209-2023.",
     heroHeading: "Handyman Services",
     heroSubheading: "No job is too big or too small. Hand us the list and we'll fix it all at once.",
     intro:
@@ -846,7 +846,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Custom maintenance plans and on-demand repairs for communities of any size.",
     metaTitle: "HOA Maintenance Services | Portland, OR & Vancouver, WA",
     metaDescription:
-      "HOA maintenance for condos, townhomes, apartments and subdivisions in Portland and Vancouver, WA. Custom plans, emergency repairs, off-hours scheduling. (503) 209-2023.",
+      "HOA maintenance for condos, townhomes, apartments and subdivisions in Portland and Vancouver, WA. Custom plans and emergency repairs. Call (503) 209-2023.",
     heroHeading: "HOA Maintenance",
     heroSubheading: `One licensed contractor for roofs, gutters, grounds and repairs. More than ${FACTS.hoaYears} years serving HOAs.`,
     intro:
@@ -886,7 +886,7 @@ export const SERVICES: ServiceData[] = [
     blurb: "Mowing, trimming, weeding and cleanups on a monthly plan or one time.",
     metaTitle: "Landscape Maintenance | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Landscape maintenance in Portland and Vancouver, WA: mowing, trimming, pruning, weeding, bark and cleanups. Monthly plans or one-time service. Call (503) 209-2023.",
+      "Landscape maintenance in Portland and Vancouver, WA: mowing, trimming, pruning, weeding, bark and cleanups. Monthly or one-time service. Call (503) 209-2023.",
     heroHeading: "Landscape Maintenance",
     heroSubheading: "A yard that stays tidy without taking your weekends.",
     intro:
@@ -920,7 +920,7 @@ export const SERVICES: ServiceData[] = [
     blurb: `Hauling and disposal at $${FACTS.junkRemoval.perCubicYard} per cubic yard, $${FACTS.junkRemoval.minimum} minimum.`,
     metaTitle: "Junk Removal | Portland, OR & Vancouver, WA",
     metaDescription:
-      "Junk hauling from a few items to whole-home cleanouts in Portland and Vancouver, WA. $50 per cubic yard, $250 minimum. Same-day or next-day when available. (503) 209-2023.",
+      "Junk hauling from a few items to whole-home cleanouts in Portland and Vancouver, WA. $50 per cubic yard, $250 minimum. Same-day when available. (503) 209-2023.",
     heroHeading: "Junk Removal",
     heroSubheading: "A few items or a whole house. We load it, haul it and sweep up.",
     intro:

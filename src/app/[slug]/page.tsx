@@ -5,6 +5,7 @@ import { SERVICES } from "@/lib/services";
 import { phoneFor } from "@/lib/constants";
 import CityPage from "@/components/pages/CityPage";
 import ServicePage from "@/components/pages/ServicePage";
+import { socialMeta } from "@/lib/social";
 
 /**
  * Root-level slugs, kept identical to the previous site so existing rankings and links carry over:
@@ -46,8 +47,7 @@ function meta(title: string, description: string, path: string): Metadata {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { title, description, url: path },
-    twitter: { title, description },
+    ...socialMeta(title, description, path),
   };
 }
 

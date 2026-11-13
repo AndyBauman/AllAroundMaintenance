@@ -6,6 +6,7 @@ import FAQSection from "@/components/FAQSection";
 import ServiceIcon from "@/components/ServiceIcon";
 import { SERVICES_PAGE_FAQS } from "@/lib/faqs";
 import { SERVICE_GROUPS, servicesInGroup } from "@/lib/services";
+import { socialMeta } from "@/lib/social";
 
 const TITLE = "Home Maintenance Services in Portland & Vancouver";
 const DESCRIPTION =
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/services" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "/services" },
+  ...socialMeta(TITLE, DESCRIPTION, "/services"),
 };
 
 export default function ServicesPage() {

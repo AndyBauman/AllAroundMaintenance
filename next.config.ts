@@ -74,6 +74,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       ...PERMANENT_REDIRECTS.map(([source, destination]) => ({ source, destination, permanent: true })),
+      // Leftover WordPress archive and feed URLs that crawlers still request.
+      { source: "/feed", destination: "/", permanent: true },
+      { source: "/comments/feed", destination: "/", permanent: true },
+      { source: "/category/:path*", destination: "/services/", permanent: true },
+      { source: "/tag/:path*", destination: "/services/", permanent: true },
+      { source: "/author/:path*", destination: "/about-us/", permanent: true },
       ...TEMPORARY_BLOG_REDIRECTS.map(([source, destination]) => ({ source, destination, permanent: false })),
     ];
   },
@@ -85,7 +91,15 @@ const nextConfig: NextConfig = {
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "X-Frame-Options", value: "DENY" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Strict-Transport-Security", value: "max-age=63072000" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
+      },
+      {
+        // Photos and the logo in /public. Short browser cache, long CDN cache, so a replaced
+        // photo shows up within a day without a manual purge.
+        source: "/:file(.+\\.(?:jpg|jpeg|png|webp|avif|svg))",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800" }],
       },
     ];
   },

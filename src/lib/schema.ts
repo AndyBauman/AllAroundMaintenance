@@ -45,6 +45,11 @@ export function siteWideGraphSchema() {
     name: NAP.name,
     alternateName: SITE_NAME,
     url: absoluteUrl("/"),
+    description:
+      "Family-owned roof, gutter, siding and deck repair and home maintenance company serving Portland, OR and Vancouver, WA since 1999. Licensed in Oregon and Washington.",
+    logo: { "@type": "ImageObject", url: `${SITE_URL}/logo-schema.png`, width: 1200, height: 397 },
+    // Real crew photos only (no stock imagery).
+    image: [`${SITE_URL}/why-us.jpg`, `${SITE_URL}/about-team.jpg`],
     telephone: e164(PHONE_RAW),
     contactPoint: [
       { "@type": "ContactPoint", telephone: e164(PHONE_RAW), contactType: "customer service", areaServed: "US-OR", availableLanguage: [...FACTS.languages] },

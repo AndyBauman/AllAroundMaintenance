@@ -5,6 +5,7 @@ import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import { reachUsText } from "@/lib/business-facts";
 import { FAQ_TOPICS, HOME_FAQS } from "@/lib/faqs";
+import { socialMeta } from "@/lib/social";
 
 const TITLE = "Frequently Asked Questions";
 const DESCRIPTION =
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/faq" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "/faq" },
+  ...socialMeta(TITLE, DESCRIPTION, "/faq"),
 };
 
 export default function FaqPage() {

@@ -6,6 +6,7 @@ import LeadCapture from "@/components/LeadCapture";
 import { LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { PROCESS_STEPS, paymentText } from "@/lib/business-facts";
 import { ESTIMATE_FAQS } from "@/lib/faqs";
+import { socialMeta } from "@/lib/social";
 
 const TITLE = "Get a Free Estimate";
 const DESCRIPTION =
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/free-estimate" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "/free-estimate" },
+  ...socialMeta(TITLE, DESCRIPTION, "/free-estimate"),
 };
 
 export default function FreeEstimatePage() {

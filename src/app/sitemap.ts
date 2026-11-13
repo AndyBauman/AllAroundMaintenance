@@ -3,8 +3,12 @@ import { absoluteUrl } from "@/lib/constants";
 import { CITIES, ROOF_CITY_SLUGS, cityPath, roofCityPath } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 
+const CONTENT_UPDATED = "2026-11-13";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date().toISOString();
+  // Date the page content last changed. Update it when copy changes, not on every deploy,
+  // so search engines can trust lastmod.
+  const now = CONTENT_UPDATED;
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "weekly", priority: 1.0 },

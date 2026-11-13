@@ -1,43 +1,42 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import Script from "next/script";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/outfit";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
 import Logo from "@/components/Logo";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
-import { hasPublicFile } from "@/lib/assets";
 import { GTM_ID, META_DOMAIN_VERIFICATION, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { siteWideGraphSchema } from "@/lib/schema";
+import { socialMeta } from "@/lib/social";
+
+/*
+ * Self-hosted variable fonts (latin subset only; the site is English). next/font preloads them
+ * and generates size-matched fallbacks, so text paints early without shifting when they arrive.
+ */
+const inter = localFont({
+  src: "../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+  variable: "--font-inter",
+  weight: "100 900",
+  display: "swap",
+});
+const outfit = localFont({
+  src: "../../node_modules/@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2",
+  variable: "--font-outfit",
+  weight: "100 900",
+  display: "swap",
+});
 
 const TITLE = "Roof, Gutter, Siding & Deck Repair Portland & Vancouver | All Around Maintenance";
 const DESCRIPTION =
   "Family-owned since 1999. Roof, gutter, siding and deck repair plus home maintenance in Portland, OR & Vancouver, WA. Free estimates: (503) 209-2023.";
 
-const ogImages = hasPublicFile("og.jpg")
-  ? [{ url: "/og.jpg", width: 1200, height: 630, alt: "All Around Maintenance: roof, gutter, siding and deck repair in Portland and Vancouver" }]
-  : undefined;
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: TITLE, template: `%s | ${SITE_NAME}` },
   description: DESCRIPTION,
-  openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/",
-    siteName: SITE_NAME,
-    type: "website",
-    locale: "en_US",
-    images: ogImages,
-  },
-  // No title or description here: each page's own Open Graph values carry over to the card.
-  twitter: {
-    card: ogImages ? "summary_large_image" : "summary",
-    images: ogImages?.map((i) => i.url),
-  },
+  ...socialMeta(TITLE, DESCRIPTION, "/"),
   robots: {
     index: true,
     follow: true,
@@ -58,7 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body className="antialiased">
         {GTM_ID ? (
           <noscript>

@@ -24,7 +24,7 @@ export default function Contact({ heading = "Ready to Cross It Off the List?" }:
                   <Phone className="h-5 w-5" aria-hidden />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Portland, OR</p>
+                  <p className="text-sm font-medium text-gray-600">Portland, OR</p>
                   <a href={PHONE_HREF} className="text-xl font-bold text-gray-900 hover:text-brand">{PHONE}</a>
                 </div>
               </li>
@@ -33,7 +33,7 @@ export default function Contact({ heading = "Ready to Cross It Off the List?" }:
                   <Phone className="h-5 w-5" aria-hidden />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Vancouver, WA</p>
+                  <p className="text-sm font-medium text-gray-600">Vancouver, WA</p>
                   <a href={PHONE_WA_HREF} className="text-xl font-bold text-gray-900 hover:text-brand">{PHONE_WA}</a>
                 </div>
               </li>
@@ -44,7 +44,7 @@ export default function Contact({ heading = "Ready to Cross It Off the List?" }:
                   <MapPin className="h-5 w-5" aria-hidden />
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Service area</p>
+                  <p className="text-sm font-medium text-gray-600">Service area</p>
                   <p className="font-semibold text-gray-900">Portland metro, Clark County, Longview &amp; Kelso</p>
                 </div>
               </li>
@@ -54,7 +54,7 @@ export default function Contact({ heading = "Ready to Cross It Off the List?" }:
                     <Clock className="h-5 w-5" aria-hidden />
                   </span>
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Hours</p>
+                    <p className="text-sm font-medium text-gray-600">Hours</p>
                     <p className="font-semibold text-gray-900">{HOURS}</p>
                   </div>
                 </li>

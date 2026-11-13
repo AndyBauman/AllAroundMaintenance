@@ -31,7 +31,7 @@ function HeroPhoto() {
   return (
     <picture>
       <source media="(max-width: 639px)" srcSet={tall.srcSet} sizes={TALL_SIZES} />
-      <img {...wide} alt={PHOTO_ALT} className="object-cover" />
+      <img {...wide} alt={PHOTO_ALT} fetchPriority="high" className="object-cover" />
     </picture>
   );
 }

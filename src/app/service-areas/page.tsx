@@ -7,6 +7,7 @@ import { ROOF_CITY_SLUGS, citiesInState, cityLabel, cityPath, getCity, roofCityP
 import { PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { SERVICE_AREA_FAQS } from "@/lib/faqs";
 import { SERVICE_GROUPS, servicesInGroup } from "@/lib/services";
+import { socialMeta } from "@/lib/social";
 
 const TITLE = "Service Areas | Portland, OR & Vancouver, WA";
 const DESCRIPTION =
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/service-areas" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "/service-areas" },
+  ...socialMeta(TITLE, DESCRIPTION, "/service-areas"),
 };
 
 function CityGrid({ cities }: { cities: CityData[] }) {
