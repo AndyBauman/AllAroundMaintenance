@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
               {hasPhoto ? (
                 <Image
                   src="/why-us.jpg"
-                  alt="The All Around Maintenance crew"
+                  alt="All Around Maintenance crew member staining a deck by hand"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   quality={60}
