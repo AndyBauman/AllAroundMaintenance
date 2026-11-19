@@ -3,8 +3,8 @@
  * An instant redirect never runs Statcounter. This page loads the counter, then forwards.
  * Statcounter records the hit with sendBeacon, which still completes after navigation.
  */
-const SC_PROJECT = 13368194;
-const SC_SECURITY = "26fccc6d";
+export const SC_PROJECT = 13368194;
+export const SC_SECURITY = "26fccc6d";
 
 export function trackedForwardHtml(message: string, destination: string): string {
   const destAttr = destination.replace(/&/g, "&amp;").replace(/"/g, "&quot;");

@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import Logo from "@/components/Logo";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { GTM_ID, META_DOMAIN_VERIFICATION, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SC_PROJECT, SC_SECURITY } from "@/lib/tracked-forward";
 import { siteWideGraphSchema } from "@/lib/schema";
 import { socialMeta } from "@/lib/social";
 
@@ -148,6 +149,25 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             `}
           </Script>
         ) : null}
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `var sc_project=${SC_PROJECT};var sc_invisible=1;var sc_security="${SC_SECURITY}";`,
+          }}
+        />
+        <script async src="https://www.statcounter.com/counter/counter.js" />
+        <noscript>
+          <div className="statcounter">
+            <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener noreferrer">
+              <img
+                className="statcounter"
+                src={`https://c.statcounter.com/${SC_PROJECT}/0/${SC_SECURITY}/1/`}
+                alt="Web Analytics Made Easy - Statcounter"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </a>
+          </div>
+        </noscript>
       </body>
     </html>
   );
