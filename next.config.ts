@@ -48,6 +48,14 @@ const TEMPORARY_BLOG_REDIRECTS: [string, string][] = [
   ["/dry-rot-siding-trim", "/dry-rot-repair/"],
 ];
 
+/**
+ * Short link for asking a customer to leave a Google review.
+ * Share https://allaroundmaintenanceinc.com/review instead of the long Google URL.
+ * Temporary (307) so a place-id change is not stuck in browser caches.
+ */
+const GOOGLE_REVIEW_URL =
+  "https://search.google.com/local/writereview?placeid=ChIJVVUJJV0wLVQRgzSgZKiUExk";
+
 const nextConfig: NextConfig = {
   // The previous site served every URL with a trailing slash. Matching it means the
   // existing indexed URLs resolve with no redirect at all.
@@ -66,6 +74,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Listed first so this short link is not rewritten to www on the way out.
+      { source: "/review", destination: GOOGLE_REVIEW_URL, permanent: false },
       // Canonical host: bare domain -> www
       {
         source: "/:path*",
