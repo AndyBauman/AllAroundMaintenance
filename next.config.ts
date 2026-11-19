@@ -56,6 +56,14 @@ const TEMPORARY_BLOG_REDIRECTS: [string, string][] = [
 const GOOGLE_REVIEW_URL =
   "https://search.google.com/local/writereview?placeid=ChIJVVUJJV0wLVQRgzSgZKiUExk";
 
+/**
+ * Short link for the giveaway Reel.
+ * Share https://allaroundmaintenanceinc.com/giveaway instead of the Instagram URL.
+ * Temporary (307) so the Reel can be swapped without browsers caching the old one.
+ * Tracking parameters are left off on purpose.
+ */
+const GIVEAWAY_REEL_URL = "https://www.instagram.com/reel/Dfrceo6heK8/";
+
 const nextConfig: NextConfig = {
   // The previous site served every URL with a trailing slash. Matching it means the
   // existing indexed URLs resolve with no redirect at all.
@@ -76,6 +84,7 @@ const nextConfig: NextConfig = {
     return [
       // Listed first so this short link is not rewritten to www on the way out.
       { source: "/review", destination: GOOGLE_REVIEW_URL, permanent: false },
+      { source: "/giveaway", destination: GIVEAWAY_REEL_URL, permanent: false },
       // Canonical host: bare domain -> www
       {
         source: "/:path*",
