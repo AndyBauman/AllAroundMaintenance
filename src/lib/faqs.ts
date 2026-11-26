@@ -9,6 +9,7 @@ import {
   paymentText,
   schedulingText,
 } from "./business-facts";
+import { getCityLocal } from "@/data/city-local";
 import type { CityData } from "./cities";
 import { SERVICES, type ServiceData } from "./services";
 
@@ -73,74 +74,14 @@ export const HOME_FAQS: Faq[] = [
 ];
 
 /** City-page FAQs. `focus: "roof"` produces the roof-maintenance variant. */
-export function cityFaqs(city: CityData, focus: "home" | "roof" = "home"): Faq[] {
-  const place = city.name;
-  const phone = city.stateAbbr === "WA" ? PHONE_WA : PHONE;
-
-  if (focus === "roof") {
-    return [
-      {
-        question: `Do you offer free roof inspections in ${place}?`,
-        answer: `Yes. Roof and attic inspections in ${place} are free and include an itemized report with photos.`,
-      },
-      {
-        question: `What roof services do you provide in ${place}?`,
-        answer: `Roof inspection, leak and storm-damage repair, moss removal and roof cleaning, yearly maintenance, and roof replacement when a repair won't last.`,
-      },
-      { question: `How do you remove moss from roofs in ${place}?`, answer: `By hand, never with a pressure washer. We then scrub the roof, clean the gutters and apply a treatment that kills the roots. ${mossGuaranteeText()}` },
-      { question: `How often should a roof in ${place} be maintained?`, answer: "Once a year is a good rule in the Pacific Northwest, ideally before the rainy season." },
-      { question: `Are you licensed to work in ${city.state}?`, answer: LICENSE_ANSWER },
-      {
-        question: `Do you repair roof leaks in ${place}?`,
-        answer: `Yes. Call ${phone} as soon as you notice water. We send someone to assess the problem and apply a quick fix, then help you plan the permanent repair. Most leaks can be repaired without replacing the roof.`,
-      },
-      {
-        question: `What does a roof inspection in ${place} include?`,
-        answer: "The roof exterior, the attic side, ventilation and insulation, followed by an itemized report with photos.",
-      },
-      {
-        question: `How do I know if my ${place} roof needs to be replaced?`,
-        answer: "Common signs are sagging, interior moisture or mold, widespread cracked or curling shingles, and age beyond about 25 years. Most damage can be repaired, and we recommend replacement only when a repair won't last.",
-      },
-      {
-        question: `Do you repair storm and wind damage in ${place}?`,
-        answer: "Yes. We repair missing shingles, blow-offs and punctures left by storms and wind.",
-      },
-      { question: `Is your roof work in ${place} guaranteed?`, answer: `Yes. ${guaranteeText()} For moss removal: ${mossGuaranteeText()}` },
-      { question: `Do I need to be home for roof work in ${place}?`, answer: AWAY_ANSWER },
-      { question: `How do I schedule roof work in ${place}?`, answer: `Call ${phone}${OR_FORM}. ${schedulingText()}` },
-    ];
-  }
-
-  return [
-    {
-      question: `What home maintenance services do you offer in ${place}?`,
-      answer: `Roof repair and moss removal, gutter cleaning and repair, deck restoration, pressure washing, siding and fence repair, dry rot repair, drywall, landscaping, junk removal and general handyman work.`,
-    },
-    { question: `Do you offer free estimates in ${place}?`, answer: `Yes. ${estimateText()}` },
-    { question: `Are you licensed to work in ${city.state}?`, answer: LICENSE_ANSWER },
-    { question: `How soon can you start a job in ${place}?`, answer: schedulingText() },
-    {
-      question: `Do you work with HOAs and businesses in ${place}?`,
-      answer: `Yes. We provide custom maintenance plans and on-demand repairs for HOAs, and maintenance and repair for commercial properties.`,
-    },
-    {
-      question: `Do you handle emergency repairs in ${place}?`,
-      answer: `Yes. For urgent problems such as a leaking roof or overflowing gutters, call ${phone} as soon as you can. We send someone to assess the problem and apply a quick fix, then help you plan the permanent repair.`,
-    },
-    {
-      question: `Do you remove roof moss in ${place}?`,
-      answer: `Yes. We remove moss by hand, never with a pressure washer, then clean the gutters and apply a treatment that kills the roots. ${mossGuaranteeText()}`,
-    },
-    {
-      question: `Do you clean and repair gutters in ${place}?`,
-      answer: "Yes. We clean gutters and downspouts, repair leaks and sagging sections, and replace gutters that are past repair. Twice a year, in late fall and spring, is a good cleaning schedule here.",
-    },
-    { question: `Do I need to be home for work at my ${place} property?`, answer: AWAY_ANSWER },
-    { question: `Is your work in ${place} guaranteed?`, answer: `Yes. ${guaranteeText()}` },
-    { question: `How can I pay for work in ${place}?`, answer: paymentText() },
-    { question: `How do I book service in ${place}?`, answer: `Call ${phone}${OR_FORM}. We respond ${FACTS.responseTime}.` },
-  ];
+/**
+ * City FAQs must be city-specific (Stage 6). Shared answers live on /faq/.
+ * Enriched cities pull from src/data/city-local.ts; others return no FAQ block.
+ */
+export function cityFaqs(city: CityData, _focus: "home" | "roof" = "home"): Faq[] {
+  const local = getCityLocal(city.slug);
+  if (!local?.faqs?.length) return [];
+  return local.faqs.map((f) => ({ question: f.q, answer: f.a }));
 }
 
 /** Service names that read wrong mid-sentence ("schedule drainage") get a noun phrase instead. */

@@ -8,8 +8,10 @@
  * Usage:
  *   node scripts/audit-uniqueness.mjs
  *   BASE_URL=https://www.allaroundmaintenanceinc.com node scripts/audit-uniqueness.mjs
+ *   After `npm run build && npx next start`, use BASE_URL=http://127.0.0.1:3000
  *
  * Exit 1 when any page scores below 30% (CI gate from Stage 6).
+ * Target uniqueness for rewritten cities is 50%+ (Stage 6 report).
  */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";

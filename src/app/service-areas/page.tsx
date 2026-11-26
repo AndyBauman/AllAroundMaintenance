@@ -3,6 +3,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
 import FAQSection from "@/components/FAQSection";
+import { SERVICE_ZIPS } from "@/data/city-local";
 import { ROOF_CITY_SLUGS, citiesInState, cityLabel, cityPath, getCity, roofCityPath, type CityData } from "@/lib/cities";
 import { PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { SERVICE_AREA_FAQS } from "@/lib/faqs";
@@ -101,6 +102,37 @@ export default function ServiceAreasPage() {
           </div>
         </div>
       </section>
+
+      {SERVICE_ZIPS.length > 0 ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-3xl font-bold text-gray-900">ZIPs we serve</h2>
+            <p className="mt-2 max-w-2xl text-gray-600">
+              Owner-confirmed ZIP codes. If your ZIP is listed, we serve that area.
+            </p>
+            <div className="mt-6 overflow-x-auto">
+              <table className="w-full min-w-[20rem] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="py-3 pr-4 font-semibold text-gray-900">ZIP</th>
+                    <th className="py-3 pr-4 font-semibold text-gray-900">City</th>
+                    <th className="py-3 font-semibold text-gray-900">State</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {SERVICE_ZIPS.map((row) => (
+                    <tr key={`${row.zip}-${row.city}`} className="border-b border-gray-100">
+                      <td className="py-3 pr-4 font-medium text-gray-900">{row.zip}</td>
+                      <td className="py-3 pr-4 text-gray-700">{row.city}</td>
+                      <td className="py-3 text-gray-700">{row.state}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <FAQSection faqs={SERVICE_AREA_FAQS} heading="Service Area FAQ" />
       <CtaBand heading="Not Sure If We Cover Your Area?" text="Call and ask. If you're in or near the Portland or Vancouver metro, the answer is probably yes." />

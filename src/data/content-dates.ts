@@ -14,6 +14,7 @@ const STAGE_1 = business.contentUpdated;
 const STAGE_3 = "2026-11-26";
 const STAGE_4 = "2026-11-26";
 const STAGE_5 = "2026-11-26";
+const STAGE_6 = "2026-11-26";
 
 const OVERRIDES: Record<string, string> = {
   "/": STAGE_1,
@@ -21,7 +22,7 @@ const OVERRIDES: Record<string, string> = {
   "/services": STAGE_1,
   "/free-estimate": STAGE_1,
   "/faq": BASELINE,
-  "/service-areas": BASELINE,
+  "/service-areas": STAGE_6,
   "/reviews": STAGE_3,
   "/projects": STAGE_3,
   "/guides": STAGE_5,
@@ -81,6 +82,22 @@ for (const slug of [
   "year-round-home-maintenance",
 ]) {
   OVERRIDES[`/${slug}`] = STAGE_5;
+}
+
+/** First-wave city rewrites (Stage 6). */
+for (const slug of [
+  "vancouver",
+  "portland",
+  "camas",
+  "battle-ground",
+  "ridgefield",
+  "beaverton",
+  "lake-oswego",
+  "gresham",
+  "tigard",
+  "hillsboro",
+]) {
+  OVERRIDES[`/${slug}-home-maintenance`] = STAGE_6;
 }
 
 /** Normalize to `/path` without trailing slash (except home `/`). */
