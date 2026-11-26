@@ -24,6 +24,21 @@ Source: `docs/AAM-SEO-GEO-AEO.md` §9 (2026-11-26).
 - [ ] Confirmation that Alex reviews service pages and guides, for the "Reviewed by" line. (Set `business.founderReviewsContent = true` in `src/data/business.ts` when confirmed.)
 - [ ] After filling `docs/project-intake.csv`, approve which sets become `/projects/{slug}/` pages (and which photo replaces the homepage hero).
 
+## Stage 5 draft guides (set `reviewed: true` and clear `draft` when approved)
+
+Drafts live in `src/data/guides/drafts.ts` and are not built until reviewed:
+
+- [ ] `gutter-cleaning-cost-portland-vancouver` — approve dollar ranges
+- [ ] `roof-moss-removal-cost-shingles` — approve dollar ranges
+- [ ] `how-often-clean-gutters-fir-maple`
+- [ ] `roof-repair-or-replacement`
+- [ ] `dry-rot-signs-repair-cost` — approve dollar ranges
+- [ ] `gutter-guards-northwest` — confirm product recommendation
+- [ ] `handyman-roofer-or-gutter-company`
+- [ ] `check-contractor-license-oregon-washington`
+- [ ] `yearly-hoa-exterior-maintenance-schedule`
+- [ ] Real project photos to attach to guides where available (`guide.image`)
+
 ## Local and language
 
 - [ ] Native-speaker reviewers for the Russian, Ukrainian and Spanish pages.

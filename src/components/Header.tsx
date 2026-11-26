@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: "/service-areas", label: "Areas" },
   { href: "/about-us", label: "About" },
   { href: "/reviews", label: "Reviews" },
+  { href: "/guides", label: "Guides" },
   { href: "/faq", label: "FAQ" },
 ];
 

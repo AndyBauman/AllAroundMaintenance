@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { pageDate } from "@/data/content-dates";
+import { publishedGuides } from "@/data/guides";
 import { absoluteUrl, SITE_URL } from "@/lib/constants";
 import { CITIES, ROOF_CITY_SLUGS, cityPath, roofCityPath } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
@@ -64,7 +65,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: absoluteUrl("/guides"),
+      lastModified: pageDate("/guides"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
   ];
+
+  const guidePages: MetadataRoute.Sitemap = publishedGuides().map((g) => ({
+    url: absoluteUrl(`/${g.slug}`),
+    lastModified: g.updated,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
   const servicePages: MetadataRoute.Sitemap = SERVICES.map((s) => ({
     url: absoluteUrl(`/${s.slug}`),
@@ -87,5 +101,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [...staticPages, ...servicePages, ...cityPages, ...roofCityPages];
+  return [...staticPages, ...servicePages, ...guidePages, ...cityPages, ...roofCityPages];
 }

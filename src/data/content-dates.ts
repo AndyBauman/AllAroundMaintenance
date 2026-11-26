@@ -13,6 +13,7 @@ const STAGE_1 = business.contentUpdated;
 
 const STAGE_3 = "2026-11-26";
 const STAGE_4 = "2026-11-26";
+const STAGE_5 = "2026-11-26";
 
 const OVERRIDES: Record<string, string> = {
   "/": STAGE_1,
@@ -23,6 +24,7 @@ const OVERRIDES: Record<string, string> = {
   "/service-areas": BASELINE,
   "/reviews": STAGE_3,
   "/projects": STAGE_3,
+  "/guides": STAGE_5,
 };
 
 /** Service pages refreshed in Stage 4 (answer blocks / pricing / FAQs). */
@@ -54,6 +56,31 @@ for (const slug of [
   "yard-cleanup",
 ]) {
   OVERRIDES[`/${slug}`] = STAGE_4;
+}
+
+/** Restored guide slugs (Stage 5). */
+for (const slug of [
+  "8-roof-and-gutter-maintenance-tasks-for-winter",
+  "cleaning-maintaining-decks",
+  "dangers-clogged-gutters",
+  "decks-and-fencing",
+  "dry-rot-siding-trim",
+  "essential-services-for-homeowners",
+  "get-ready-for-summer-entertaining",
+  "home-maintenance-tasks-never-do-yourself",
+  "how-to-find-a-handyman",
+  "new-homeowners-guide-to-gutter-maintenance",
+  "professional-dry-rot-repair-smart-investment",
+  "questions-to-ask-your-gutter-cleaners",
+  "roof-gutter-cleaning-mistakes",
+  "roof-maintenance-tips",
+  "signs-trust-handyman",
+  "tips-well-maintained-home",
+  "what-to-do-if-roof-is-leaking",
+  "why-is-moss-so-bad-for-your-roof",
+  "year-round-home-maintenance",
+]) {
+  OVERRIDES[`/${slug}`] = STAGE_5;
 }
 
 /** Normalize to `/path` without trailing slash (except home `/`). */

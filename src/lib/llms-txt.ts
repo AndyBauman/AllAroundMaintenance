@@ -1,6 +1,7 @@
 import { business, profileUrls } from "@/data/business";
 import { SITE_NAME, LEGAL_NAME, PHONE, PHONE_WA, LICENSE_LINE, ESTIMATE_PATH, absoluteUrl } from "./constants";
 import { FACTS, estimateText, languagesText, mossGuaranteeText, schedulingText } from "./business-facts";
+import { publishedGuides } from "@/data/guides";
 import { CITIES, ROOF_CITY_SLUGS, cityLabel, cityPath, getCity, roofCityPath } from "./cities";
 import { SERVICES } from "./services";
 
@@ -34,6 +35,7 @@ export function buildLlmsTxt(): string {
     `- [Reviews](${absoluteUrl("/reviews")})`,
     `- [Projects](${absoluteUrl("/projects")})`,
     `- [FAQ](${absoluteUrl("/faq")})`,
+    `- [Guides](${absoluteUrl("/guides")})`,
     `- [Service areas](${absoluteUrl("/service-areas")})`,
     ...profileUrls().map((url) => `- Profile: ${url}`),
     ``,
@@ -51,6 +53,14 @@ export function buildLlmsTxt(): string {
   for (const slug of ROOF_CITY_SLUGS) {
     const c = getCity(slug);
     if (c) lines.push(`- [Roof maintenance in ${cityLabel(c)}](${absoluteUrl(roofCityPath(slug))})`);
+  }
+
+  const guides = publishedGuides();
+  if (guides.length > 0) {
+    lines.push(``, `## Guides`);
+    for (const g of guides) {
+      lines.push(`- [${g.title}](${absoluteUrl(`/${g.slug}`)}): ${g.description.replace(/\s+/g, " ").trim()}`);
+    }
   }
 
   lines.push(

@@ -253,3 +253,29 @@ export function webPageSchema(opts: {
     inLanguage: "en-US",
   };
 }
+
+export function blogPostingSchema(opts: {
+  headline: string;
+  description: string;
+  url: string;
+  datePublished?: string;
+  dateModified: string;
+  image?: string;
+}) {
+  const node: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: opts.headline,
+    description: opts.description,
+    url: opts.url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url },
+    dateModified: opts.dateModified,
+    author: { "@type": "Organization", "@id": ORGANIZATION_ID, name: SITE_NAME },
+    publisher: { "@id": ORGANIZATION_ID },
+    inLanguage: "en-US",
+  };
+  if (opts.datePublished) node.datePublished = opts.datePublished;
+  else node.datePublished = opts.dateModified;
+  if (opts.image) node.image = opts.image;
+  return node;
+}

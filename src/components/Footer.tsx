@@ -133,6 +133,7 @@ export default function Footer() {
               <li><Link href="/about-us" className={linkClass}>About Us</Link></li>
               <li><Link href="/reviews" className={linkClass}>Reviews</Link></li>
               <li><Link href="/projects" className={linkClass}>Projects</Link></li>
+              <li><Link href="/guides" className={linkClass}>Guides</Link></li>
               <li><Link href="/faq" className={linkClass}>FAQ</Link></li>
               <li><Link href="/hoa-maintenance" className={linkClass}>HOA Maintenance</Link></li>
               <li><Link href="/service-areas" className={linkClass}>All Service Areas</Link></li>

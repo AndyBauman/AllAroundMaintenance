@@ -15,6 +15,7 @@ import ReviewGrid from "@/components/ReviewGrid";
 import ServiceIcon from "@/components/ServiceIcon";
 import { pageDate } from "@/data/content-dates";
 import { pricingHeadline, approvedPricing } from "@/data/pricing";
+import { guidesForService } from "@/data/guides";
 import { answerBlock, decisionTable, quickFacts } from "@/data/service-content";
 import { reviewsForService } from "@/lib/reviews";
 import { projectsForService } from "@/lib/projects";
@@ -30,6 +31,7 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
   const answer = answerBlock(svc);
   const facts = quickFacts(svc);
   const decision = decisionTable(svc.slug);
+  const relatedGuides = guidesForService(svc.slug);
   const price = pricingHeadline(svc.slug, svc.pricing);
   const approved = approvedPricing(svc.slug);
 
@@ -215,6 +217,19 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
                       <Link key={r.slug} href={`/${r.slug}`} className="flex items-center gap-2 font-medium text-brand hover:underline">
                         <ArrowRight className="h-4 w-4" aria-hidden />
                         {r.shortTitle}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {relatedGuides.length > 0 && (
+                <div className="mt-10">
+                  <h3 className="text-lg font-bold text-gray-900">Related Guides</h3>
+                  <div className="mt-4 space-y-2">
+                    {relatedGuides.map((g) => (
+                      <Link key={g.slug} href={`/${g.slug}/`} className="flex items-center gap-2 font-medium text-brand hover:underline">
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                        {g.title}
                       </Link>
                     ))}
                   </div>

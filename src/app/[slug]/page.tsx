@@ -4,7 +4,9 @@ import { CITIES, CITY_SUFFIX, ROOF_CITY_PREFIX, ROOF_CITY_SLUGS, cityLabel, city
 import { SERVICES } from "@/lib/services";
 import { phoneFor } from "@/lib/constants";
 import CityPage from "@/components/pages/CityPage";
+import GuidePage from "@/components/pages/GuidePage";
 import ServicePage from "@/components/pages/ServicePage";
+import { getGuide, publishedGuides } from "@/data/guides";
 import { socialMeta } from "@/lib/social";
 
 /**
@@ -12,12 +14,20 @@ import { socialMeta } from "@/lib/social";
  *   /gutter-repair-portland          service page
  *   /beaverton-home-maintenance      city page
  *   /roof-maintenance-vancouver      roof-focused city page
+ *   /why-is-moss-so-bad-for-your-roof guide (Stage 5)
  */
-type PageType = { kind: "service"; slug: string } | { kind: "city"; slug: string } | { kind: "roof-city"; slug: string };
+type PageType =
+  | { kind: "service"; slug: string }
+  | { kind: "city"; slug: string }
+  | { kind: "roof-city"; slug: string }
+  | { kind: "guide"; slug: string };
 
 function resolveSlug(slug: string): PageType | null {
   const service = SERVICES.find((s) => s.slug === slug);
   if (service) return { kind: "service", slug: service.slug };
+
+  const guide = getGuide(slug);
+  if (guide) return { kind: "guide", slug: guide.slug };
 
   if (slug.endsWith(CITY_SUFFIX)) {
     const city = getCity(slug.slice(0, -CITY_SUFFIX.length));
@@ -37,6 +47,7 @@ export const dynamicParams = false;
 export function generateStaticParams() {
   return [
     ...SERVICES.map((s) => ({ slug: s.slug })),
+    ...publishedGuides().map((g) => ({ slug: g.slug })),
     ...CITIES.map((c) => ({ slug: cityPath(c.slug).slice(1) })),
     ...ROOF_CITY_SLUGS.map((s) => ({ slug: roofCityPath(s).slice(1) })),
   ];
@@ -60,6 +71,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const svc = SERVICES.find((s) => s.slug === resolved.slug)!;
     // metaTitle already carries the location, so skip the "| brand" template to stay within title length.
     return { ...meta(svc.metaTitle, svc.metaDescription, `/${svc.slug}`), title: { absolute: svc.metaTitle } };
+  }
+
+  if (resolved.kind === "guide") {
+    const guide = getGuide(resolved.slug)!;
+    return { ...meta(guide.title, guide.description, `/${guide.slug}`), title: { absolute: guide.title } };
   }
 
   const city = getCity(resolved.slug)!;
@@ -87,5 +103,6 @@ export default async function SlugPage({ params }: { params: Promise<{ slug: str
   if (!resolved) notFound();
 
   if (resolved.kind === "service") return <ServicePage serviceSlug={resolved.slug} />;
+  if (resolved.kind === "guide") return <GuidePage guide={getGuide(resolved.slug)!} />;
   return <CityPage citySlug={resolved.slug} focus={resolved.kind === "roof-city" ? "roof" : "home"} />;
 }
