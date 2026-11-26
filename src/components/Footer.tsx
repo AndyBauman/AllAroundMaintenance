@@ -1,8 +1,19 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import {
-  EMAIL, ESTIMATE_PATH, HOURS, LEGAL_NAME, LICENSES,
-  PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF, SOCIAL,
+  business,
+  hasPublicAddress,
+  hoursDisplayLines,
+  phoneDisplay,
+} from "@/data/business";
+import {
+  ESTIMATE_PATH,
+  LEGAL_NAME,
+  PHONE,
+  PHONE_HREF,
+  PHONE_WA,
+  PHONE_WA_HREF,
+  SOCIAL,
 } from "@/lib/constants";
 import { CREDENTIALS } from "@/lib/business-facts";
 import { CITIES, cityLabel, cityPath } from "@/lib/cities";
@@ -13,45 +24,78 @@ const linkClass = "text-sm text-gray-300 transition-colors hover:text-white";
 export default function Footer() {
   const year = new Date().getFullYear();
   const featured = SERVICES.filter((s) => s.popular || s.group !== "home").slice(0, 12);
+  const email = business.email.trim();
+  const sms = business.smsNumber.trim();
+  const hours = hoursDisplayLines();
 
   return (
     <footer className="bg-gray-900 pb-24 pt-16 md:pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* NAP block */}
-          <div itemScope itemType="https://schema.org/HomeAndConstructionBusiness">
+          <div>
             <Logo />
-            <meta itemProp="name" content={LEGAL_NAME} />
             <p className="mt-4 text-sm leading-relaxed text-gray-300">
-              Family-owned home maintenance and repair in Portland, OR &amp; Vancouver, WA since 1999. {CREDENTIALS}.
+              Family-owned home maintenance and repair in Portland, OR &amp; Vancouver, WA since {business.founded}.{" "}
+              {CREDENTIALS}.
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-300">
-              <li>
-                Portland:{" "}
-                <a href={PHONE_HREF} itemProp="telephone" className="font-semibold text-white transition-colors hover:text-accent">
-                  {PHONE}
-                </a>
-              </li>
-              <li>
-                Vancouver:{" "}
-                <a href={PHONE_WA_HREF} className="font-semibold text-white transition-colors hover:text-accent">
-                  {PHONE_WA}
-                </a>
-              </li>
-              {EMAIL ? (
+            <address className="mt-4 not-italic">
+              <p className="text-sm font-semibold text-white">{LEGAL_NAME}</p>
+              {hasPublicAddress() ? (
+                <p className="mt-1 text-sm text-gray-300">
+                  {business.address.street}
+                  <br />
+                  {business.address.city}, {business.address.region} {business.address.postalCode}
+                </p>
+              ) : null}
+              <ul className="mt-3 space-y-2 text-sm text-gray-300">
                 <li>
-                  <a href={`mailto:${EMAIL}`} itemProp="email" className="text-gray-200 transition-colors hover:text-white">
-                    {EMAIL}
+                  Portland:{" "}
+                  <a href={PHONE_HREF} className="font-semibold text-white transition-colors hover:text-accent">
+                    {PHONE}
                   </a>
                 </li>
-              ) : null}
-              {HOURS ? <li>{HOURS}</li> : null}
-              <li>Oregon CCB #{LICENSES.oregonCcb}</li>
-              <li>Washington #{LICENSES.washington}</li>
-            </ul>
+                <li>
+                  Vancouver:{" "}
+                  <a href={PHONE_WA_HREF} className="font-semibold text-white transition-colors hover:text-accent">
+                    {PHONE_WA}
+                  </a>
+                </li>
+                {sms ? (
+                  <li>
+                    <a
+                      href={`sms:${sms}`}
+                      className="font-semibold text-white transition-colors hover:text-accent"
+                    >
+                      Text us: {phoneDisplay(sms.startsWith("+") ? sms : `+1${sms.replace(/\D/g, "").slice(-10)}`)}
+                    </a>
+                  </li>
+                ) : null}
+                {email ? (
+                  <li>
+                    <a href={`mailto:${email}`} className="text-gray-200 transition-colors hover:text-white">
+                      {email}
+                    </a>
+                  </li>
+                ) : null}
+                {hours.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+                {business.licenses.map((lic) => (
+                  <li key={lic.number}>
+                    <a
+                      href={lic.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-white"
+                    >
+                      {lic.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </address>
           </div>
 
-          {/* Services */}
           <div>
             <h3 className="font-bold text-white">Services</h3>
             <ul className="mt-4 space-y-2">
@@ -70,7 +114,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Service areas */}
           <div>
             <h3 className="font-bold text-white">Service Areas</h3>
             <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
@@ -84,7 +127,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h3 className="font-bold text-white">Company</h3>
             <ul className="mt-4 space-y-2">
@@ -93,8 +135,20 @@ export default function Footer() {
               <li><Link href="/hoa-maintenance" className={linkClass}>HOA Maintenance</Link></li>
               <li><Link href="/service-areas" className={linkClass}>All Service Areas</Link></li>
               <li><Link href={ESTIMATE_PATH} className={linkClass}>Get a Free Estimate</Link></li>
-              <li><a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className={linkClass}>Facebook</a></li>
-              <li><a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={linkClass}>Instagram</a></li>
+              {SOCIAL.facebook ? (
+                <li>
+                  <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                    Facebook
+                  </a>
+                </li>
+              ) : null}
+              {SOCIAL.instagram ? (
+                <li>
+                  <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                    Instagram
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>

@@ -1,19 +1,20 @@
+import { business } from "@/data/business";
 import { LEAD_FORM_ENABLED, PHONE } from "./constants";
 
 /**
- * Single source of truth for claims used in copy, FAQs and schema.
- * Change a fact here and every page that mentions it updates.
+ * Operational copy facts used in FAQs and page prose.
+ * Legal identity, licenses, languages, payment and not-offered lists come from `src/data/business.ts`.
  *
  * NOT included on purpose (not yet confirmed with the owner):
  *  - "properties served" count
  *  - Angie's List award years
- *  - review count and star rating (env-driven in schema.ts)
+ *  - review count and star rating (visible HTML only, Stage 3)
  *  - written warranty terms beyond the moss guarantee
  */
 export const FACTS = {
-  founded: 1999,
-  founder: "Alex Svistun",
-  languages: ["English", "Russian", "Ukrainian", "Spanish"],
+  founded: business.founded,
+  founder: business.founder.name,
+  languages: business.languages,
   /** Inquiries are answered the same day. */
   responseTime: "the same day",
   /** Itemized estimate turnaround. */
@@ -22,11 +23,11 @@ export const FACTS = {
   schedulingWindow: "2 to 3 days",
   mossGuaranteeMonths: 6,
   hoaYears: 15,
-  payment: ["credit cards", "debit cards", "bank transfers", "checks"],
+  payment: business.payment,
   /** The only published prices. */
   junkRemoval: { perCubicYard: 50, minimum: 250 },
   /** Work the company does not take on. */
-  notOffered: ["sewer", "septic", "foundation"],
+  notOffered: business.notOffered.map((item) => item.toLowerCase().replace(" work", "")),
 } as const;
 
 export const CREDENTIALS = "Licensed, bonded & insured";
@@ -58,7 +59,12 @@ export function changeOrderText(): string {
 }
 
 export function paymentText(): string {
-  return "We accept credit and debit cards, bank transfers and checks.";
+  const items = [...business.payment];
+  if (items.length === 0) return "";
+  if (items.length === 1) return `We accept ${items[0].toLowerCase()}s.`;
+  const last = items[items.length - 1].toLowerCase();
+  const head = items.slice(0, -1).map((p) => p.toLowerCase()).join(", ");
+  return `We accept ${head} and ${last}.`;
 }
 
 export function junkPricingText(): string {

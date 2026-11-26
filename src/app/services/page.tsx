@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
+import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
+import { business } from "@/data/business";
+import { absoluteUrl } from "@/lib/constants";
 import { SERVICES_PAGE_FAQS } from "@/lib/faqs";
+import { webPageSchema } from "@/lib/schema";
 import { SERVICE_GROUPS, servicesInGroup } from "@/lib/services";
 import { socialMeta } from "@/lib/social";
 
@@ -22,6 +27,15 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main>
+      <JsonLd
+        data={webPageSchema({
+          name: TITLE,
+          description: DESCRIPTION,
+          url: absoluteUrl("/services"),
+          dateModified: business.contentUpdated,
+        })}
+      />
+      <FAQJsonLd faqs={SERVICES_PAGE_FAQS} />
       <Breadcrumbs items={[{ label: "Services", href: "/services" }]} />
 
       <section className="bg-white pb-6 pt-6">

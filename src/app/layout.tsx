@@ -45,8 +45,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   other: {
-    "geo.region": "US-OR",
-    "geo.placename": "Portland, OR and Vancouver, WA",
+    // Shared pages serve both states; page-level geo meta is added where a single state applies.
     "facebook-domain-verification": META_DOMAIN_VERIFICATION,
   },
 };

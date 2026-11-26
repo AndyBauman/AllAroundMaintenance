@@ -11,11 +11,11 @@ import Process from "@/components/Process";
 import ServiceAreas from "@/components/ServiceAreas";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import { PROCESS_STEPS } from "@/lib/business-facts";
+import { business } from "@/data/business";
 import { cityPath } from "@/lib/cities";
 import { absoluteUrl } from "@/lib/constants";
 import { HOME_FAQS } from "@/lib/faqs";
-import { breadcrumbSchema, howToSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -29,13 +29,19 @@ export default function Home() {
       <JsonLd
         data={[
           breadcrumbSchema([{ name: "Home", url: absoluteUrl("/") }]),
+          webPageSchema({
+            name: "Roof, Gutter, Siding & Deck Repair Portland & Vancouver",
+            description:
+              "Family-owned since 1999. Roof, gutter, siding and deck repair plus home maintenance in Portland, OR & Vancouver, WA.",
+            url: absoluteUrl("/"),
+            dateModified: business.contentUpdated,
+          }),
           serviceSchema({
             name: "Home Maintenance and Repair",
             description:
               "Roof repair and moss removal, gutter cleaning and repair, deck restoration and full home maintenance in Portland, OR and Vancouver, WA.",
             url: absoluteUrl("/"),
           }),
-          howToSchema("How to work with All Around Maintenance", PROCESS_STEPS),
         ]}
       />
 
