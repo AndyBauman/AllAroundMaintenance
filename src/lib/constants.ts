@@ -51,10 +51,9 @@ export const SOCIAL = {
 export const ESTIMATE_PATH = "/free-estimate";
 
 /**
- * Online estimate form and its email delivery (src/app/api/lead).
- * OFF for launch: the site is call-first and no lead endpoint is exposed.
- * To turn it on later: set this to true, add RESEND_API_KEY and NOTIFY_EMAIL
- * in Vercel, and redeploy. Every page and all copy switch over from this one flag.
+ * Call-first sentences in page copy, FAQs, and the mobile bar.
+ * Left false so existing titles, descriptions, H1s, and FAQ JSON-LD stay as they are.
+ * The quote form is shown either way. See src/components/LeadCapture.tsx.
  */
 export const LEAD_FORM_ENABLED: boolean = false;
 

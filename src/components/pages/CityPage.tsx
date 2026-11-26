@@ -232,7 +232,7 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         </div>
       </section>
 
-      <section id="quote" className="bg-surface py-16 sm:py-20">
+      <section className="bg-surface py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-center font-display text-3xl font-bold text-gray-900">Get a Free Estimate in {city.name}</h2>
           <p className="mx-auto mt-4 max-w-xl text-center text-lg text-gray-600">

@@ -1,174 +1,503 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { CircleCheck } from "lucide-react";
-import { PHONE, PHONE_HREF } from "@/lib/constants";
-import { FORM_SERVICE_OPTIONS } from "@/lib/services";
-import { ELAPSED_FIELD, HONEYPOT_FIELD } from "@/lib/spam-guard";
-
-const HEARD_OPTIONS = ["Google", "Referral / Word of Mouth", "Facebook or Instagram", "Saw your truck or sign", "Repeat customer", "Other"];
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
+import {
+  HEARD_OPTIONS,
+  QUOTE_SERVICES,
+  US_STATES,
+  captureAttribution,
+  firstName,
+  formatPhone,
+  leadFieldErrors,
+  quoteLeadSchema,
+  readAttribution,
+  type LeadField,
+} from "@/lib/lead";
 
 const inputClass =
   "mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30";
 const labelClass = "block text-sm font-semibold text-gray-800";
 
-type Status = "idle" | "submitting" | "done";
+const FIELD_IDS: Record<LeadField, string> = {
+  name: "qf-name",
+  email: "qf-email",
+  phone: "qf-phone",
+  heard_from: "qf-heard",
+  heard_detail: "qf-heard-detail",
+  street: "qf-street",
+  city: "qf-city",
+  state: "qf-state",
+  zip: "qf-zip",
+  message: "qf-message",
+};
 
-/**
- * Lead form. Posts JSON to /api/lead, which emails the lead (no database).
- * `service` preselects the dropdown; `city` is passed along for context.
- */
-export default function QuoteForm({ service, city }: { service?: string; city?: string }) {
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState("");
-  const mountedAt = useRef(0);
+const FAILURE = `Something went wrong sending your request. Please call ${PHONE} or try again.`;
+
+type Errors = Partial<Record<LeadField, string>>;
+
+function focusFirst(errors: Errors) {
+  const key = (Object.keys(FIELD_IDS) as LeadField[]).find((field) => errors[field]);
+  if (!key) return;
+  document.getElementById(FIELD_IDS[key])?.focus();
+}
+
+function RequiredLabel({ htmlFor, children }: { htmlFor: string; children: ReactNode }) {
+  return (
+    <label htmlFor={htmlFor} className={labelClass}>
+      {children}
+      <span className="sr-only"> required</span>
+    </label>
+  );
+}
+
+function FieldError({ id, error }: { id: string; error?: string }) {
+  if (!error) return null;
+  return (
+    <p id={`${id}-error`} className="mt-1 text-sm text-red-700">
+      {error}
+    </p>
+  );
+}
+
+export default function QuoteForm({
+  defaultServices,
+  compact = false,
+  heading,
+  defaultCity = "",
+  defaultState = "",
+}: {
+  defaultServices?: string[];
+  compact?: boolean;
+  heading?: string;
+  defaultCity?: string;
+  defaultState?: string;
+}) {
+  const starting = (defaultServices ?? []).filter((service) => (QUOTE_SERVICES as readonly string[]).includes(service));
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [heardFrom, setHeardFrom] = useState("");
+  const [heardDetail, setHeardDetail] = useState("");
+  const [services, setServices] = useState<string[]>(starting);
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState(defaultCity);
+  const [state, setState] = useState(
+    US_STATES.some(([abbr]) => abbr === defaultState) ? defaultState : "",
+  );
+  const [zip, setZip] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<Errors>({});
+  const [formError, setFormError] = useState("");
+  const [sending, setSending] = useState(false);
+  const [done, setDone] = useState(false);
+  const renderedAt = useRef(0);
+  const honeypot = useRef<HTMLInputElement>(null);
+  const thanksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    mountedAt.current = Date.now();
+    renderedAt.current = Date.now();
+    captureAttribution();
   }, []);
 
-  const preselect = service && FORM_SERVICE_OPTIONS.includes(service) ? service : "";
+  useEffect(() => {
+    if (done) thanksRef.current?.focus();
+  }, [done]);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("submitting");
-    setError("");
+  function clearError(field: LeadField) {
+    setErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+  }
 
-    const fd = new FormData(e.currentTarget);
-    const get = (k: string) => String(fd.get(k) ?? "");
+  function toggleService(service: string) {
+    setServices((current) => (current.includes(service) ? current.filter((item) => item !== service) : [...current, service]));
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (sending) return;
+    setFormError("");
+
+    captureAttribution();
+    const attribution = readAttribution();
     const payload = {
-      name: get("name"),
-      phone: get("phone"),
-      email: get("email"),
-      service: get("service"),
-      location: get("location"),
-      address: get("address"),
-      message: get("message"),
-      heard: get("heard"),
-      context_service: service ?? "",
-      context_city: city ?? "",
-      page: typeof window !== "undefined" ? window.location.pathname : "",
-      [HONEYPOT_FIELD]: get(HONEYPOT_FIELD),
-      [ELAPSED_FIELD]: mountedAt.current ? String(Date.now() - mountedAt.current) : "",
+      name,
+      email,
+      phone,
+      heard_from: heardFrom,
+      heard_detail: heardDetail,
+      services,
+      street: compact ? "" : street,
+      city,
+      state,
+      zip: compact ? "" : zip,
+      message,
+      page_url: window.location.href,
+      referrer: document.referrer,
+      ...attribution,
+      company_website: honeypot.current?.value ?? "",
+      rendered_at: renderedAt.current,
     };
 
+    const parsed = quoteLeadSchema.safeParse(payload);
+    if (!parsed.success) {
+      const next = leadFieldErrors(parsed.error);
+      setErrors(next);
+      focusFirst(next);
+      return;
+    }
+
+    setSending(true);
     try {
       const res = await fetch("/api/lead/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const json = (await res.json().catch(() => ({}))) as { error?: string };
-      if (!res.ok) throw new Error(json.error || "Something went wrong sending your request.");
+      const json = (await res.json().catch(() => ({}))) as { fieldErrors?: Errors };
+      if (!res.ok) {
+        if (json.fieldErrors && Object.keys(json.fieldErrors).length > 0) {
+          setErrors(json.fieldErrors);
+          focusFirst(json.fieldErrors);
+          setSending(false);
+          return;
+        }
+        throw new Error("send");
+      }
 
-      const w = window as unknown as { gtag?: (...args: unknown[]) => void };
-      w.gtag?.("event", "generate_lead", { form: "estimate", service: payload.service, city: payload.context_city });
-      setStatus("done");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong sending your request.");
-      setStatus("idle");
+      const human = !(honeypot.current?.value ?? "").trim() && renderedAt.current > 0 && Date.now() - renderedAt.current >= 3000;
+      if (human) {
+        const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({
+          event: "generate_lead",
+          form_id: "quote",
+          lead_services: parsed.data.services,
+          page_path: window.location.pathname,
+        });
+      }
+      setDone(true);
+    } catch {
+      setFormError(FAILURE);
+      setSending(false);
     }
   }
 
-  if (status === "done") {
+  if (done) {
     return (
-      <div className="rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-lg">
-        <CircleCheck className="mx-auto h-14 w-14 text-brand" aria-hidden />
-        <h3 className="mt-4 font-display text-2xl font-bold text-gray-900">Request received</h3>
-        <p className="mt-3 text-gray-600">
-          Thank you. We respond the same day and will have your itemized estimate to you within 1 business day.
-        </p>
-        <p className="mt-4 text-gray-600">
-          Need us sooner? Call{" "}
-          <a href={PHONE_HREF} className="font-semibold text-brand hover:underline">
-            {PHONE}
-          </a>
-          .
-        </p>
-      </div>
+      <section id="quote" className="scroll-mt-28">
+        <div
+          ref={thanksRef}
+          tabIndex={-1}
+          role="status"
+          className="rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-lg outline-none"
+        >
+          <p className="text-lg text-gray-800">
+            Thanks, {firstName(name)}. We got your request and will reach out within one business day. Need help sooner? Call{" "}
+            <a href={PHONE_HREF} className="font-semibold text-brand hover:underline">
+              {PHONE}
+            </a>
+            .
+          </p>
+        </div>
+      </section>
     );
   }
 
+  const invalid = (field: LeadField) => (errors[field] ? true : undefined);
+  const described = (field: LeadField) => (errors[field] ? `${FIELD_IDS[field]}-error` : undefined);
+
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-lg sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="qf-name" className={labelClass}>Name *</label>
-          <input id="qf-name" name="name" type="text" required autoComplete="name" className={inputClass} />
+    <section id="quote" className="scroll-mt-28" aria-labelledby={heading ? "quote-heading" : undefined}>
+      <form onSubmit={onSubmit} noValidate className="rounded-2xl border border-gray-100 bg-white p-6 shadow-lg sm:p-8">
+        {heading ? (
+          <h2 id="quote-heading" className="mb-5 font-display text-2xl font-bold text-gray-900">
+            {heading}
+          </h2>
+        ) : null}
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div>
+            <RequiredLabel htmlFor={FIELD_IDS.name}>Name</RequiredLabel>
+            <input
+              id={FIELD_IDS.name}
+              name="name"
+              type="text"
+              required
+              autoComplete="name"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+                clearError("name");
+              }}
+              aria-invalid={invalid("name")}
+              aria-describedby={described("name")}
+              className={inputClass}
+            />
+            <FieldError id={FIELD_IDS.name} error={errors.name} />
+          </div>
+          <div>
+            <RequiredLabel htmlFor={FIELD_IDS.email}>Email</RequiredLabel>
+            <input
+              id={FIELD_IDS.email}
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                clearError("email");
+              }}
+              aria-invalid={invalid("email")}
+              aria-describedby={described("email")}
+              className={inputClass}
+            />
+            <FieldError id={FIELD_IDS.email} error={errors.email} />
+          </div>
+          <div>
+            <RequiredLabel htmlFor={FIELD_IDS.phone}>Phone</RequiredLabel>
+            <input
+              id={FIELD_IDS.phone}
+              name="phone"
+              type="tel"
+              required
+              inputMode="tel"
+              autoComplete="tel"
+              placeholder="(999) 999-9999"
+              value={phone}
+              onChange={(event) => {
+                setPhone(formatPhone(event.target.value));
+                clearError("phone");
+              }}
+              aria-invalid={invalid("phone")}
+              aria-describedby={described("phone")}
+              className={inputClass}
+            />
+            <FieldError id={FIELD_IDS.phone} error={errors.phone} />
+          </div>
+          <div>
+            <RequiredLabel htmlFor={FIELD_IDS.heard_from}>How did you hear about us?</RequiredLabel>
+            <select
+              id={FIELD_IDS.heard_from}
+              name="heard_from"
+              required
+              value={heardFrom}
+              onChange={(event) => {
+                setHeardFrom(event.target.value);
+                clearError("heard_from");
+              }}
+              aria-invalid={invalid("heard_from")}
+              aria-describedby={described("heard_from")}
+              className={inputClass}
+            >
+              <option value="">Select one</option>
+              {HEARD_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <FieldError id={FIELD_IDS.heard_from} error={errors.heard_from} />
+          </div>
+          <div className="sm:col-span-2">
+            <label htmlFor={FIELD_IDS.heard_detail} className={labelClass}>
+              Tell us more (optional)
+            </label>
+            <input
+              id={FIELD_IDS.heard_detail}
+              name="heard_detail"
+              type="text"
+              autoComplete="off"
+              value={heardDetail}
+              onChange={(event) => {
+                setHeardDetail(event.target.value);
+                clearError("heard_detail");
+              }}
+              aria-invalid={invalid("heard_detail")}
+              aria-describedby={described("heard_detail")}
+              className={inputClass}
+            />
+            <FieldError id={FIELD_IDS.heard_detail} error={errors.heard_detail} />
+          </div>
         </div>
-        <div>
-          <label htmlFor="qf-phone" className={labelClass}>Phone *</label>
-          <input id="qf-phone" name="phone" type="tel" required autoComplete="tel" inputMode="tel" className={inputClass} />
-        </div>
-        <div>
-          <label htmlFor="qf-email" className={labelClass}>Email</label>
-          <input id="qf-email" name="email" type="email" autoComplete="email" className={inputClass} />
-        </div>
-        <div>
-          <label htmlFor="qf-service" className={labelClass}>Service needed</label>
-          <select id="qf-service" name="service" defaultValue={preselect} className={inputClass}>
-            <option value="">Select a service</option>
-            {FORM_SERVICE_OPTIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
+
+        <fieldset className="mt-5">
+          <legend className={labelClass}>Services I&apos;m interested in</legend>
+          <div className={compact ? "mt-3 grid grid-cols-2 gap-2" : "mt-3 grid gap-2 sm:grid-cols-2"}>
+            {QUOTE_SERVICES.map((service) => (
+              <label key={service} className="flex items-start gap-2 text-sm text-gray-800">
+                <input
+                  type="checkbox"
+                  name="services"
+                  value={service}
+                  checked={services.includes(service)}
+                  onChange={() => toggleService(service)}
+                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-brand focus:ring-brand"
+                />
+                <span>{service}</span>
+              </label>
             ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="qf-location" className={labelClass}>City or ZIP *</label>
-          <input id="qf-location" name="location" type="text" required defaultValue={city ?? ""} autoComplete="address-level2" className={inputClass} />
-        </div>
-        <div>
-          <label htmlFor="qf-address" className={labelClass}>Property address</label>
-          <input id="qf-address" name="address" type="text" autoComplete="street-address" className={inputClass} />
-        </div>
-        <div className="sm:col-span-2">
-          <label htmlFor="qf-message" className={labelClass}>How can we help? *</label>
+          </div>
+        </fieldset>
+
+        {compact ? null : (
+          <fieldset className="mt-5">
+            <legend className={labelClass}>Address</legend>
+            <div className="mt-3 grid gap-5 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <label htmlFor={FIELD_IDS.street} className={labelClass}>
+                  Street
+                </label>
+                <input
+                  id={FIELD_IDS.street}
+                  name="street"
+                  type="text"
+                  autoComplete="street-address"
+                  value={street}
+                  onChange={(event) => {
+                    setStreet(event.target.value);
+                    clearError("street");
+                  }}
+                  aria-invalid={invalid("street")}
+                  aria-describedby={described("street")}
+                  className={inputClass}
+                />
+                <FieldError id={FIELD_IDS.street} error={errors.street} />
+              </div>
+              <div>
+                <label htmlFor={FIELD_IDS.city} className={labelClass}>
+                  City
+                </label>
+                <input
+                  id={FIELD_IDS.city}
+                  name="city"
+                  type="text"
+                  autoComplete="address-level2"
+                  value={city}
+                  onChange={(event) => {
+                    setCity(event.target.value);
+                    clearError("city");
+                  }}
+                  aria-invalid={invalid("city")}
+                  aria-describedby={described("city")}
+                  className={inputClass}
+                />
+                <FieldError id={FIELD_IDS.city} error={errors.city} />
+              </div>
+              <div>
+                <label htmlFor={FIELD_IDS.state} className={labelClass}>
+                  State
+                </label>
+                <select
+                  id={FIELD_IDS.state}
+                  name="state"
+                  autoComplete="address-level1"
+                  value={state}
+                  onChange={(event) => {
+                    setState(event.target.value);
+                    clearError("state");
+                  }}
+                  aria-invalid={invalid("state")}
+                  aria-describedby={described("state")}
+                  className={inputClass}
+                >
+                  <option value="">State</option>
+                  {US_STATES.map(([abbr, stateName]) => (
+                    <option key={abbr} value={abbr}>
+                      {stateName}
+                    </option>
+                  ))}
+                </select>
+                <FieldError id={FIELD_IDS.state} error={errors.state} />
+              </div>
+              <div>
+                <label htmlFor={FIELD_IDS.zip} className={labelClass}>
+                  ZIP
+                </label>
+                <input
+                  id={FIELD_IDS.zip}
+                  name="zip"
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="postal-code"
+                  value={zip}
+                  onChange={(event) => {
+                    setZip(event.target.value);
+                    clearError("zip");
+                  }}
+                  aria-invalid={invalid("zip")}
+                  aria-describedby={described("zip")}
+                  className={inputClass}
+                />
+                <FieldError id={FIELD_IDS.zip} error={errors.zip} />
+              </div>
+            </div>
+          </fieldset>
+        )}
+
+        <div className="mt-5">
+          <RequiredLabel htmlFor={FIELD_IDS.message}>How can we help you?</RequiredLabel>
           <textarea
-            id="qf-message"
+            id={FIELD_IDS.message}
             name="message"
             required
-            rows={4}
-            placeholder="Tell us what's going on: what needs fixing, where it is, and anything we should know about access."
+            rows={5}
+            maxLength={2000}
+            value={message}
+            onChange={(event) => {
+              setMessage(event.target.value);
+              clearError("message");
+            }}
+            aria-invalid={invalid("message")}
+            aria-describedby={described("message")}
             className={inputClass}
           />
+          <div className="mt-1 flex items-start justify-between gap-3">
+            <FieldError id={FIELD_IDS.message} error={errors.message} />
+            <p className="ml-auto text-xs text-gray-500">{message.length} / 2000</p>
+          </div>
         </div>
-        <div className="sm:col-span-2">
-          <label htmlFor="qf-heard" className={labelClass}>How did you hear about us?</label>
-          <select id="qf-heard" name="heard" defaultValue="" className={inputClass}>
-            <option value="">Select one</option>
-            {HEARD_OPTIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
+
+        <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+          <label htmlFor="company_website">Company website</label>
+          <input id="company_website" name="company_website" type="text" tabIndex={-1} autoComplete="off" ref={honeypot} />
         </div>
-      </div>
 
-      {/* Honeypot: hidden from people, filled by bots. */}
-      <div className="absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden>
-        <label htmlFor="qf-company-site">Company website</label>
-        <input id="qf-company-site" name={HONEYPOT_FIELD} type="text" tabIndex={-1} autoComplete="off" />
-      </div>
+        {formError ? (
+          <p role="alert" className="mt-5 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+            Something went wrong sending your request. Please call{" "}
+            <a href={PHONE_HREF} className="font-semibold underline">
+              {PHONE}
+            </a>{" "}
+            or try again.
+          </p>
+        ) : null}
 
-      {error ? (
-        <p role="alert" className="mt-5 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
-          {error}
-          {error.includes(PHONE) ? null : (
-            <>
-              {" "}
-              <a href={PHONE_HREF} className="font-semibold underline">Call {PHONE}</a>
-            </>
-          )}
+        <button
+          type="submit"
+          disabled={sending}
+          aria-busy={sending}
+          className="mt-6 w-full rounded-xl bg-accent px-8 py-4 text-lg font-bold text-gray-950 shadow-md transition-all hover:bg-accent-light hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {sending ? "Sending…" : "Submit"}
+        </button>
+        <p className="mt-3 text-center text-sm text-gray-600">
+          Or call{" "}
+          <a href={PHONE_HREF} className="font-semibold text-brand hover:underline">
+            {PHONE}
+          </a>{" "}
+          in Portland or{" "}
+          <a href={PHONE_WA_HREF} className="font-semibold text-brand hover:underline">
+            {PHONE_WA}
+          </a>{" "}
+          in Vancouver.
         </p>
-      ) : null}
-
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="mt-6 w-full rounded-xl bg-accent px-8 py-4 text-lg font-bold text-gray-950 shadow-md transition-all hover:bg-accent-light hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {status === "submitting" ? "Sending…" : "Get My Free Estimate"}
-      </button>
-      <p className="mt-3 text-center text-xs text-gray-500">Free, itemized, no obligation. We respond the same day.</p>
-    </form>
+      </form>
+    </section>
   );
 }
