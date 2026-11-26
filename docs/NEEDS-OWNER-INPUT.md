@@ -41,7 +41,7 @@ Drafts live in `src/data/guides/drafts.ts` and are not built until reviewed:
 
 ## Local and language
 
-- [ ] Native-speaker reviewers for the Russian, Ukrainian and Spanish pages.
+- [ ] Native-speaker reviewers for the Russian (`/ru/`), Ukrainian (`/uk/`), and Spanish (`/es/`) pages. When approved, set `reviewed: true` on each entry in `src/data/languages.ts` (enables index + sitemap).
 - [ ] ZIP codes served (add rows to `SERVICE_ZIPS` in `src/data/city-local.ts` — table on `/service-areas/` stays hidden until then).
 - [ ] Per city: neighborhoods worked in most and any local facts the crew knows.
 - [ ] Confirm or correct Stage 6 `localNotes` for the first ten cities (Vancouver → Hillsboro) in `src/data/city-local.ts`.

@@ -15,6 +15,7 @@ import ServiceAreas from "@/components/ServiceAreas";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { pageDate } from "@/data/content-dates";
+import { hreflangLanguages } from "@/data/languages";
 import { cityPath } from "@/lib/cities";
 import { absoluteUrl } from "@/lib/constants";
 import { HOME_FAQS } from "@/lib/faqs";
@@ -22,7 +23,10 @@ import { REVIEWS } from "@/lib/reviews";
 import { breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: hreflangLanguages(),
+  },
 };
 
 const HOME_PAGE_FAQS = HOME_FAQS.slice(0, 10);

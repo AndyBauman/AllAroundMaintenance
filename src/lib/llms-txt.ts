@@ -2,6 +2,7 @@ import { business, profileUrls } from "@/data/business";
 import { SITE_NAME, LEGAL_NAME, PHONE, PHONE_WA, LICENSE_LINE, ESTIMATE_PATH, absoluteUrl } from "./constants";
 import { FACTS, estimateText, languagesText, mossGuaranteeText, schedulingText } from "./business-facts";
 import { publishedGuides } from "@/data/guides";
+import { LANGUAGE_PAGES } from "@/data/languages";
 import { CITIES, ROOF_CITY_SLUGS, cityLabel, cityPath, getCity, roofCityPath } from "./cities";
 import { SERVICES } from "./services";
 
@@ -19,6 +20,7 @@ export function buildLlmsTxt(): string {
     `- Founded: ${business.founded} by ${business.founder.name}`,
     `- Licenses: ${LICENSE_LINE}`,
     `- Languages: ${languagesText()}`,
+    `- Language pages: ${LANGUAGE_PAGES.map((p) => `[${p.englishName}](${absoluteUrl(p.path)})`).join(", ")} (noindex until native-speaker review)`,
     `- ${estimateText()}`,
     `- ${schedulingText()}`,
     `- Moss removal guarantee: ${mossGuaranteeText()}`,

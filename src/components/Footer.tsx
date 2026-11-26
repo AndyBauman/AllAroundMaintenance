@@ -15,6 +15,7 @@ import {
   PHONE_WA_HREF,
   SOCIAL,
 } from "@/lib/constants";
+import { LANGUAGE_PAGES } from "@/data/languages";
 import { CREDENTIALS } from "@/lib/business-facts";
 import { CITIES, cityLabel, cityPath } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
@@ -160,9 +161,28 @@ export default function Footer() {
           <p className="text-sm text-gray-400">
             &copy; {year} {LEGAL_NAME} All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-6 text-sm">
-            <Link href="/service-areas" className="text-gray-300 transition-colors hover:text-white">Sitemap</Link>
-            <Link href={ESTIMATE_PATH} className="text-gray-300 transition-colors hover:text-white">Contact</Link>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+            <nav aria-label="Language" className="flex flex-wrap gap-3">
+              <Link href="/" className="text-gray-300 transition-colors hover:text-white" hrefLang="en">
+                English
+              </Link>
+              {LANGUAGE_PAGES.map((p) => (
+                <Link
+                  key={p.code}
+                  href={p.path}
+                  className="text-gray-300 transition-colors hover:text-white"
+                  hrefLang={p.htmlLang}
+                >
+                  {p.nativeName}
+                </Link>
+              ))}
+            </nav>
+            <Link href="/service-areas" className="text-gray-300 transition-colors hover:text-white">
+              Sitemap
+            </Link>
+            <Link href={ESTIMATE_PATH} className="text-gray-300 transition-colors hover:text-white">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

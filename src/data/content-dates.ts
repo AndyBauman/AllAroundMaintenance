@@ -15,10 +15,11 @@ const STAGE_3 = "2026-11-26";
 const STAGE_4 = "2026-11-26";
 const STAGE_5 = "2026-11-26";
 const STAGE_6 = "2026-11-26";
+const STAGE_7 = "2026-11-26";
 
 const OVERRIDES: Record<string, string> = {
   "/": STAGE_1,
-  "/about-us": STAGE_1,
+  "/about-us": STAGE_7,
   "/services": STAGE_1,
   "/free-estimate": STAGE_1,
   "/faq": BASELINE,
@@ -26,6 +27,9 @@ const OVERRIDES: Record<string, string> = {
   "/reviews": STAGE_3,
   "/projects": STAGE_3,
   "/guides": STAGE_5,
+  "/ru": STAGE_7,
+  "/uk": STAGE_7,
+  "/es": STAGE_7,
 };
 
 /** Service pages refreshed in Stage 4 (answer blocks / pricing / FAQs). */

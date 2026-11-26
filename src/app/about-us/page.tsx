@@ -11,6 +11,7 @@ import JsonLd from "@/components/JsonLd";
 import LastUpdated from "@/components/LastUpdated";
 import { business, hasPublicAddress, hoursDisplayLines } from "@/data/business";
 import { pageDate } from "@/data/content-dates";
+import { LANGUAGE_PAGES } from "@/data/languages";
 import { hasPublicFile } from "@/lib/assets";
 import { absoluteUrl, LEGAL_NAME, PHONE, PHONE_WA } from "@/lib/constants";
 import { FACTS, languagesText, paymentText } from "@/lib/business-facts";
@@ -82,6 +83,16 @@ function companyFactRows(): [string, ReactNode][] {
   if (hours.length) rows.push(["Hours", hours.join("; ")]);
 
   rows.push(["Languages", languagesText()]);
+  rows.push([
+    "Language pages",
+    <span key="lang-pages" className="inline-flex flex-wrap justify-end gap-x-3 gap-y-1">
+      {LANGUAGE_PAGES.map((p) => (
+        <Link key={p.code} href={p.path} className="text-brand hover:underline" hrefLang={p.htmlLang}>
+          {p.nativeName}
+        </Link>
+      ))}
+    </span>,
+  ]);
   rows.push(["Portland phone", PHONE]);
   rows.push(["Vancouver phone", PHONE_WA]);
   if (business.email.trim()) rows.push(["Email", business.email.trim()]);
