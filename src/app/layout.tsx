@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
+import AttributionCapture from "@/components/AttributionCapture";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             />
           </noscript>
         ) : null}
+        <AttributionCapture />
         <JsonLd data={siteWideGraphSchema()} />
         <Header logo={<Logo />} />
         {children}

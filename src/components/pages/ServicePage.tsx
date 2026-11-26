@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, CircleCheck, Phone } from "lucide-react";
+import { checkboxServicesForSlug } from "@/lib/lead";
 import { DEFAULT_SERVICE_PROCESS, SERVICES, getServiceBySlug } from "@/lib/services";
 import { absoluteUrl, LEAD_FORM_ENABLED, PHONE, PHONE_HREF } from "@/lib/constants";
 import { serviceSchema } from "@/lib/schema";
@@ -124,7 +125,7 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
         </div>
       </section>
 
-      <section id="quote" className="bg-surface py-16 sm:py-20">
+      <section className="bg-surface py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-2">
             <div>
@@ -147,7 +148,7 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
                 </div>
               )}
             </div>
-            <LeadCapture />
+            <LeadCapture compact defaultServices={checkboxServicesForSlug(svc.slug)} />
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 # All Around Maintenance Inc. website
 
-Marketing site for **allaroundmaintenanceinc.com**. Static Next.js (App Router) on Vercel. **No database.**
+Marketing site for **allaroundmaintenanceinc.com**. Next.js (App Router) on Vercel.
 Built on the same structure and practices as the RemoveScrap site: data files drive the pages, one
 `business-facts.ts` is the source of truth for claims, and every page ships JSON-LD.
 
@@ -32,27 +32,26 @@ schema and `llms.txt` line are generated from it.
 
 ## Pages (59 indexable URLs)
 
-- `/` home, `/services`, `/service-areas`, `/about-us`, `/faq`, `/free-estimate` (call-first contact page)
+- `/` home, `/services`, `/service-areas`, `/about-us`, `/faq`, `/free-estimate` (quote form)
 - 25 service pages at their **original slugs** (e.g. `/gutter-repair-portland/`)
 - 35 city pages (`/{city}-home-maintenance/`) and 5 roof-city pages (`/roof-maintenance-{city}/`)
 - `/sitemap.xml`, `/robots.txt`, `/llms.txt`
 
 `trailingSlash: true` matches the old WordPress URLs exactly, so existing indexed URLs resolve with no redirect.
 
-## Contact: call-first (online form is switched off)
+## Quote form
 
-The site launches **without a contact form or email system**. Every place a form would go shows a
-call card with both phone lines instead, and `/api/lead` answers 404.
+The form is on the home page, service pages, city pages, and `/free-estimate`. It posts to
+`/api/lead/`. Titles, meta descriptions, H1s, canonicals, and FAQ JSON-LD stay call-first until
+`LEAD_FORM_ENABLED` in `src/lib/constants.ts` is set to true.
 
-The form and its email delivery are already built and tested, just switched off. To turn them on later:
+A request is saved when `SUPABASE_URL` is set with either `SUPABASE_SERVICE_ROLE_KEY`, or
+`SUPABASE_PUBLISHABLE_KEY` plus `LEAD_DB_SECRET`. It is emailed when `RESEND_API_KEY`,
+`LEAD_TO_EMAIL`, and `LEAD_FROM_EMAIL` are set. `NOTIFY_EMAIL` and `RESEND_FROM` are used when
+the `LEAD_*` email names are unset. Apply both files in `supabase/migrations` before relying on
+the publishable-key path. Do not drop any existing table.
 
-1. Set `LEAD_FORM_ENABLED` to `true` in `src/lib/constants.ts`.
-2. Add `RESEND_API_KEY` and `NOTIFY_EMAIL` in Vercel → Settings → Environment Variables
-   (`RESEND_FROM` optional, for a verified sender).
-3. Redeploy. Pages, FAQs and CTA copy all switch over from that one flag.
-
-When on, the form posts to `src/app/api/lead/route.ts`, which validates, drops bots
-(honeypot + minimum fill time) and emails the lead through Resend. No database.
+The route saves the lead first, then emails it. If neither is configured, the visitor is told to call.
 
 ## Drop-in assets
 
