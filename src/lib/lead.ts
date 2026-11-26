@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { detectSpam } from "@/lib/spam-guard";
 
-/** Gravity Forms options, in the original order. */
-export const HEARD_OPTIONS = ["Google", "KVN Referral", "Word of Mouth Referral", "Other"] as const;
+/** How the visitor found the company. Referral reveals a name-or-code field. */
+export const HEARD_OPTIONS = ["Google", "Facebook", "Referral", "Word of Mouth Referral", "Other"] as const;
+export const REFERRAL_HEARD = "Referral";
 
 export const QUOTE_SERVICES = [
   "HOA Services",
@@ -173,6 +174,7 @@ export const quoteLeadSchema = z.object({
     z.string().refine((value) => value.replace(/\D/g, "").length === 10, "Enter a 10-digit phone number."),
   ),
   heard_from: z.preprocess(asText, z.string().refine((value) => HEARD.has(value), "Select how you heard about us.")),
+  referral: optionalText(200, "Keep this to 200 characters."),
   heard_detail: optionalText(200, "Keep this to 200 characters."),
   services: z.preprocess(
     (value) => (Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : []),
@@ -218,11 +220,21 @@ export const quoteLeadSchema = z.object({
     const number = typeof value === "number" ? value : typeof value === "string" ? Number(value) : Number.NaN;
     return Number.isFinite(number) ? number : null;
   }, z.number().nullable()),
-});
+}).superRefine((value, ctx) => {
+  if (value.heard_from === REFERRAL_HEARD && !value.referral) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["referral"], message: "Enter the referral or referral code." });
+  }
+}).transform(({ referral, heard_detail, ...lead }) => ({
+  ...lead,
+  heard_detail:
+    lead.heard_from === REFERRAL_HEARD
+      ? [referral, heard_detail].filter(Boolean).join(" — ") || null
+      : heard_detail,
+}));
 
 export type QuoteLead = z.infer<typeof quoteLeadSchema>;
 
-export const LEAD_FIELDS = ["name", "email", "phone", "heard_from", "heard_detail", "street", "city", "state", "zip", "message"] as const;
+export const LEAD_FIELDS = ["name", "email", "phone", "heard_from", "referral", "heard_detail", "street", "city", "state", "zip", "message"] as const;
 export type LeadField = (typeof LEAD_FIELDS)[number];
 
 export function leadFieldErrors(error: z.ZodError): Partial<Record<LeadField, string>> {

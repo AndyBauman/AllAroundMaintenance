@@ -66,7 +66,7 @@ function emailText(lead: StoredLead): string {
     line("Email", lead.email),
     line("Phone", lead.phone),
     line("Heard", lead.heard_from),
-    line("Heard detail", lead.heard_detail),
+    line(lead.heard_from === "Referral" ? "Referral" : "Heard detail", lead.heard_detail),
     line("Services", lead.services.length ? lead.services.join(", ") : null),
     line("Street", lead.street),
     line("City", lead.city),

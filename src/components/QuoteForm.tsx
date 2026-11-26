@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "rea
 import { PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import {
   HEARD_OPTIONS,
+  REFERRAL_HEARD,
   QUOTE_SERVICES,
   US_STATES,
   captureAttribution,
@@ -24,6 +25,7 @@ const FIELD_IDS: Record<LeadField, string> = {
   email: "qf-email",
   phone: "qf-phone",
   heard_from: "qf-heard",
+  referral: "qf-referral",
   heard_detail: "qf-heard-detail",
   street: "qf-street",
   city: "qf-city",
@@ -78,6 +80,7 @@ export default function QuoteForm({
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [heardFrom, setHeardFrom] = useState("");
+  const [referral, setReferral] = useState("");
   const [heardDetail, setHeardDetail] = useState("");
   const [services, setServices] = useState<string[]>(starting);
   const [street, setStreet] = useState("");
@@ -129,6 +132,7 @@ export default function QuoteForm({
       email,
       phone,
       heard_from: heardFrom,
+      referral: heardFrom === REFERRAL_HEARD ? referral : "",
       heard_detail: heardDetail,
       services,
       street: compact ? "" : street,
@@ -288,8 +292,11 @@ export default function QuoteForm({
               required
               value={heardFrom}
               onChange={(event) => {
-                setHeardFrom(event.target.value);
+                const next = event.target.value;
+                setHeardFrom(next);
+                if (next !== REFERRAL_HEARD) setReferral("");
                 clearError("heard_from");
+                clearError("referral");
               }}
               aria-invalid={invalid("heard_from")}
               aria-describedby={described("heard_from")}
@@ -304,6 +311,28 @@ export default function QuoteForm({
             </select>
             <FieldError id={FIELD_IDS.heard_from} error={errors.heard_from} />
           </div>
+          {heardFrom === REFERRAL_HEARD ? (
+            <div className="sm:col-span-2">
+              <RequiredLabel htmlFor={FIELD_IDS.referral}>Referral or referral code</RequiredLabel>
+              <input
+                id={FIELD_IDS.referral}
+                name="referral"
+                type="text"
+                required
+                autoComplete="off"
+                placeholder="Name or code"
+                value={referral}
+                onChange={(event) => {
+                  setReferral(event.target.value);
+                  clearError("referral");
+                }}
+                aria-invalid={invalid("referral")}
+                aria-describedby={described("referral")}
+                className={inputClass}
+              />
+              <FieldError id={FIELD_IDS.referral} error={errors.referral} />
+            </div>
+          ) : null}
           <div className="sm:col-span-2">
             <label htmlFor={FIELD_IDS.heard_detail} className={labelClass}>
               Tell us more (optional)
