@@ -6,8 +6,11 @@ import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import Hero from "@/components/Hero";
 import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import OfferStack from "@/components/OfferStack";
 import Process from "@/components/Process";
+import ReviewGrid from "@/components/ReviewGrid";
+import ReviewRatingLine from "@/components/ReviewRatingLine";
 import ServiceAreas from "@/components/ServiceAreas";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -15,6 +18,7 @@ import { pageDate } from "@/data/content-dates";
 import { cityPath } from "@/lib/cities";
 import { absoluteUrl } from "@/lib/constants";
 import { HOME_FAQS } from "@/lib/faqs";
+import { REVIEWS } from "@/lib/reviews";
 import { breadcrumbSchema, serviceSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -82,9 +86,12 @@ export default function Home() {
       <OfferStack />
       <AudienceBands />
       <ServiceAreas />
+      <ReviewRatingLine className="mx-auto max-w-7xl px-4 pb-2 text-center text-sm text-gray-600 sm:px-6 lg:px-8" />
+      <ReviewGrid reviews={REVIEWS} heading="Customer reviews" limit={6} />
       <FAQJsonLd faqs={HOME_PAGE_FAQS} />
       <FAQSection faqs={HOME_PAGE_FAQS} heading="Home Maintenance FAQ: Portland & Vancouver" />
       <Contact />
+      <LastUpdated date={pageDate("/")} />
     </main>
   );
 }

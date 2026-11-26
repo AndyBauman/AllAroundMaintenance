@@ -18,7 +18,8 @@ Source: `docs/AAM-SEO-GEO-AEO.md` §9 (2026-11-26).
 - [ ] 15 to 25 Google reviews exported as written, each tagged with service and city.
 - [ ] Price guide per service (from, typical range, minimum, what moves the price), approved by Alex.
 - [ ] `docs/project-intake.csv` filled in for the first 20 photo sets.
-- [ ] Confirmation that Alex reviews service pages and guides, for the "Reviewed by" line.
+- [ ] Confirmation that Alex reviews service pages and guides, for the "Reviewed by" line. (Set `business.founderReviewsContent = true` in `src/data/business.ts` when confirmed.)
+- [ ] After filling `docs/project-intake.csv`, approve which sets become `/projects/{slug}/` pages (and which photo replaces the homepage hero).
 
 ## Local and language
 

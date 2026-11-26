@@ -9,14 +9,22 @@ import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FAQSection from "@/components/FAQSection";
 import FAQJsonLd from "@/components/FAQJsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import LeadCapture from "@/components/LeadCapture";
+import ReviewGrid from "@/components/ReviewGrid";
 import ServiceIcon from "@/components/ServiceIcon";
+import { pageDate } from "@/data/content-dates";
+import { reviewsForService } from "@/lib/reviews";
+import { projectsForService } from "@/lib/projects";
 
 export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
   const svc = getServiceBySlug(serviceSlug)!;
   const steps = svc.process ?? DEFAULT_SERVICE_PROCESS;
   const related = svc.related.map((s) => SERVICES.find((x) => x.slug === s)).filter((x) => x !== undefined);
   const faqs = serviceFaqs(svc);
+  const reviews = reviewsForService(svc.shortTitle);
+  const projects = projectsForService(svc.slug);
+  const updated = pageDate(`/${svc.slug}`);
 
   return (
     <main>
@@ -153,9 +161,33 @@ export default function ServicePage({ serviceSlug }: { serviceSlug: string }) {
         </div>
       </section>
 
+      <ReviewGrid reviews={reviews} heading={`${svc.shortTitle} reviews`} limit={3} />
+
+      {projects.length > 0 ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold text-gray-900">Recent {svc.shortTitle} projects</h2>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+              {projects.slice(0, 4).map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/projects/${p.slug}/`} className="font-semibold text-brand hover:underline">
+                    {p.title}
+                  </Link>
+                  <span className="text-sm text-gray-600">
+                    {" "}
+                    · {p.city}, {p.state}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       {/* Shared questions repeat across pages, so only this service's own are marked up. */}
       <FAQJsonLd faqs={svc.faqs} />
       <FAQSection faqs={faqs} heading={`${svc.shortTitle} FAQ`} />
+      <LastUpdated date={updated} />
     </main>
   );
 }

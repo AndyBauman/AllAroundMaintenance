@@ -11,6 +11,8 @@ const BASELINE = "2026-11-13";
 /** Paths touched in Stage 1 (facts / schema / footer / about). */
 const STAGE_1 = business.contentUpdated;
 
+const STAGE_3 = "2026-11-26";
+
 const OVERRIDES: Record<string, string> = {
   "/": STAGE_1,
   "/about-us": STAGE_1,
@@ -18,6 +20,8 @@ const OVERRIDES: Record<string, string> = {
   "/free-estimate": STAGE_1,
   "/faq": BASELINE,
   "/service-areas": BASELINE,
+  "/reviews": STAGE_3,
+  "/projects": STAGE_3,
 };
 
 /** Normalize to `/path` without trailing slash (except home `/`). */

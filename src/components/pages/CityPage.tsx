@@ -11,8 +11,13 @@ import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import LeadCapture from "@/components/LeadCapture";
+import ReviewGrid from "@/components/ReviewGrid";
 import ServiceIcon from "@/components/ServiceIcon";
+import { pageDate } from "@/data/content-dates";
+import { projectsForCity } from "@/lib/projects";
+import { reviewsForCity } from "@/lib/reviews";
 
 const TRUST = [
   { stat: "Since 1999", label: "Family-Owned" },
@@ -41,6 +46,9 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
   const hasRoofPage = (ROOF_CITY_SLUGS as readonly string[]).includes(city.slug);
   const areasHeading =
     city.kind === "county" ? `Communities We Serve in ${city.name}` : `Neighborhoods We Serve in ${city.name}`;
+  const reviews = reviewsForCity(city.name);
+  const projects = projectsForCity(city.name);
+  const updated = pageDate(path);
 
   return (
     <main>
@@ -248,8 +256,28 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         </div>
       </section>
 
+      <ReviewGrid reviews={reviews} heading={`Reviews from ${city.name}`} limit={3} />
+
+      {projects.length > 0 ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold text-gray-900">Projects in {city.name}</h2>
+            <ul className="mt-4 space-y-2">
+              {projects.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/projects/${p.slug}/`} className="font-semibold text-brand hover:underline">
+                    {p.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       <FAQJsonLd faqs={faqs} />
       <FAQSection faqs={faqs} heading={`${noun} FAQ: ${label}`} />
+      <LastUpdated date={updated} />
     </main>
   );
 }

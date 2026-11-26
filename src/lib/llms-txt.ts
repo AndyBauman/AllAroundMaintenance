@@ -31,6 +31,8 @@ export function buildLlmsTxt(): string {
     `- Website: ${absoluteUrl("/")}`,
     `- [Free estimate](${absoluteUrl(ESTIMATE_PATH)}): request a free itemized estimate`,
     `- [About](${absoluteUrl("/about-us")})`,
+    `- [Reviews](${absoluteUrl("/reviews")})`,
+    `- [Projects](${absoluteUrl("/projects")})`,
     `- [FAQ](${absoluteUrl("/faq")})`,
     `- [Service areas](${absoluteUrl("/service-areas")})`,
     ...profileUrls().map((url) => `- Profile: ${url}`),

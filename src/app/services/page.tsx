@@ -5,6 +5,7 @@ import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import ServiceIcon from "@/components/ServiceIcon";
 import { pageDate } from "@/data/content-dates";
 import { absoluteUrl } from "@/lib/constants";
@@ -88,6 +89,7 @@ export default function ServicesPage() {
 
       <FAQSection faqs={SERVICES_PAGE_FAQS} heading="Services FAQ" />
       <CtaBand />
+      <LastUpdated date={pageDate("/services")} />
     </main>
   );
 }

@@ -12,7 +12,7 @@ const PERMANENT_REDIRECTS: [string, string][] = [
   ["/quote", "/free-estimate/"],
   ["/residential-services", "/services/"],
   ["/sitemap", "/service-areas/"],
-  ["/reviews", "/about-us/"],
+  // /reviews is a live page again (Stage 3); do not redirect it.
   ["/resources", "/faq/"],
   ["/thank-you", "/"],
   ["/vancouver-wa", "/vancouver-home-maintenance/"],

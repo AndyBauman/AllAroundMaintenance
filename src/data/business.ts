@@ -18,6 +18,8 @@ export const business = {
     title: "Founder & Owner",
     url: "/about-us/",
   },
+  /** OWNER — set true only after Alex confirms he reviews service pages and guides. */
+  founderReviewsContent: false,
   phones: {
     or: "+15032092023",
     wa: "+13607720224",

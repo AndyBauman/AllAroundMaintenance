@@ -8,6 +8,7 @@ import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import { business, hasPublicAddress, hoursDisplayLines } from "@/data/business";
 import { pageDate } from "@/data/content-dates";
 import { hasPublicFile } from "@/lib/assets";
@@ -233,6 +234,7 @@ export default function AboutPage() {
         heading="Let's Take a Look"
         text="Tell us what's going on with the house. Estimates are free, itemized and come with no obligation."
       />
+      <LastUpdated date={pageDate("/about-us")} />
     </main>
   );
 }
