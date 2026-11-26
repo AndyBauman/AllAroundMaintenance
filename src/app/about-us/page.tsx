@@ -9,6 +9,7 @@ import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
 import { business, hasPublicAddress, hoursDisplayLines } from "@/data/business";
+import { pageDate } from "@/data/content-dates";
 import { hasPublicFile } from "@/lib/assets";
 import { absoluteUrl, LEGAL_NAME, PHONE, PHONE_WA } from "@/lib/constants";
 import { FACTS, languagesText, paymentText } from "@/lib/business-facts";
@@ -98,7 +99,7 @@ export default function AboutPage() {
           name: TITLE,
           description: DESCRIPTION,
           url: absoluteUrl("/about-us"),
-          dateModified: business.contentUpdated,
+          dateModified: pageDate("/about-us"),
         })}
       />
       <FAQJsonLd faqs={ABOUT_FAQS} />

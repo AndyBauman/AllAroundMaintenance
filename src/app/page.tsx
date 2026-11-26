@@ -11,7 +11,7 @@ import Process from "@/components/Process";
 import ServiceAreas from "@/components/ServiceAreas";
 import Services from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import { business } from "@/data/business";
+import { pageDate } from "@/data/content-dates";
 import { cityPath } from "@/lib/cities";
 import { absoluteUrl } from "@/lib/constants";
 import { HOME_FAQS } from "@/lib/faqs";
@@ -34,7 +34,7 @@ export default function Home() {
             description:
               "Family-owned since 1999. Roof, gutter, siding and deck repair plus home maintenance in Portland, OR & Vancouver, WA.",
             url: absoluteUrl("/"),
-            dateModified: business.contentUpdated,
+            dateModified: pageDate("/"),
           }),
           serviceSchema({
             name: "Home Maintenance and Repair",

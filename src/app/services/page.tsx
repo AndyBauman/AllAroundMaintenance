@@ -6,7 +6,7 @@ import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
-import { business } from "@/data/business";
+import { pageDate } from "@/data/content-dates";
 import { absoluteUrl } from "@/lib/constants";
 import { SERVICES_PAGE_FAQS } from "@/lib/faqs";
 import { webPageSchema } from "@/lib/schema";
@@ -32,7 +32,7 @@ export default function ServicesPage() {
           name: TITLE,
           description: DESCRIPTION,
           url: absoluteUrl("/services"),
-          dateModified: business.contentUpdated,
+          dateModified: pageDate("/services"),
         })}
       />
       <FAQJsonLd faqs={SERVICES_PAGE_FAQS} />

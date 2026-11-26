@@ -34,6 +34,9 @@ const TITLE = "Roof, Gutter, Siding & Deck Repair Portland & Vancouver | All Aro
 const DESCRIPTION =
   "Family-owned since 1999. Roof, gutter, siding and deck repair plus home maintenance in Portland, OR & Vancouver, WA. Free estimates: (503) 209-2023.";
 
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+const bingVerification = process.env.BING_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: TITLE, template: `%s | ${SITE_NAME}` },
@@ -43,6 +46,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  verification: {
+    ...(googleVerification ? { google: googleVerification } : {}),
+    ...(bingVerification ? { other: { "msvalidate.01": bingVerification } } : {}),
   },
   other: {
     // Shared pages serve both states; page-level geo meta is added where a single state applies.

@@ -5,7 +5,7 @@ import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
 import LeadCapture from "@/components/LeadCapture";
-import { business } from "@/data/business";
+import { pageDate } from "@/data/content-dates";
 import { absoluteUrl, LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { PROCESS_STEPS, paymentText } from "@/lib/business-facts";
 import { ESTIMATE_FAQS } from "@/lib/faqs";
@@ -31,7 +31,7 @@ export default function FreeEstimatePage() {
           name: TITLE,
           description: DESCRIPTION,
           url: absoluteUrl("/free-estimate"),
-          dateModified: business.contentUpdated,
+          dateModified: pageDate("/free-estimate"),
         })}
       />
       <FAQJsonLd faqs={ESTIMATE_FAQS} />
