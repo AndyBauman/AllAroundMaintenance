@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+  HEARD_OPTIONS,
+  REFERRAL_HEARD,
   US_STATES,
   checkboxServicesFor,
   checkboxServicesForSlug,
@@ -69,6 +71,19 @@ describe("quoteLeadSchema", () => {
   it("rejects a message over 2000 characters", () => {
     const parsed = quoteLeadSchema.safeParse(validLead({ message: "a".repeat(2001) }));
     expect(parsed.success).toBe(false);
+  });
+
+  it("accepts Facebook and stores a referral name or code", () => {
+    expect(HEARD_OPTIONS).toContain("Facebook");
+    expect(HEARD_OPTIONS).not.toContain("KVN Referral");
+    const facebook = quoteLeadSchema.parse(validLead({ heard_from: "Facebook" }));
+    expect(facebook.heard_from).toBe("Facebook");
+    const missing = quoteLeadSchema.safeParse(validLead({ heard_from: REFERRAL_HEARD, referral: " " }));
+    expect(missing.success).toBe(false);
+    if (!missing.success) expect(leadFieldErrors(missing.error).referral).toBe("Enter the referral or referral code.");
+    const referred = quoteLeadSchema.parse(validLead({ heard_from: REFERRAL_HEARD, referral: "Jane Smith", heard_detail: "Neighbor" }));
+    expect(referred.heard_detail).toBe("Jane Smith — Neighbor");
+    expect("referral" in referred).toBe(false);
   });
 });
 
