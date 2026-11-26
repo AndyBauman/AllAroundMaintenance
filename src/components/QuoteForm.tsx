@@ -271,13 +271,14 @@ export default function QuoteForm({
               type="tel"
               required
               inputMode="tel"
-              autoComplete="tel"
+              autoComplete="tel-national"
               placeholder="(999) 999-9999"
               value={phone}
               onChange={(event) => {
                 setPhone(formatPhone(event.target.value));
                 clearError("phone");
               }}
+              onBlur={() => setPhone((current) => formatPhone(current))}
               aria-invalid={invalid("phone")}
               aria-describedby={described("phone")}
               className={inputClass}

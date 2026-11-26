@@ -143,8 +143,15 @@ export function checkboxServicesForSlug(slug: string): string[] | undefined {
   return knownServices(SLUG_SERVICE[slug]);
 }
 
+/** Digits only, US country code stripped. Autofill often sends +1XXXXXXXXXX. */
+export function nationalPhoneDigits(value: string): string {
+  let digits = value.replace(/\D/g, "");
+  if (digits.length >= 11 && digits.startsWith("1")) digits = digits.slice(1);
+  return digits.slice(0, 10);
+}
+
 export function formatPhone(value: string): string {
-  const digits = value.replace(/\D/g, "").slice(0, 10);
+  const digits = nationalPhoneDigits(value);
   if (digits.length === 0) return "";
   if (digits.length < 4) return `(${digits}`;
   if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
@@ -171,7 +178,7 @@ export const quoteLeadSchema = z.object({
   ),
   phone: z.preprocess(
     asText,
-    z.string().refine((value) => value.replace(/\D/g, "").length === 10, "Enter a 10-digit phone number."),
+    z.string().refine((value) => nationalPhoneDigits(value).length === 10, "Enter a 10-digit phone number."),
   ),
   heard_from: z.preprocess(asText, z.string().refine((value) => HEARD.has(value), "Select how you heard about us.")),
   referral: optionalText(200, "Keep this to 200 characters."),
