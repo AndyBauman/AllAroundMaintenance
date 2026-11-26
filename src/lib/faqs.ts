@@ -191,22 +191,40 @@ export function serviceFaqs(svc: ServiceData): Faq[] {
   const repair = !NON_REPAIR_SLUGS.has(svc.slug);
 
   const shared: (Faq | false)[] = [
-    !TRADE_SLUGS.has(svc.slug) && { question: "Are you licensed and insured?", answer: LICENSE_ANSWER },
+    !TRADE_SLUGS.has(svc.slug) && {
+      question: `Is All Around Maintenance licensed for ${label} in Oregon and Washington?`,
+      answer: LICENSE_ANSWER,
+    },
     !PROJECT_SLUGS.has(svc.slug) &&
       !covers(/how soon|same.day|how far ahead|emergenc/i) && {
-        question: `How soon can you schedule ${label}?`,
+        question: `How soon can you schedule ${label} in Portland or Vancouver?`,
         answer: schedulingText(),
       },
-    outdoor && !covers(/be home/i) && { question: `Do I need to be home during ${label}?`, answer: AWAY_ANSWER },
-    !covers(/cost|price|charge/i) && { question: `Is there a charge for ${label} estimates?`, answer: `No. ${estimateText()}` },
-    repair && !covers(/guarantee|comes back/i) && { question: `Do you guarantee your ${label}?`, answer: `Yes. ${guaranteeText()}` },
-    { question: `Where do you offer ${label}?`, answer: AREAS_ANSWER },
+    outdoor &&
+      !covers(/be home/i) && {
+        question: `Do I need to be home for ${label} in the Portland or Vancouver area?`,
+        answer: AWAY_ANSWER,
+      },
+    !covers(/cost|price|charge|how much/i) && {
+      question: `How much does ${label} cost in Portland or Vancouver, WA?`,
+      answer: `Estimates are free. ${estimateText()}`,
+    },
+    repair &&
+      !covers(/guarantee|comes back/i) && {
+        question: `Do you guarantee ${label} in Portland and Vancouver?`,
+        answer: `Yes. ${guaranteeText()}`,
+      },
+    { question: `Where do you offer ${label} near Portland and Vancouver?`, answer: AREAS_ANSWER },
     repair &&
       !covers(/what if you find|find damage|rot behind/i) && {
         question: "What if you find more damage once you start?",
         answer: changeOrderText(),
       },
-    repair && !covers(/clean.?up|haul/i) && { question: `Do you clean up after ${label}?`, answer: CLEANUP_ANSWER },
+    repair &&
+      !covers(/clean.?up|haul/i) && {
+        question: `Do you clean up after ${label}?`,
+        answer: CLEANUP_ANSWER,
+      },
   ];
 
   const room = Math.max(MIN_SHARED_FAQS, MAX_SERVICE_FAQS - own.length);
@@ -314,16 +332,16 @@ export const FAQ_TOPICS: { heading: string; faqs: Faq[] }[] = [
   {
     heading: "Roof Questions",
     faqs: [
-      ...fromService("roof-inspection-cleaning-repair", "How much does a roof inspection cost?", "How often should a roof be inspected?", "What are signs my roof needs repair?"),
+      ...fromService("roof-inspection-cleaning-repair", "How much does a roof inspection cost in Portland or Vancouver?", "How often should a roof be inspected in the Portland area?", "What are signs my roof needs repair?"),
       ...fromService("leaky-roof-repair", "What causes most roof leaks?", "What should I do while I wait for a roof leak repair?", "Will I need a new roof?"),
-      ...fromService("moss-removal-portland", "How do you remove moss from a roof?", "Do you pressure wash roofs?", "What if the moss comes back?"),
+      ...fromService("moss-removal-portland", "How do you remove moss from a roof in Portland or Vancouver?", "Is pressure washing safe for a roof?", "What if the moss comes back after treatment?"),
       ...fromService("roof-replacement", "How much does a roof replacement cost?", "How long does a roof last?"),
     ],
   },
   {
     heading: "Gutter Questions",
     faqs: [
-      ...fromService("gutter-cleaning-gutter-inspection", "How much does gutter cleaning cost?", "How often should gutters be cleaned?", "What does a gutter cleaning include?", "What happens if gutters are not cleaned?", "Do you clean gutters that have gutter guards?"),
+      ...fromService("gutter-cleaning-gutter-inspection", "How much does gutter cleaning cost in Vancouver, WA?", "How often should gutters be cleaned in the Portland area?", "What does a gutter cleaning include?", "What happens if gutters are not cleaned?", "Do you clean gutters that have gutter guards?"),
       ...fromService("gutter-repair-portland", "How do I know if I need repair or just cleaning?", "Should I repair or replace my gutters?"),
       ...fromService("gutter-replacement", "How long do gutters last?", "Do I need to replace all of my gutters?"),
     ],
@@ -344,7 +362,7 @@ export const FAQ_TOPICS: { heading: string; faqs: Faq[] }[] = [
       ...fromService("handyman-portland", "What handyman jobs do you take?", "Do I need to supply materials?", "Can I combine several small jobs in one visit?"),
       ...fromService("drywall-installation", "Do you do small drywall repairs?"),
       ...fromService("plumbing-leaks", "What kinds of leaks do you repair?"),
-      ...fromService("junk-removal-portland", "How much does junk removal cost?", "What do you take?"),
+      ...fromService("junk-removal-portland", "How much does junk removal cost in Portland or Vancouver?", "What do you take?"),
       ...fromService("landscape-maintenance-portland", "Do you offer recurring service?"),
       ...fromService("hoa-maintenance", "What can an HOA maintenance plan cover?"),
     ],

@@ -12,6 +12,7 @@ const BASELINE = "2026-11-13";
 const STAGE_1 = business.contentUpdated;
 
 const STAGE_3 = "2026-11-26";
+const STAGE_4 = "2026-11-26";
 
 const OVERRIDES: Record<string, string> = {
   "/": STAGE_1,
@@ -23,6 +24,37 @@ const OVERRIDES: Record<string, string> = {
   "/reviews": STAGE_3,
   "/projects": STAGE_3,
 };
+
+/** Service pages refreshed in Stage 4 (answer blocks / pricing / FAQs). */
+for (const slug of [
+  "roof-inspection-cleaning-repair",
+  "leaky-roof-repair",
+  "roof-replacement",
+  "roof-installation",
+  "moss-removal-portland",
+  "gutter-cleaning-gutter-inspection",
+  "gutter-repair-portland",
+  "gutter-replacement",
+  "deck-cleaning-deck-repair-deck-restoration",
+  "pressure-washing-portland",
+  "siding-repair-portland",
+  "fence-repair-portland",
+  "dry-rot-repair",
+  "trims-around-houses",
+  "drainage-services",
+  "plumbing-leaks",
+  "cabinet-repair",
+  "light-fixture-replacements",
+  "drywall-installation",
+  "handyman-portland",
+  "hoa-maintenance",
+  "landscape-maintenance-portland",
+  "junk-removal-portland",
+  "guest-ready-home-repairs",
+  "yard-cleanup",
+]) {
+  OVERRIDES[`/${slug}`] = STAGE_4;
+}
 
 /** Normalize to `/path` without trailing slash (except home `/`). */
 export function normalizePath(path: string): string {

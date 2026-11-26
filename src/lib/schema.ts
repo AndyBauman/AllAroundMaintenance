@@ -180,6 +180,7 @@ export function serviceSchema(service: {
   url: string;
   areaServed?: string[];
   image?: string;
+  offers?: { price: number; priceCurrency: string; unitText: string; minPrice?: number };
 }) {
   const area =
     service.areaServed?.map((name) => ({ "@type": "City", name })) ??
@@ -196,6 +197,21 @@ export function serviceSchema(service: {
     areaServed: area,
   };
   if (service.image) node.image = service.image;
+  if (service.offers) {
+    const spec: Record<string, unknown> = {
+      "@type": "UnitPriceSpecification",
+      price: service.offers.price,
+      priceCurrency: service.offers.priceCurrency,
+      unitText: service.offers.unitText,
+    };
+    if (service.offers.minPrice != null) spec.minPrice = service.offers.minPrice;
+    node.offers = {
+      "@type": "Offer",
+      priceCurrency: service.offers.priceCurrency,
+      priceSpecification: spec,
+      availability: "https://schema.org/InStock",
+    };
+  }
   return node;
 }
 

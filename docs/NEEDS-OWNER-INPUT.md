@@ -16,7 +16,10 @@ Source: `docs/AAM-SEO-GEO-AEO.md` §9 (2026-11-26).
 ## Proof and pricing
 
 - [ ] 15 to 25 Google reviews exported as written, each tagged with service and city.
-- [ ] Price guide per service (from, typical range, minimum, what moves the price), approved by Alex.
+- [ ] Price guide per service (from, typical range, minimum, what moves the price), approved by Alex. (Junk removal is already approved in `src/data/pricing.ts`; set `approved: true` on other rows when signed off.)
+- [ ] Typical time on site per service (for Quick facts “Typical time” rows — currently hidden).
+- [ ] Confirm gutter-guard product recommendation (decision table notes this is pending).
+- [ ] Confirm soft-wash products used on siding (decision table notes this is pending).
 - [ ] `docs/project-intake.csv` filled in for the first 20 photo sets.
 - [ ] Confirmation that Alex reviews service pages and guides, for the "Reviewed by" line. (Set `business.founderReviewsContent = true` in `src/data/business.ts` when confirmed.)
 - [ ] After filling `docs/project-intake.csv`, approve which sets become `/projects/{slug}/` pages (and which photo replaces the homepage hero).
