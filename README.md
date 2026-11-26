@@ -45,11 +45,11 @@ The form is on the home page, service pages, city pages, and `/free-estimate`. I
 `/api/lead/`. Titles, meta descriptions, H1s, canonicals, and FAQ JSON-LD stay call-first until
 `LEAD_FORM_ENABLED` in `src/lib/constants.ts` is set to true.
 
-Before requests can be stored or emailed:
-
-1. Apply `supabase/migrations/20261126030000_site_leads.sql` in the Supabase SQL editor. Do not drop any existing table.
-2. Set `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `LEAD_TO_EMAIL`, and `LEAD_FROM_EMAIL`
-   in Vercel. `NOTIFY_EMAIL` and `RESEND_FROM` are used when the `LEAD_*` names are unset.
+A request is saved when `SUPABASE_URL` is set with either `SUPABASE_SERVICE_ROLE_KEY`, or
+`SUPABASE_PUBLISHABLE_KEY` plus `LEAD_DB_SECRET`. It is emailed when `RESEND_API_KEY`,
+`LEAD_TO_EMAIL`, and `LEAD_FROM_EMAIL` are set. `NOTIFY_EMAIL` and `RESEND_FROM` are used when
+the `LEAD_*` email names are unset. Apply both files in `supabase/migrations` before relying on
+the publishable-key path. Do not drop any existing table.
 
 The route saves the lead first, then emails it. If neither is configured, the visitor is told to call.
 

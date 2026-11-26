@@ -13,13 +13,18 @@ export type DeliveryResult = { ok: true } | { ok: false; status: number };
 function configured() {
   const supabaseUrl = process.env.SUPABASE_URL?.trim() || process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || "";
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || "";
+  const publishableKey =
+    process.env.SUPABASE_PUBLISHABLE_KEY?.trim() ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() ||
+    "";
+  const leadSecret = process.env.LEAD_DB_SECRET?.trim() || "";
   const resendKey = process.env.RESEND_API_KEY?.trim() || "";
   const to = (process.env.LEAD_TO_EMAIL || process.env.NOTIFY_EMAIL || "")
     .split(/[,;]+/)
     .map((item) => item.trim())
     .filter(Boolean);
   const from = process.env.LEAD_FROM_EMAIL?.trim() || process.env.RESEND_FROM?.trim() || "";
-  return { supabaseUrl, serviceKey, resendKey, to, from };
+  return { supabaseUrl, serviceKey, publishableKey, leadSecret, resendKey, to, from };
 }
 
 function admin(): SupabaseClient | null {
@@ -28,6 +33,17 @@ function admin(): SupabaseClient | null {
   return createClient(supabaseUrl, serviceKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
+}
+
+function gate(): { client: SupabaseClient; secret: string } | null {
+  const { supabaseUrl, publishableKey, leadSecret } = configured();
+  if (!supabaseUrl || !publishableKey || !leadSecret) return null;
+  return {
+    secret: leadSecret,
+    client: createClient(supabaseUrl, publishableKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    }),
+  };
 }
 
 function clientIp(request: Request): string | null {
@@ -111,8 +127,36 @@ async function sendEmail(lead: StoredLead): Promise<{ ok: true } | { ok: false; 
  * email is not configured yet. Nothing is stored when neither store nor
  * email can accept it.
  */
+function leadPayload(lead: StoredLead, ipHash: string | null, userAgent: string | null) {
+  return {
+    name: lead.name,
+    email: lead.email,
+    phone: lead.phone,
+    heard_from: lead.heard_from,
+    heard_detail: lead.heard_detail,
+    services: lead.services,
+    street: lead.street,
+    city: lead.city,
+    state: lead.state,
+    zip: lead.zip,
+    message: lead.message,
+    page_url: lead.page_url,
+    referrer: lead.referrer,
+    utm_source: lead.utm_source,
+    utm_medium: lead.utm_medium,
+    utm_campaign: lead.utm_campaign,
+    utm_term: lead.utm_term,
+    utm_content: lead.utm_content,
+    gclid: lead.gclid,
+    fbclid: lead.fbclid,
+    user_agent: userAgent,
+    ip_hash: ipHash,
+  };
+}
+
 export async function deliverLead(lead: StoredLead, request: Request): Promise<DeliveryResult> {
   const db = admin();
+  const gated = db ? null : gate();
   const ip = clientIp(request);
   const ipHash = ip ? hashIp(ip) : null;
   const userAgent = request.headers.get("user-agent")?.slice(0, 400) || null;
@@ -131,45 +175,37 @@ export async function deliverLead(lead: StoredLead, request: Request): Promise<D
   if (db) {
     const { data, error } = await db
       .from("site_leads")
-      .insert({
-        name: lead.name,
-        email: lead.email,
-        phone: lead.phone,
-        heard_from: lead.heard_from,
-        heard_detail: lead.heard_detail,
-        services: lead.services,
-        street: lead.street,
-        city: lead.city,
-        state: lead.state,
-        zip: lead.zip,
-        message: lead.message,
-        page_url: lead.page_url,
-        referrer: lead.referrer,
-        utm_source: lead.utm_source,
-        utm_medium: lead.utm_medium,
-        utm_campaign: lead.utm_campaign,
-        utm_term: lead.utm_term,
-        utm_content: lead.utm_content,
-        gclid: lead.gclid,
-        fbclid: lead.fbclid,
-        user_agent: userAgent,
-        ip_hash: ipHash,
-        email_status: "pending",
-      })
+      .insert({ ...leadPayload(lead, ipHash, userAgent), email_status: "pending" })
       .select("id")
       .single();
     if (error) console.error("[lead] could not store the request");
     else savedId = typeof data?.id === "string" ? data.id : null;
+  } else if (gated) {
+    const { data, error } = await gated.client.rpc("accept_site_lead", {
+      payload: leadPayload(lead, ipHash, userAgent),
+      secret: gated.secret,
+    });
+    if (error?.message?.includes("rate_limited")) return { ok: false, status: 429 };
+    if (error) console.error("[lead] could not store the request");
+    else savedId = typeof data === "string" ? data : null;
   } else {
-    console.error("[lead] SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not set");
+    console.error("[lead] SUPABASE_URL and a database key are not set");
   }
 
   const emailed = await sendEmail(lead);
+  const emailUpdate = emailed.ok
+    ? { email_status: "sent", email_error: null }
+    : { email_status: "failed", email_error: emailed.error };
   if (db && savedId) {
-    const { error } = await db
-      .from("site_leads")
-      .update(emailed.ok ? { email_status: "sent", email_error: null } : { email_status: "failed", email_error: emailed.error })
-      .eq("id", savedId);
+    const { error } = await db.from("site_leads").update(emailUpdate).eq("id", savedId);
+    if (error) console.error("[lead] could not record the email result");
+  } else if (gated && savedId) {
+    const { error } = await gated.client.rpc("record_site_lead_email", {
+      lead_id: savedId,
+      email_status: emailUpdate.email_status,
+      email_error: emailUpdate.email_error,
+      secret: gated.secret,
+    });
     if (error) console.error("[lead] could not record the email result");
   }
 
