@@ -15,7 +15,7 @@ import { PROCESS_STEPS } from "@/lib/business-facts";
 import { cityPath } from "@/lib/cities";
 import { absoluteUrl } from "@/lib/constants";
 import { HOME_FAQS } from "@/lib/faqs";
-import { howToSchema, serviceSchema } from "@/lib/schema";
+import { breadcrumbSchema, howToSchema, serviceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -28,6 +28,7 @@ export default function Home() {
     <main>
       <JsonLd
         data={[
+          breadcrumbSchema([{ name: "Home", url: absoluteUrl("/") }]),
           serviceSchema({
             name: "Home Maintenance and Repair",
             description:

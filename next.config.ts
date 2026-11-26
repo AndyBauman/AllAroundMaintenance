@@ -96,10 +96,19 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Photos and the logo in /public. Short browser cache, long CDN cache, so a replaced
-        // photo shows up within a day without a manual purge.
+        // Fingerprinted build assets never change for a given URL.
+        source: "/_next/static/(.*)",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        // next/image optimizer output — match images.minimumCacheTTL.
+        source: "/_next/image",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, stale-while-revalidate=86400" }],
+      },
+      {
+        // Photos and the logo in /public. Long browser + CDN cache; filenames change on replace.
         source: "/:file(.+\\.(?:jpg|jpeg|png|webp|avif|svg))",
-        headers: [{ key: "Cache-Control", value: "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800" }],
+        headers: [{ key: "Cache-Control", value: "public, max-age=2592000, s-maxage=31536000, stale-while-revalidate=604800" }],
       },
     ];
   },

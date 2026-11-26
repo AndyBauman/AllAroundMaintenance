@@ -152,12 +152,22 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </Script>
         ) : null}
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `var sc_project=${SC_PROJECT};var sc_invisible=1;var sc_security="${SC_SECURITY}";`,
-          }}
-        />
-        <script async src="https://www.statcounter.com/counter/counter.js" />
+        {/*
+          StatCounter must see sc_project/sc_security before counter.js runs. A separate
+          async <script> raced ahead of the inline vars and logged a console error in Lighthouse.
+          Set the globals, then inject the counter only after they exist.
+        */}
+        <Script id="statcounter" strategy="lazyOnload">
+          {`
+            window.sc_project = ${SC_PROJECT};
+            window.sc_invisible = 1;
+            window.sc_security = "${SC_SECURITY}";
+            var s = document.createElement("script");
+            s.src = "https://www.statcounter.com/counter/counter.js";
+            s.async = true;
+            document.body.appendChild(s);
+          `}
+        </Script>
         <noscript>
           <div className="statcounter">
             <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener noreferrer">
