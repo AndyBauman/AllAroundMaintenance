@@ -11,6 +11,8 @@ export type LanguagePage = {
   htmlLang: string;
   /** Native label for the footer switch */
   nativeName: string;
+  /** Single-letter switch label (E / R / U / S) */
+  shortLabel: string;
   /** English label */
   englishName: string;
   path: `/${LangCode}`;
@@ -38,6 +40,7 @@ export const LANGUAGE_PAGES: LanguagePage[] = [
     code: "ru",
     htmlLang: "ru",
     nativeName: "Русский",
+    shortLabel: "R",
     englishName: "Russian",
     path: "/ru",
     title: "All Around Maintenance — обслуживание домов на русском",
@@ -67,6 +70,7 @@ export const LANGUAGE_PAGES: LanguagePage[] = [
     code: "uk",
     htmlLang: "uk",
     nativeName: "Українська",
+    shortLabel: "U",
     englishName: "Ukrainian",
     path: "/uk",
     title: "All Around Maintenance — обслуговування дому українською",
@@ -96,6 +100,7 @@ export const LANGUAGE_PAGES: LanguagePage[] = [
     code: "es",
     htmlLang: "es",
     nativeName: "Español",
+    shortLabel: "S",
     englishName: "Spanish",
     path: "/es",
     title: "All Around Maintenance — mantenimiento del hogar en español",

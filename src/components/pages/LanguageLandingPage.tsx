@@ -75,18 +75,32 @@ export default function LanguageLandingPage({ page }: { page: LanguagePage }) {
           </div>
           <p className="rounded-xl bg-surface p-5 text-base leading-relaxed text-gray-800">{page.languageNote}</p>
 
-          <nav aria-label="Languages" className="flex flex-wrap gap-3 text-sm">
-            <Link href="/" className="font-medium text-brand hover:underline">
-              English
+          <nav
+            aria-label="Languages"
+            className="flex flex-wrap items-center gap-2 text-[11px] font-medium tracking-wide"
+          >
+            <Link
+              href="/"
+              className="text-brand hover:underline"
+              title="English"
+              aria-label="English"
+            >
+              E
             </Link>
             {LANGUAGE_PAGES.map((p) => (
               <Link
                 key={p.code}
                 href={p.path}
-                className={p.code === page.code ? "font-bold text-gray-900" : "font-medium text-brand hover:underline"}
+                className={
+                  p.code === page.code
+                    ? "font-bold text-gray-900"
+                    : "text-brand hover:underline"
+                }
                 hrefLang={p.htmlLang}
+                title={p.nativeName}
+                aria-label={p.nativeName}
               >
-                {p.nativeName}
+                {p.shortLabel}
               </Link>
             ))}
           </nav>

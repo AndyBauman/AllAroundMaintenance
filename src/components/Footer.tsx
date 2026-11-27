@@ -162,9 +162,15 @@ export default function Footer() {
             &copy; {year} {LEGAL_NAME} All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
-            <nav aria-label="Language" className="flex flex-wrap gap-3">
-              <Link href="/" className="text-gray-300 transition-colors hover:text-white" hrefLang="en">
-                English
+            <nav aria-label="Language" className="flex flex-wrap items-center gap-2 text-[11px] font-medium tracking-wide">
+              <Link
+                href="/"
+                className="text-gray-300 transition-colors hover:text-white"
+                hrefLang="en"
+                title="English"
+                aria-label="English"
+              >
+                E
               </Link>
               {LANGUAGE_PAGES.map((p) => (
                 <Link
@@ -172,8 +178,10 @@ export default function Footer() {
                   href={p.path}
                   className="text-gray-300 transition-colors hover:text-white"
                   hrefLang={p.htmlLang}
+                  title={p.nativeName}
+                  aria-label={p.nativeName}
                 >
-                  {p.nativeName}
+                  {p.shortLabel}
                 </Link>
               ))}
             </nav>
