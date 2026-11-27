@@ -4,15 +4,22 @@ import { ESTIMATE_PATH, LEAD_FORM_ENABLED, absoluteUrl, phoneFor } from "@/lib/c
 import { FACTS, PROCESS_STEPS, estimateText, paymentText } from "@/lib/business-facts";
 import { CITIES, cityLabel, cityPath, getCity, nearbyCities, roofCityPath, ROOF_CITY_SLUGS } from "@/lib/cities";
 import { cityFaqs } from "@/lib/faqs";
+import { cityHomeTitle, cityRoofTitle } from "@/lib/city-seo";
 import { serviceSchema } from "@/lib/schema";
-import { SERVICES } from "@/lib/services";
+import { SERVICES, getServiceBySlug } from "@/lib/services";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
 import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
 import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import LeadCapture from "@/components/LeadCapture";
+import ReviewGrid from "@/components/ReviewGrid";
 import ServiceIcon from "@/components/ServiceIcon";
+import { getCityLocal } from "@/data/city-local";
+import { pageDate } from "@/data/content-dates";
+import { projectsForCity } from "@/lib/projects";
+import { reviewsForCity } from "@/lib/reviews";
 
 const TRUST = [
   { stat: "Since 1999", label: "Family-Owned" },
@@ -28,19 +35,36 @@ const TRUST = [
  */
 export default function CityPage({ citySlug, focus = "home" }: { citySlug: string; focus?: "home" | "roof" }) {
   const city = getCity(citySlug)!;
+  const local = getCityLocal(city.slug);
   const phone = phoneFor(city.stateAbbr);
   const label = cityLabel(city);
   const isRoof = focus === "roof";
   const path = isRoof ? roofCityPath(city.slug) : cityPath(city.slug);
   const noun = isRoof ? "Roof Maintenance" : "Home Maintenance";
   const faqs = cityFaqs(city, focus);
+  const topFromLocal = (local?.topServices ?? [])
+    .map((slug) => getServiceBySlug(slug))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s));
   const services = isRoof
     ? SERVICES.filter((s) => s.group === "roofs" || s.group === "gutters")
-    : SERVICES.filter((s) => s.popular || s.group !== "home").slice(0, 12);
+    : topFromLocal.length > 0
+      ? [...topFromLocal, ...SERVICES.filter((s) => s.popular && !topFromLocal.some((t) => t.slug === s.slug))].slice(0, 12)
+      : SERVICES.filter((s) => s.popular || s.group !== "home").slice(0, 12);
   const nearby = nearbyCities(city.slug, 6);
   const hasRoofPage = (ROOF_CITY_SLUGS as readonly string[]).includes(city.slug);
+  const areas = city.areas;
   const areasHeading =
     city.kind === "county" ? `Communities We Serve in ${city.name}` : `Neighborhoods We Serve in ${city.name}`;
+  const reviews = reviewsForCity(city.name);
+  const projects = projectsForCity(city.name);
+  const updated = local?.updated ?? pageDate(path);
+  const displayTitle = isRoof ? cityRoofTitle(city) : cityHomeTitle(city);
+
+  const lead =
+    local?.lead ??
+    (isRoof
+      ? `Months of rain, wind and fir needles are hard on roofs in ${city.name}. All Around Maintenance inspects, repairs, cleans and treats them, and tells you honestly when a repair is all you need. ${estimateText()}`
+      : `All Around Maintenance is a family-owned contractor serving ${city.name} since ${FACTS.founded}. One licensed crew handles roof repair, gutter cleaning, deck restoration and the rest of your home's to-do list. ${estimateText()}`);
 
   return (
     <main>
@@ -68,18 +92,11 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
             <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-medium text-white">
               {city.kind === "county" ? city.state : `${city.county} · ${city.state}`}
             </span>
-            <h1 className="mt-6 font-display text-4xl font-extrabold text-white sm:text-5xl">
-              {noun} in {label}
-            </h1>
+            <h1 className="mt-6 font-display text-4xl font-extrabold text-white sm:text-5xl">{displayTitle}</h1>
             <p className="mt-4 text-lg text-accent">
               {isRoof ? "Free roof inspections, repairs and moss removal." : "Roofs, gutters, decks and everything in between."}
             </p>
-            <p className="mt-6 text-lg leading-relaxed text-white/85">
-              {isRoof
-                ? `Months of rain, wind and fir needles are hard on roofs in ${city.name}. All Around Maintenance inspects, repairs, cleans and treats them, and tells you honestly when a repair is all you need.`
-                : `All Around Maintenance is a family-owned contractor serving ${city.name} since ${FACTS.founded}. One licensed crew handles roof repair, gutter cleaning, deck restoration and the rest of your home's to-do list.`}{" "}
-              {estimateText()}
-            </p>
+            <p className="mt-6 text-lg leading-relaxed text-white/85">{lead}</p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
                 href={phone.href}
@@ -112,6 +129,35 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         </div>
       </section>
 
+      {local?.body?.length ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">Working in {city.name}</h2>
+            {local.body.map((p) => (
+              <p key={p.slice(0, 48)} className="mt-4 text-base leading-relaxed text-gray-700">
+                {p}
+              </p>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {local && local.localNotes.length > 0 ? (
+        <section className="bg-surface py-12 sm:py-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">Local notes for {city.name}</h2>
+            <ul className="mt-6 space-y-4">
+              {local.localNotes.map((note) => (
+                <li key={note.text.slice(0, 64)} className="rounded-xl bg-white p-5 shadow-sm">
+                  <p className="text-base leading-relaxed text-gray-800">{note.text}</p>
+                  <p className="mt-2 text-xs text-gray-500">Source: {note.source}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       <section className="bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -135,7 +181,9 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
             ))}
           </div>
           <p className="mt-8 text-sm text-gray-600">
-            <Link href="/services" className="font-semibold text-brand hover:underline">See all services</Link>
+            <Link href="/services" className="font-semibold text-brand hover:underline">
+              See all services
+            </Link>
             {!isRoof && hasRoofPage ? (
               <>
                 {" · "}
@@ -156,7 +204,7 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         </div>
       </section>
 
-      {city.areas && city.areas.length > 0 ? (
+      {areas && areas.length > 0 ? (
         <section className="bg-surface py-12 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">{areasHeading}</h2>
@@ -164,7 +212,7 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
               We work throughout {label}, including these {city.kind === "county" ? "communities" : "neighborhoods"}:
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
-              {city.areas.map((n) => (
+              {areas.map((n) => (
                 <span key={n} className="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-sm font-medium text-brand">
                   {n}
                 </span>
@@ -174,22 +222,22 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         </section>
       ) : null}
 
-      <section className="bg-white py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">
-            How {noun} Works in {city.name}
-          </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {PROCESS_STEPS.map((step) => (
-              <div key={step.step} className="rounded-xl border border-gray-200 p-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">{step.step}</div>
-                <h3 className="mt-4 font-bold text-gray-900">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">{step.description}</p>
-              </div>
-            ))}
+      {!local ? (
+        <section className="bg-white py-12 sm:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold text-gray-900 sm:text-3xl">How {noun} Works in {city.name}</h2>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {PROCESS_STEPS.map((step) => (
+                <div key={step.step} className="rounded-xl border border-gray-200 p-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">{step.step}</div>
+                  <h3 className="mt-4 font-bold text-gray-900">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{step.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="bg-surface py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -197,15 +245,18 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
             {noun} Pricing in {city.name}
           </h2>
           <p className="mt-4 leading-relaxed text-gray-700">
-            Every job is different, so we don&apos;t quote from a price list. {estimateText()} Cost depends on the size and
-            height of the home, how easy the work area is to reach, and the materials needed. {paymentText()}
+            {local?.pricingNote ??
+              `Every job is different, so we don't quote from a price list. ${estimateText()} Cost depends on the size and height of the home, how easy the work area is to reach, and the materials needed. ${paymentText()}`}
           </p>
         </div>
       </section>
 
       <CtaBand
         heading={`Need ${isRoof ? "Roof" : "Home"} Help in ${city.name}?`}
-        text={`We respond ${FACTS.responseTime}, and most repairs and maintenance are scheduled within ${FACTS.schedulingWindow}.`}
+        text={
+          local?.ctaNote ??
+          `We respond ${FACTS.responseTime}, and most repairs and maintenance are scheduled within ${FACTS.schedulingWindow}.`
+        }
         phone={phone}
       />
 
@@ -248,8 +299,32 @@ export default function CityPage({ citySlug, focus = "home" }: { citySlug: strin
         </div>
       </section>
 
-      <FAQJsonLd faqs={faqs} />
-      <FAQSection faqs={faqs} heading={`${noun} FAQ: ${label}`} />
+      <ReviewGrid reviews={reviews} heading={`Reviews from ${city.name}`} limit={3} />
+
+      {projects.length > 0 ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold text-gray-900">Projects in {city.name}</h2>
+            <ul className="mt-4 space-y-2">
+              {projects.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/projects/${p.slug}/`} className="font-semibold text-brand hover:underline">
+                    {p.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
+      {faqs.length > 0 ? (
+        <>
+          <FAQJsonLd faqs={faqs} />
+          <FAQSection faqs={faqs} heading={`${noun} FAQ: ${label}`} />
+        </>
+      ) : null}
+      <LastUpdated date={updated} />
     </main>
   );
 }

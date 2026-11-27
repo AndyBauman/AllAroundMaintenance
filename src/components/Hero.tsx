@@ -73,8 +73,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.6)] sm:text-xl">
-            One licensed, family-owned crew for the roof, the gutters, the siding, the deck and nearly everything else on your list.
-            We respond {FACTS.responseTime} and send a free itemized estimate within {FACTS.estimateTurnaround}.
+            All Around Maintenance is a family-owned home maintenance company that repairs roofs, gutters, siding and decks for homeowners in Portland, OR and Vancouver, WA.
+            One licensed crew handles the list. We respond {FACTS.responseTime} and send a free itemized estimate within {FACTS.estimateTurnaround}.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">

@@ -1,5 +1,8 @@
+import { business, profileUrls } from "@/data/business";
 import { SITE_NAME, LEGAL_NAME, PHONE, PHONE_WA, LICENSE_LINE, ESTIMATE_PATH, absoluteUrl } from "./constants";
 import { FACTS, estimateText, languagesText, mossGuaranteeText, schedulingText } from "./business-facts";
+import { publishedGuides } from "@/data/guides";
+import { LANGUAGE_PAGES } from "@/data/languages";
 import { CITIES, ROOF_CITY_SLUGS, cityLabel, cityPath, getCity, roofCityPath } from "./cities";
 import { SERVICES } from "./services";
 
@@ -14,22 +17,29 @@ export function buildLlmsTxt(): string {
     `> ${LEGAL_NAME} is a family-owned home maintenance and repair contractor serving the Portland, Oregon and Vancouver, Washington metro areas since ${FACTS.founded}. Specialties: roofs, gutters, siding and decks, plus exterior, interior and property maintenance for homeowners, HOAs and businesses.`,
     ``,
     `## Key facts`,
-    `- Founded: ${FACTS.founded} by ${FACTS.founder}`,
+    `- Founded: ${business.founded} by ${business.founder.name}`,
     `- Licenses: ${LICENSE_LINE}`,
     `- Languages: ${languagesText()}`,
+    `- Language pages: ${LANGUAGE_PAGES.map((p) => `[${p.englishName}](${absoluteUrl(p.path)})`).join(", ")} (noindex until native-speaker review)`,
     `- ${estimateText()}`,
     `- ${schedulingText()}`,
     `- Moss removal guarantee: ${mossGuaranteeText()}`,
-    `- Not offered: ${FACTS.notOffered.join(", ")} work`,
+    `- Not offered: ${business.notOffered.join(", ")}`,
+    `- Payment: ${business.payment.join(", ")}`,
     ``,
     `## Contact`,
     `- Portland, OR: ${PHONE}`,
     `- Vancouver, WA: ${PHONE_WA}`,
+    ...(business.email.trim() ? [`- Email: ${business.email.trim()}`] : []),
     `- Website: ${absoluteUrl("/")}`,
     `- [Free estimate](${absoluteUrl(ESTIMATE_PATH)}): request a free itemized estimate`,
     `- [About](${absoluteUrl("/about-us")})`,
+    `- [Reviews](${absoluteUrl("/reviews")})`,
+    `- [Projects](${absoluteUrl("/projects")})`,
     `- [FAQ](${absoluteUrl("/faq")})`,
+    `- [Guides](${absoluteUrl("/guides")})`,
     `- [Service areas](${absoluteUrl("/service-areas")})`,
+    ...profileUrls().map((url) => `- Profile: ${url}`),
     ``,
     `## Services`,
   ];
@@ -45,6 +55,14 @@ export function buildLlmsTxt(): string {
   for (const slug of ROOF_CITY_SLUGS) {
     const c = getCity(slug);
     if (c) lines.push(`- [Roof maintenance in ${cityLabel(c)}](${absoluteUrl(roofCityPath(slug))})`);
+  }
+
+  const guides = publishedGuides();
+  if (guides.length > 0) {
+    lines.push(``, `## Guides`);
+    for (const g of guides) {
+      lines.push(`- [${g.title}](${absoluteUrl(`/${g.slug}`)}): ${g.description.replace(/\s+/g, " ").trim()}`);
+    }
   }
 
   lines.push(

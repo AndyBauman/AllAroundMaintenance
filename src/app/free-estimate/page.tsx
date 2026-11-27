@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
+import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
 import LeadCapture from "@/components/LeadCapture";
-import { LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
+import { pageDate } from "@/data/content-dates";
+import { absoluteUrl, LEAD_FORM_ENABLED, LICENSE_LINE, PHONE, PHONE_HREF, PHONE_WA, PHONE_WA_HREF } from "@/lib/constants";
 import { PROCESS_STEPS, paymentText } from "@/lib/business-facts";
 import { ESTIMATE_FAQS } from "@/lib/faqs";
+import { webPageSchema } from "@/lib/schema";
 import { socialMeta } from "@/lib/social";
 
 const TITLE = "Get a Free Estimate";
@@ -22,6 +27,15 @@ export const metadata: Metadata = {
 export default function FreeEstimatePage() {
   return (
     <main className="bg-surface">
+      <JsonLd
+        data={webPageSchema({
+          name: TITLE,
+          description: DESCRIPTION,
+          url: absoluteUrl("/free-estimate"),
+          dateModified: pageDate("/free-estimate"),
+        })}
+      />
+      <FAQJsonLd faqs={ESTIMATE_FAQS} />
       <Breadcrumbs items={[{ label: "Free Estimate", href: "/free-estimate" }]} />
 
       <section className="pb-20 pt-4">
@@ -75,6 +89,7 @@ export default function FreeEstimatePage() {
       </section>
 
       <FAQSection faqs={ESTIMATE_FAQS} heading="Estimate FAQ" />
+      <LastUpdated date={pageDate("/free-estimate")} />
     </main>
   );
 }

@@ -44,6 +44,12 @@ describe("formatPhone", () => {
     expect(formatPhone("503-209-2023")).toBe("(503) 209-2023");
     expect(formatPhone("50320920239999")).toBe("(503) 209-2023");
   });
+
+  it("strips a US country code from autofill", () => {
+    expect(formatPhone("+13607720224")).toBe("(360) 772-0224");
+    expect(formatPhone("1 (360) 772-0224")).toBe("(360) 772-0224");
+    expect(formatPhone("13607720224")).toBe("(360) 772-0224");
+  });
 });
 
 describe("quoteLeadSchema", () => {

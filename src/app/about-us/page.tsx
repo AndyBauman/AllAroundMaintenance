@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CircleCheck } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import FAQJsonLd from "@/components/FAQJsonLd";
 import FAQSection from "@/components/FAQSection";
+import JsonLd from "@/components/JsonLd";
+import LastUpdated from "@/components/LastUpdated";
+import { business, hasPublicAddress, hoursDisplayLines } from "@/data/business";
+import { pageDate } from "@/data/content-dates";
+import { LANGUAGE_PAGES } from "@/data/languages";
 import { hasPublicFile } from "@/lib/assets";
-import { LEGAL_NAME, LICENSES } from "@/lib/constants";
-import { FACTS, languagesText } from "@/lib/business-facts";
+import { absoluteUrl, LEGAL_NAME, PHONE, PHONE_WA } from "@/lib/constants";
+import { FACTS, languagesText, paymentText } from "@/lib/business-facts";
 import { ABOUT_FAQS } from "@/lib/faqs";
+import { webPageSchema } from "@/lib/schema";
 import { socialMeta } from "@/lib/social";
 
 const TITLE = "About Us | Family-Owned Since 1999";
@@ -46,19 +54,67 @@ const VALUES = [
   { title: "Hold the standard", text: "If it isn't right, we make it right." },
 ];
 
-const FACT_ROWS: [string, string][] = [
-  ["Founded", `${FACTS.founded}, by ${FACTS.founder}`],
-  ["Ownership", "Family-owned and operated"],
-  ["Languages", languagesText()],
-  ["Oregon license", `CCB #${LICENSES.oregonCcb}`],
-  ["Washington license", `#${LICENSES.washington}`],
-  ["Service area", "Portland, OR and Vancouver, WA metro areas"],
-  ["Customers", "Homeowners, HOAs and businesses"],
-];
+function companyFactRows(): [string, ReactNode][] {
+  const rows: [string, ReactNode][] = [
+    ["Legal name", business.legalName],
+    ["Founded", `${business.founded}`],
+    ["Owner", `${business.founder.name}, ${business.founder.title}`],
+  ];
+
+  for (const lic of business.licenses) {
+    rows.push([
+      `${lic.state} license`,
+      <a key={lic.number} href={lic.verifyUrl} target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">
+        {lic.label}
+      </a>,
+    ]);
+  }
+
+  rows.push(["Service area", "Portland, OR and Vancouver, WA metro areas"]);
+
+  if (hasPublicAddress()) {
+    rows.push([
+      "Address",
+      `${business.address.street}, ${business.address.city}, ${business.address.region} ${business.address.postalCode}`,
+    ]);
+  }
+
+  const hours = hoursDisplayLines();
+  if (hours.length) rows.push(["Hours", hours.join("; ")]);
+
+  rows.push(["Languages", languagesText()]);
+  rows.push([
+    "Language pages",
+    <span key="lang-pages" className="inline-flex flex-wrap justify-end gap-x-3 gap-y-1">
+      {LANGUAGE_PAGES.map((p) => (
+        <Link key={p.code} href={p.path} className="text-brand hover:underline" hrefLang={p.htmlLang}>
+          {p.nativeName}
+        </Link>
+      ))}
+    </span>,
+  ]);
+  rows.push(["Portland phone", PHONE]);
+  rows.push(["Vancouver phone", PHONE_WA]);
+  if (business.email.trim()) rows.push(["Email", business.email.trim()]);
+  if (paymentText()) rows.push(["Payment", paymentText()]);
+  rows.push(["Not offered", business.notOffered.join(", ")]);
+  return rows;
+}
 
 export default function AboutPage() {
+  const factRows = companyFactRows();
+
   return (
     <main>
+      <JsonLd
+        data={webPageSchema({
+          name: TITLE,
+          description: DESCRIPTION,
+          url: absoluteUrl("/about-us"),
+          dateModified: pageDate("/about-us"),
+        })}
+      />
+      <FAQJsonLd faqs={ABOUT_FAQS} />
       <Breadcrumbs items={[{ label: "About Us", href: "/about-us" }]} />
 
       <section className="relative overflow-hidden bg-brand-dark py-16 sm:py-24">
@@ -134,10 +190,10 @@ export default function AboutPage() {
               )}
               <div className="rounded-2xl bg-surface p-8">
                 <h2 className="font-display text-2xl font-bold text-gray-900">
-                  At a glance
+                  Company facts
                 </h2>
                 <dl className="mt-6 divide-y divide-gray-200">
-                  {FACT_ROWS.map(([k, v]) => (
+                  {factRows.map(([k, v]) => (
                     <div
                       key={k}
                       className="flex flex-col gap-1 py-3 sm:flex-row sm:justify-between sm:gap-6"
@@ -189,6 +245,7 @@ export default function AboutPage() {
         heading="Let's Take a Look"
         text="Tell us what's going on with the house. Estimates are free, itemized and come with no obligation."
       />
+      <LastUpdated date={pageDate("/about-us")} />
     </main>
   );
 }

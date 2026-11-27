@@ -1,9 +1,16 @@
 /**
  * Core identity for All Around Maintenance Inc.
- * Every fact here was published on the previous site. Facts the owner has not
- * confirmed yet (street address, hours, email, rating) come from env vars and
- * are simply not rendered while unset.
+ * Confirmed facts live in `src/data/business.ts`. Owner-pending fields stay empty there
+ * and are not rendered until set.
  */
+import {
+  business,
+  phoneDisplay,
+  phoneHref,
+  profileUrls,
+} from "@/data/business";
+import { CITIES } from "@/lib/cities";
+
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://www.allaroundmaintenanceinc.com"
 ).replace(/\/$/, "");
@@ -19,33 +26,35 @@ export const GTM_ID = gtmEnv === "off" ? "" : gtmEnv || "GTM-KTHXVD7";
 export const META_DOMAIN_VERIFICATION = "po5xqpw5zqg0pcrjq79tkht8g0keb9";
 
 /** Public brand (titles, copy, schema). */
-export const SITE_NAME = "All Around Maintenance";
-export const LEGAL_NAME = "All Around Maintenance Inc.";
+export const SITE_NAME = business.name;
+export const LEGAL_NAME = business.legalName;
 export const TAGLINE = "Roofs, Gutters & Decks. There's Nothing We Can't Handle.";
 /** Npm `package.json` name and Vercel project slug. */
 export const PROJECT_SLUG = "all-around-maintenance";
 
 /** Portland line: the primary number site-wide. */
-export const PHONE = "(503) 209-2023";
-export const PHONE_HREF = "tel:+15032092023";
-export const PHONE_RAW = "503-209-2023";
+export const PHONE = phoneDisplay(business.phones.or);
+export const PHONE_HREF = phoneHref(business.phones.or);
+export const PHONE_RAW = business.phones.or.replace(/^\+1/, "").replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
 /** Vancouver, WA line: shown first on Washington pages. */
-export const PHONE_WA = "(360) 772-0224";
-export const PHONE_WA_HREF = "tel:+13607720224";
-export const PHONE_WA_RAW = "360-772-0224";
+export const PHONE_WA = phoneDisplay(business.phones.wa);
+export const PHONE_WA_HREF = phoneHref(business.phones.wa);
+export const PHONE_WA_RAW = business.phones.wa.replace(/^\+1/, "").replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
 
-export const EMAIL = process.env.NEXT_PUBLIC_BUSINESS_EMAIL?.trim() || "";
-export const HOURS = process.env.NEXT_PUBLIC_BUSINESS_HOURS?.trim() || "";
+export const EMAIL = business.email.trim();
+export const SMS_NUMBER = business.smsNumber.trim();
+/** Legacy single-line hours string; prefer hoursDisplayLines() from business.ts. */
+export const HOURS = "";
 
 export const LICENSES = {
-  oregonCcb: "202731",
-  washington: "ALLARAM926JB",
+  oregonCcb: business.licenses[0].number,
+  washington: business.licenses[1].number,
 } as const;
 export const LICENSE_LINE = `OR CCB #${LICENSES.oregonCcb} · WA #${LICENSES.washington}`;
 
 export const SOCIAL = {
-  facebook: "https://www.facebook.com/allaroundmaintenanceinc/",
-  instagram: "https://www.instagram.com/allaroundmaintenance/",
+  facebook: business.profiles.facebook,
+  instagram: business.profiles.instagram,
 } as const;
 
 export const ESTIMATE_PATH = "/free-estimate";
@@ -63,6 +72,8 @@ export function absoluteUrl(path = "/"): string {
   return `${SITE_URL}${clean}/`;
 }
 
+const areaLabels = CITIES.filter((c) => c.kind !== "county").map((c) => `${c.name}, ${c.stateAbbr}`);
+
 export const NAP = {
   name: LEGAL_NAME,
   phone: PHONE,
@@ -70,20 +81,13 @@ export const NAP = {
   phoneWaRaw: PHONE_WA_RAW,
   email: EMAIL,
   address: {
-    city: "Vancouver",
-    state: "WA",
+    city: business.address.city || "Vancouver",
+    state: business.address.region,
     country: "US",
   },
   hours: HOURS,
-  areaServed: [
-    "Portland, OR", "Gresham, OR", "Fairview, OR", "Troutdale, OR", "Corbett, OR", "Beaverton, OR",
-    "Cedar Hills, OR", "Aloha, OR", "Hillsboro, OR", "Tigard, OR", "Lake Oswego, OR", "West Linn, OR",
-    "Milwaukie, OR", "Gladstone, OR", "Clackamas, OR", "Happy Valley, OR", "Wilsonville, OR",
-    "Boring, OR", "Sandy, OR", "Estacada, OR",
-    "Vancouver, WA", "Felida, WA", "Salmon Creek, WA", "Hockinson, WA", "Battle Ground, WA", "Camas, WA",
-    "Washougal, WA", "Ridgefield, WA", "La Center, WA", "Woodland, WA", "Kalama, WA", "Longview, WA", "Kelso, WA",
-  ],
-  sameAs: [SOCIAL.facebook, SOCIAL.instagram] as string[],
+  areaServed: areaLabels,
+  sameAs: profileUrls(),
   priceRange: "$$",
 };
 

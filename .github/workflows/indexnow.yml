@@ -1,0 +1,26 @@
+# Submit the production sitemap to IndexNow after a successful production deploy.
+# Never runs for preview deployments.
+name: IndexNow
+
+on:
+  deployment_status:
+
+jobs:
+  submit:
+    if: >
+      github.event.deployment_status.state == 'success' &&
+      (
+        github.event.deployment_status.environment == 'Production' ||
+        github.event.deployment_status.environment == 'production' ||
+        contains(github.event.deployment.environment, 'Production')
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Submit sitemap to IndexNow
+        env:
+          SITE_URL: https://www.allaroundmaintenanceinc.com
+        run: node scripts/indexnow.mjs
